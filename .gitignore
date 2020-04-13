@@ -1,0 +1,8 @@
+node_modules
+/build
+/*.log
+*.tar.gz
+/dist
+package-lock.json
+yarn.lock
+.DS_Store

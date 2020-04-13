@@ -1,0 +1,47 @@
+{
+	"version": "1.0.0",
+	"name": "idena-pocket",
+	"private": true,
+	"scripts": {
+		"dev": "export NODE_ENV=development && webpack-dev-server --open",
+		"build": "npm install && export NODE_ENV=production && webpack"
+	},
+	"dependencies": {
+		"bip39": "^3.0.2",
+		"connected-react-router": "^6.8.0",
+		"crypto-js": "^4.0.0",
+		"ethereum-hdwallet": "0.0.26",
+		"history": "^4.10.1",
+		"idena-js": "^1.0.5",
+		"react": "^16.13.1",
+		"react-copy-to-clipboard": "^5.0.2",
+		"react-dom": "^16.13.1",
+		"react-hook-form": "^5.2.0",
+		"react-redux": "^7.2.0",
+		"react-router-dom": "^5.1.2",
+		"react-tooltip": "^4.2.0",
+		"redux": "^4.0.5",
+		"styled-components": "^5.0.1"
+	},
+	"devDependencies": {
+		"@types/react": "^16.9.25",
+		"@types/react-dom": "^16.9.5",
+		"@types/react-redux": "^7.1.7",
+		"@types/react-router-dom": "^5.1.3",
+		"@types/redux": "^3.6.0",
+		"@types/styled-components": "^5.0.1",
+		"clean-webpack-plugin": "^3.0.0",
+		"copy-webpack-plugin": "^5.1.1",
+		"css-loader": "^3.4.2",
+		"file-loader": "^6.0.0",
+		"html-webpack-plugin": "^3.2.0",
+		"react-hot-loader": "^4.12.20",
+		"ts-loader": "^6.2.1",
+		"typescript": "^3.8.3",
+		"url-loader": "^4.1.0",
+		"webpack": "^4.42.1",
+		"webpack-bundle-analyzer": "^3.6.1",
+		"webpack-cli": "^3.3.11",
+		"webpack-dev-server": "^3.10.3"
+	}
+}
