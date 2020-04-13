@@ -29,7 +29,6 @@ export const store = (() => {
 		// Enable Webpack hot module replacement for reducers
 		(module as any).hot.accept('../reducer', () => {
 		  const nextRootReducer = require('../reducer');
-		  console.log(nextRootReducer)
 		  store.replaceReducer(nextRootReducer);
 		});
 	  }

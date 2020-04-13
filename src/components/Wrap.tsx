@@ -8,6 +8,7 @@ const Wrap = styled.div`
 	flex-direction: column;
 	margin: 0 auto;
 	padding: 0 1em;
+	box-sizing: border-box;
 `;
 
 export default (props) => {

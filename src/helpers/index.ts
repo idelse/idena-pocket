@@ -14,7 +14,7 @@ export const colors = {
 
 export const shuffle = array => [...array].sort(() => Math.random() - 0.5);
 
-export const formatAddress = (address, l = 6) => `${address.slice(0, l+2)}...${address.slice(address.length-l, address.length)}`
+export const formatAddress = (address, l = 4) => `${address.slice(0, l+2)}...${address.slice(address.length-l, address.length)}`
 
 export const formatNumber = number => Math.floor(number*100)/100;
 
