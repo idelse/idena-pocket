@@ -80,7 +80,7 @@ export default () => {
 		<Header>
 			<Logo width={50} />
 			<CopyToClipboard text={storage.address}>
-				<span className="address">{formatAddress(storage.address, 10)}</span>
+				<span className="address">{formatAddress(storage.address, 6)}</span>
 			</CopyToClipboard>
 			<span className="logout" onClick={() => dispatch(lock())}>Logout</span>
 			{storage.message && <div className={`toast toast--${storage.type || "info"}`}>
