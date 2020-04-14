@@ -74,16 +74,21 @@ export default (): ReactElement => {
 					<li className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'} key={key}>
 						<a target="_blank" href={`https://scan.idena.io/tx?tx=${tx.hash}`}>
 							<div className="transactions__li__tx">
-								<span>{formatAddress(tx.from)}</span>
-								<span>{tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? '→' : '⭠'}</span>
+								{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 10)}</span>}
+								{
+									(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
+									(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
+									<span>{formatAddress(tx.to, 10)}</span>
+								}
 								<span>{tx.amount} DNA</span>
-								<span>{tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? '→' : '⭠'}</span>
-								<span>{formatAddress(tx.to)}</span>
 							</div>
 							<span className="transactions__li__details">
 								<span>{tx.timestamp.slice(0, 10)}</span>
 								{tx.payload === "0x" && <span></span>}
-								{tx.payload !== "0x" && <span>{hexDecode(tx.payload.slice(2, tx.payload.length-1)).slice(0, 255)}</span>}
+								{tx.payload !== "0x" && <span>{(() => {
+									const decoded = hexDecode(tx.payload.slice(2, tx.payload.length-1));
+									return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
+								})()}</span>}
 							</span>
 						</a>
 					</li>
