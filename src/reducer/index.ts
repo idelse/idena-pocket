@@ -68,6 +68,7 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					sending: false,
+					balance: state.balance-action.result.amount,
 					transactions: [
 						{
 							from: state.currentAddress,

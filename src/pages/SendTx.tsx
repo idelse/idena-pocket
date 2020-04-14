@@ -29,8 +29,10 @@ export default (): ReactElement => {
 	const { register, handleSubmit, errors } = useForm();
 	
 	const onTransactionSent = (data) => {
+		const fee = 0.0000001;
 		const to = data.destination;
-		const amount = formatAmount(data.amount);
+		let amount = formatAmount(data.amount);
+		amount = amount === storage.balance ? amount-fee : amount;
 		const payload = data.message !== "" ? "0x"+hexEncode(data.message) : "0x";
 		dispatch(sendTx(storage.privateKey, { amount, to, payload }));
 	}
@@ -53,8 +55,7 @@ export default (): ReactElement => {
 					ref={register({
 						validate: amount => {
 							amount = formatAmount(amount);
-							const fee = 0.0000001;
-							return amount > 0 && amount < storage.balance-fee;
+							return amount > 0 && amount <= storage.balance;
 						},
 					})}
 					error={errors.amount ? `Insert valid amount.` : ""} />
