@@ -68,7 +68,7 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					sending: false,
-					balance: state.balance-action.result.amount,
+					balance: (action.result.to || "").toLowerCase() === state.currentAddress.toLowerCase() ? state.balance : state.balance-action.result.amount,
 					transactions: [
 						{
 							from: state.currentAddress,
@@ -78,7 +78,7 @@ export default (defaultState: any) => {
 					],
 					toast: {
 						type: "success",
-						message: `Transaction confirmed (${action.result.hash})`,
+						message: `Transaction confirmed.`,
 						autoclose: true,
 					}
 				}
