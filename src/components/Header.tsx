@@ -15,27 +15,18 @@ const Header = styled.div`
 	align-items: center;
 	border-bottom: 1px dotted ${colors.darkGrey};
 	.address {
-		align-items: center;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-	}
-	.address__copy {
+		text-align: center;
 		background: ${colors.black};
 		color: ${colors.white};
 		padding: .5em;
 		border-radius: 3px;
-		display: inline-flex;
+		display: block;
 		text-decoration: none;
 		cursor: pointer;
 	}
-	.address__copy:hover {
+	.address:hover {
 		color: ${colors.white};
 		background: ${colors.darkBlack};
-	}
-	.address__full {
-		padding-top: .5em;
-		font-size: .8em;
 	}
 	.logout {
 		cursor: pointer;
@@ -88,12 +79,9 @@ export default () => {
 	return (
 		<Header>
 			<Logo width={50} />
-			<div className="address">
-				<CopyToClipboard text={storage.address}>
-					<span className="address__copy">{formatAddress(storage.address, 6)}</span>
-				</CopyToClipboard>
-				<span className="address__full">{storage.address}</span>
-			</div>
+			<CopyToClipboard text={storage.address}>
+				<span className="address">{formatAddress(storage.address, 6)}</span>
+			</CopyToClipboard>
 			<span className="logout" onClick={() => dispatch(lock())}>Logout</span>
 			{storage.message && <div className={`toast toast--${storage.type || "info"}`}>
 				{storage.message}
