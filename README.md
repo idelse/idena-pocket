@@ -1,4 +1,4 @@
-# idena-lite
+# Idena-lite
 A web wallet original based on Idena-pocket built by [@idena-dev](https://github.com/idena-dev)
 
 ```Original Idena-pocket wallet is available at https://pocket.idena.dev```
