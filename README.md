@@ -1,6 +1,4 @@
 # Idena-pocket
-A web wallet based on Idena-JS and Idena-rpc built by [@idena-dev](https://github.com/idena-dev)
-
 ```Idena-pocket wallet is available at https://pocket.idena.dev```
 
 ### Overview 🔎
