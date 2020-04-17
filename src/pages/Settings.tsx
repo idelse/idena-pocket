@@ -13,6 +13,11 @@ const Settings = styled.div`
 	.fa {
 	padding-right: 1em;
 	}
+	.desc {
+	margin-top: 10px;
+    font-size: 0.9em;
+    color: #999;
+	}
 `;
 
 export default (): ReactElement => {
@@ -34,6 +39,7 @@ export default (): ReactElement => {
 			<i className="fa fa-undo"/>
 			Reset wallet
 			</p>
+			<p className="desc">Clear browser storage and use another wallet</p>
 			</Container>
 		</Settings>
 	);
