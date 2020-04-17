@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { retrieveEncryptedSeed, unlock } from "../actions";
-import { shuffle } from "../helpers";
+import { shuffle, colors } from "../helpers";
 import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
 
@@ -20,6 +20,34 @@ const Login = styled.div`
 	height: 80vh;
 	* {
 		padding: .5em 0;
+	}
+	.greyback {
+		background: ${colors.grey};
+		width: 38px;
+    	display: block;
+    	z-index: 999;
+	}
+	.description {
+		text-align: center;
+		padding: 0px 10px;
+		color: ${colors.darkGrey};
+		background: ${colors.grey};
+	}
+	.title {
+		font-size: 1.7em;
+		font-family: 'Inter',sans-serif;
+		margin-bottom: 0em;
+		font-weight: 400;
+	}
+	.separator {
+		width: 225px;
+		border-bottom: 1px solid ${colors.darkGrey};
+		margin-top: -34px;
+	    margin-bottom: 10px;
+	}
+	.extrapadding {
+		padding-bottom: 2em;
+		font-size: 1em;
 	}
 `;
 
@@ -63,8 +91,12 @@ export default () => {
 		<Wrap>
 			<Login>
 				<Logo width={100} />
-				<h1 style={{fontFamily:'courier'}}>idena-pocket</h1>
+				<h1 className="title">Idena-pocket</h1>
+				<p className="description extrapadding">Web-wallet for Idena</p>
+
 				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" />}
+				<span className="greyback"><p className="description">Or</p></span>
+				<span className="separator"></span>
 				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
