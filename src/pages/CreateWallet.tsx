@@ -1,8 +1,10 @@
 import * as React from "react";
 import { ReactElement } from "react";
 import Wrap from "../components/Wrap";
+import Container from "../components/Container";
 import styled from "styled-components";
 import Button from "../components/Button";
+import { colors } from "../helpers";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -11,10 +13,30 @@ import { updateCreationWalletPassword } from "../actions";
 
 const CreateWallet = styled.div`
 	form {
-		margin-top: 2em;
+		margin-top: 1.2em;
 	}
 	input, textarea {
 		margin-bottom: 1em;
+	}
+	.textcontain {
+	margin: auto;
+	text-align: center;
+    margin-bottom: 2em;
+	}
+	.textcontain p {
+	color: ${colors.darkGrey};
+	}
+	@media (min-width: 300px) {
+		width: 100%;
+		margin-top: 3em;
+	}
+	@media (min-width: 576px) {
+		width: 90%;
+	    margin-top: 4em;
+	}
+	@media (min-width: 768px) {
+		width: 85%;
+	    margin-top: 6em;
 	}
 `;
 
@@ -31,8 +53,11 @@ export default (): ReactElement => {
 	return (
 		<Wrap>
 			<CreateWallet>
-				<h1>Create password</h1>
-				<h2>Enter your browser encryption data password.</h2>
+			    <div className="textcontain">
+				<h3>Create password</h3>
+				<p>Enter your browser encryption data password.</p>
+				</div>
+				<Container>
 				<form onSubmit={handleSubmit(onCreationWalletPassword)}>
 					<Input
 						name="password"
@@ -51,8 +76,9 @@ export default (): ReactElement => {
 						label="Confirm password"
 						error={errors.password2 ? "Password must match" : ""}
 						type="password" />
-					<Button type="submit" text="Create" />
+					<Button type="submit" text="Create" margin="center"/>
 				</form>
+				</Container>
 			</CreateWallet>
 		</Wrap>
 	);

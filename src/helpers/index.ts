@@ -10,6 +10,7 @@ export const colors = {
 	darkRed: "#FF5733",
 	blue: "#BFEEFF",
 	darkBlue: "#4BACD1",
+    lightGrey: "#BBB",
 };
 
 export const shuffle = array => [...array].sort(() => Math.random() - 0.5);

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import Wrap from "../components/Wrap";
+import Container from "../components/Container";
 import Or from "../components/OrSeparator";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../components/Input";
@@ -18,7 +19,7 @@ const Login = styled.div`
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	height: 80vh;
+	height: 100vh;
 	* {
 		padding: .5em 0;
 	}
@@ -77,10 +78,11 @@ export default () => {
 				<h1 className="title">Idena-pocket</h1>
 				<p className="description extrapadding">Web-wallet for Idena</p>
 
-				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" />}
+				<Container>
+				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" margin="center"/>}
 				{!storage.encryptedSeed && <Or />}
 
-				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" />}
+				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" icon="arrow-right" margin="center"/>}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
 						name="password"
@@ -97,11 +99,13 @@ export default () => {
 							},
 						})}
 						placeholder={placeholder}
-						label="Password"
-						error={errors.password ? "Wrong password" : ""}
+						label="Enter Your Password"
+						error={errors.password ? "Wrong password. Please try again." : ""}
 						type="password" />
 					<Button type="submit" text="Login" />
 				</form>}
+				</Container>
+
 			</Login>
 		</Wrap>
 	);
