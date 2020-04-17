@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ReactElement } from "react";
+import ThinContainer from "../components/ThinContainer";
 import { useSelector } from "react-redux";
 import { colors, formatAddress, hexDecode } from "../helpers";
 import styled from "styled-components";
@@ -40,20 +41,26 @@ const Transactions = styled.div`
 		justify-content: space-between;
 	}
 	.transactions__li--green {
-		background: ${colors.green}
+		background: ${colors.green};
+		-webkit-transition: all .35s ease;
+    	-o-transition: all .35s ease;
+    	transition: all .35s ease;
 	}
 	.transactions__li--green a:hover {
-		background: ${colors.darkGreen};
+		background: #d9ffab;
 	}
 	.transactions__li--red {
-		background: ${colors.red}
+		background: ${colors.red};
+		-webkit-transition: all .35s ease;
+    	-o-transition: all .35s ease;
+    	transition: all .35s ease;
 	}
 	.transactions__li--red a:hover {
-		background: ${colors.darkRed};
+		background: #ffc9bd;
 	}
 	.transactions__li--red a:hover span,
 	.transactions__li--green a:hover span {
-		color: ${colors.white};
+		color: ${colors.black};
 	}
 `;
 
@@ -67,6 +74,7 @@ export default (): ReactElement => {
 	});
 
 	return (
+		<ThinContainer>
 		<Transactions>
 			{(storage.transactions.length === 0) && <p>No transactions :(</p>}
 			<ul className="transactions">
@@ -80,7 +88,7 @@ export default (): ReactElement => {
 									(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
 									<span>{formatAddress(tx.to, 10)}</span>
 								}
-								<span>{tx.amount} DNA</span>
+								<span>{tx.amount} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
 							</div>
 							<span className="transactions__li__details">
 								<span>{tx.timestamp.slice(0, 10)}</span>
@@ -95,5 +103,6 @@ export default (): ReactElement => {
 				))}
 			</ul>
 		</Transactions>
+		</ThinContainer>
 	);
 }
