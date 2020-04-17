@@ -12,7 +12,7 @@ They are using ```rpc.idena.dev``` as the reference endpoint since their is no p
 rpc.idena.dev is built and maintained by [@idena-dev](https://github.com/idena-dev/idena-pocket)
 
 ### Will this be opensource?
-I was impressed by idena-pocket project and decided to enhance it from usability and interaction design standpoint. 
+I was impressed by original idena-pocket project and decided to enhance it from usability and interaction design standpoint. 
 Idena-lite will be 100% opensource. Feel free to fork it, contribute to it. PRs are welcome.
 
 ## Useful Links
