@@ -14,7 +14,7 @@ As of date, It is using ```rpc.idena.dev``` as the reference endpoint since thei
 ```rpc.idena.dev``` is built and maintained by [@idena-dev](https://github.com/idena-dev/idena-pocket)
 
 ### Will this be opensource?
-💯. Feel free to improve on Idena-pocket
+💯. Feel free to improve on Idena-pocket. Forks and PRs are welcome.
 
 ### Useful Links 🌐
 - [Idena-JS documentation](https://www.idena.dev/idena-js/quick-start)
