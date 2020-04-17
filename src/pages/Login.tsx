@@ -95,8 +95,8 @@ export default () => {
 				<p className="description extrapadding">Web-wallet for Idena</p>
 
 				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" />}
-				<span className="greyback"><p className="description">Or</p></span>
-				<span className="separator"></span>
+				{!storage.encryptedSeed && <span className="greyback"><p className="description">Or</p></span><span className="separator"></span>}
+
 				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
