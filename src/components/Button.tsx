@@ -27,7 +27,7 @@ const Button = styled.span`
     	transition: all .35s ease;
     	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.2);
     	box-shadow: 0 1px 3px rgba(0,0,0,.2);
-	    @media (min-width: 576px) {
+	    @media (min-width: 300px) {
 		    width: 100%;
 		}
 	    @media (min-width: 768px) {

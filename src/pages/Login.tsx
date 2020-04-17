@@ -102,7 +102,7 @@ export default () => {
 						label="Enter Your Password"
 						error={errors.password ? "Wrong password. Please try again." : ""}
 						type="password" />
-					<Button type="submit" text="Login" />
+						<Button type="submit" text="Login" margin="center"/>
 				</form>}
 				</Container>
 
