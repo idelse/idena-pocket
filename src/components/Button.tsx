@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const Button = styled.span`
 	.btn {
-		background: ${colors.darkBlack};
-		border-radius: 3px;
+		background: ${colors.black};
+		border-radius: 8px;
 		padding: .85em;
 		display: block;
 		text-align: center;
@@ -15,9 +15,21 @@ const Button = styled.span`
 		text-decoration: none;
 		font-weight: normal;
 		font-size: 1.1em;
+		-webkit-transition: all .35s ease;
+    	-o-transition: all .35s ease;
+    	transition: all .35s ease;
+    	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    	box-shadow: 0 1px 3px rgba(0,0,0,.2);
 	}
 	.btn:hover {
+		background: ${colors.darkBlack};
+    	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,.2);
+    	box-shadow: 0 2px 12px rgba(0,0,0,.2);
+	}
+	.btn:focus {
 		background: ${colors.black};
+    	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,.2);
+    	box-shadow: 0 2px 12px rgba(0,0,0,.2);
 	}
 	.btn--disabled, .btn--disabled:hover {
 		background: ${colors.darkGrey};
