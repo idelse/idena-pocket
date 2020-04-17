@@ -16,7 +16,11 @@ const Unlocked = styled.div`
 		padding: 1em 0;
 		display: flex;
 		flex-direction: column;
-		border-bottom: 1px dotted ${colors.darkGrey};
+		padding: 2.5em 0;
+    	border-radius: 4px;
+    	background: ${colors.white};
+    	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	.balance__value {
 		font-size: 2.5em;
@@ -25,23 +29,37 @@ const Unlocked = styled.div`
 		font-size: 1em;
 	}
 	.menu {
-		display: flex;
-		height: 100px;
+		background: #efefef;
+    	border-radius: 6em;
+    	overflow: hidden;
 		align-items: center;
+		display: flex;
+		margin: 1.3em 0px;
+    	justify-content: space-between;
 	}
 	.menu__li {
 		list-style: none;
+		display: flex;
+		cursor: pointer;
+		flex: 1;
 	}
 	.menu__li a {
-		color: ${colors.white};
-		margin-right: 1em;
+		color: ${colors.black};
+		margin: auto;
 		padding: .5em;
-		background: ${colors.black};
-		border-radius: 3px;
+		background: #efefef;
+		text-align: center;
+    	width: 100%;
 		text-decoration: none;
 	}
-	.menu__li--active a, .menu__li a:hover {
-		background: ${colors.darkBlack};
+	.menu__li--active a {
+		background: ${colors.white};
+    	border-radius: 5em;
+    	color: ${colors.darkBlack};
+    	border: 1px solid ${colors.lightGrey};
+	}
+	.menu__li a:hover {
+		color: ${colors.darkBlack};
 	}
 	.footer {
 		width: 100%;

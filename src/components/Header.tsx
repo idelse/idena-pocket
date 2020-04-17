@@ -10,10 +10,12 @@ import CopyToClipboard from "react-copy-to-clipboard";
 const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
-	height: 100px;
+	min-height: 10vh;
 	align-content: center;
 	align-items: center;
-	border-bottom: 1px dotted ${colors.darkGrey};
+	.fa {
+		padding-right: 10px;
+	}
 	.address {
 		text-align: center;
 		background: ${colors.black};
@@ -82,7 +84,10 @@ export default () => {
 			<CopyToClipboard text={storage.address}>
 				<span className="address">{formatAddress(storage.address, 6)}</span>
 			</CopyToClipboard>
-			<span className="logout" onClick={() => dispatch(lock())}>Logout</span>
+			<span className="logout" onClick={() => dispatch(lock())}>
+				<i className="fa fa-power-off"/>
+				Logout
+			</span>
 			{storage.message && <div className={`toast toast--${storage.type || "info"}`}>
 				{storage.message}
 			</div>}
