@@ -1,6 +1,6 @@
 # idena-lite
 A web wallet original based on Idena-pocket built by [@idena-dev](https://github.com/idena-dev)
-Original Idena-pocket wallet is available at https://pocket.idena.dev
+```Original Idena-pocket wallet is available at https://pocket.idena.dev```
 
 ### Overview
 Idena-pocket and Idena-lite are both based on Idena-js library developed by [@idena-dev](https://github.com/idena-dev). Idena-JS is built with typescript
