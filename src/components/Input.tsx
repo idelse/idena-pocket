@@ -10,7 +10,7 @@ const Input = styled.span`
     	border-radius: 4px;
 		padding: .75em;
 		box-sizing: border-box;
-		font-size: 1.2em;
+		font-size: 1em;
 		resize: none;
 		margin: 0!important;
 		resize: none;
@@ -24,7 +24,7 @@ const Input = styled.span`
 	}
 	input::placeholder {
 		color: ${colors.darkGrey};
-		font-size: 0.8em;
+		font-size: 0.94em;
 	}
 	textarea::placeholder {
 		color: ${colors.darkGrey};
@@ -39,7 +39,7 @@ const Input = styled.span`
 		border-radius: 4px;
 		padding: .75em;
 		box-sizing: border-box;
-		font-size: 1.2em;
+		font-size: 1em;
 		height: 100px;
 		resize: none;
 		margin: 0!important;
