@@ -24,6 +24,4 @@ As of date, It is using ```rpc.idena.dev``` as the reference endpoint since thei
 
 ### Credits 🤝
 - [@idena-dev](https://github.com/idena-dev)
-- [@menxit](https://github.com/menxit)
-- [@bingbinglee](https://github.com/bingbinglee)
 
