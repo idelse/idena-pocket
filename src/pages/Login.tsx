@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import Wrap from "../components/Wrap";
+import Or from "../components/OrSeparator";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
@@ -21,29 +22,11 @@ const Login = styled.div`
 	* {
 		padding: .5em 0;
 	}
-	.greyback {
-		background: ${colors.grey};
-		width: 38px;
-    	display: block;
-    	z-index: 999;
-	}
-	.description {
-		text-align: center;
-		padding: 0px 10px;
-		color: ${colors.darkGrey};
-		background: ${colors.grey};
-	}
 	.title {
 		font-size: 1.7em;
 		font-family: 'Inter',sans-serif;
 		margin-bottom: 0em;
 		font-weight: 400;
-	}
-	.separator {
-		width: 225px;
-		border-bottom: 1px solid ${colors.darkGrey};
-		margin-top: -34px;
-	    margin-bottom: 10px;
 	}
 	.extrapadding {
 		padding-bottom: 2em;
@@ -95,7 +78,7 @@ export default () => {
 				<p className="description extrapadding">Web-wallet for Idena</p>
 
 				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" />}
-				{!storage.encryptedSeed && <span className="greyback"><p className="description">Or</p></span><span className="separator"></span>}
+				{!storage.encryptedSeed && <Or />}
 
 				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
