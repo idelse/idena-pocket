@@ -5,7 +5,7 @@
 Idena-pocket is based on Idena-js library developed by [@idena-dev](https://github.com/idena-dev). 
 Idena-JS is built with typescript.
 
-This wallet do not need an active node needed to run.
+This wallet does not need an active node needed to run.
 
 As of date, It is using ```rpc.idena.dev``` as the reference endpoint since their is no public rpc endpoint available.
 
