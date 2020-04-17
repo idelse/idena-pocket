@@ -21,7 +21,3 @@ As of date, It is using ```rpc.idena.dev``` as the reference endpoint since thei
 - [Idena-RPC documentation](https://github.com/idena-dev/idena-rpc)
 - [Original Idena Pocket](https://github.com/idena-dev/idena-pocket)
 - [Idena-pocket website](https://pocket.idena.dev/#/)
-
-### Credits 🤝
-- [@idena-dev](https://github.com/idena-dev)
-
