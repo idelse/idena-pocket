@@ -74,8 +74,8 @@ export default () => {
 		<Wrap>
 			<Login>
 				<Logo width={100} />
-				<h1 className="title">Idena-pocket</h1>
-				<p className="description extrapadding">Web-wallet for Idena</p>
+				<h1 className="title">idena-pocket</h1>
+				<p className="description extrapadding">web-wallet for Idena</p>
 
 				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" />}
 				{!storage.encryptedSeed && <Or />}
