@@ -15,10 +15,14 @@ rpc.idena.dev is built and maintained by [@idena-dev](https://github.com/idena-d
 I was impressed by original idena-pocket project and decided to enhance it from usability and interaction design standpoint. 
 Idena-lite will be 100% opensource. Feel free to fork it, contribute to it. PRs are welcome.
 
-## Useful Links
+### Useful Links
 - [Idena-JS documentation](https://www.idena.dev/idena-js/quick-start)
 - [Idena-RPC documentation](https://github.com/idena-dev/idena-rpc)
 - [Original Idena Pocket](https://github.com/idena-dev/idena-pocket)
+
+### Credits
+- [@idena-dev](https://github.com/idena-dev)
+- [@menxit](https://github.com/menxit)
 
 
 
