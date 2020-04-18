@@ -15,6 +15,15 @@ const Header = styled.div`
 	align-items: center;
 	.fa {
 		padding-right: 10px;
+		color: ${colors.darkRed};
+	}
+	.darkbg {
+		width: 100%;
+	    z-index: -13;
+	    height: 56vh;
+	    left: 0;
+	    background-color: rgb(57, 60, 62);
+	    position: absolute;
 	}
 	.address {
 		text-align: center;
@@ -32,6 +41,7 @@ const Header = styled.div`
 	}
 	.logout {
 		cursor: pointer;
+		color: ${colors.darkRed};
 	}
 	.logout:hover {
 		text-decoration: underline;
@@ -80,6 +90,7 @@ export default () => {
 
 	return (
 		<Header>
+			<div className="darkbg"></div>
 			<Logo width={50} />
 			<CopyToClipboard text={storage.address}>
 				<span className="address">{formatAddress(storage.address, 6)}</span>

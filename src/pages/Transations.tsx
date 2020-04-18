@@ -62,6 +62,19 @@ const Transactions = styled.div`
 	.transactions__li--green a:hover span {
 		color: ${colors.black};
 	}
+	.desc {
+	margin: auto;
+	text-align: center;
+	margin-bottom: 2em;
+	}
+	.empty {
+	margin: auto;
+	margin-top: 1em;
+	text-align: center;
+	}
+	.empty fa {
+	color: ${colors.red};
+	}
 `;
 
 export default (): ReactElement => {
@@ -76,7 +89,9 @@ export default (): ReactElement => {
 	return (
 		<ThinContainer>
 		<Transactions>
-			{(storage.transactions.length === 0) && <p>No transactions :(</p>}
+			{(storage.transactions.length === 0) && <h1 className="empty">
+			&#128546;</h1>}
+			<p className="desc">No transactions</p> 
 			<ul className="transactions">
 				{(storage.transactions||[]).map((tx, key) => (
 					<li className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'} key={key}>
