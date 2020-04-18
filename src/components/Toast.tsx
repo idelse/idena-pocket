@@ -14,7 +14,7 @@ const Toast = styled.div`
 		align-items: center;
 		color: #fff;
 		background: ${colors.darkGreen};
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		left: 0;
 	}

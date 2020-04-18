@@ -118,7 +118,7 @@ export default () => {
 							},
 						})}
 						placeholder={placeholder}
-						label="Enter Your Password"
+						label="Enter your password"
 						error={errors.password ? "Wrong password. Please try again." : ""}
 						type="password" />
 						<Button type="submit" text="Login" margin="center"/>
