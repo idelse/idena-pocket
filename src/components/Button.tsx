@@ -4,13 +4,20 @@ import { colors } from "../helpers";
 import { Link } from "react-router-dom";
 
 const Button = styled.span`
+	.fa {
+	color: ${colors.white}; 
+	float: right;
+	padding: 3px 0px;
+    margin-left: 1em;
+	}
 	.btn {
 		background: ${colors.black};
-		border-radius: 8px;
+		border-radius: 4px;
 		padding: .85em;
+		box-sizing: border-box;
+		cursor: pointer;
 		display: block;
 		text-align: center;
-		width: 200px;
 		color: ${colors.white};
 		text-decoration: none;
 		font-weight: normal;
@@ -20,6 +27,12 @@ const Button = styled.span`
     	transition: all .35s ease;
     	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.2);
     	box-shadow: 0 1px 3px rgba(0,0,0,.2);
+	    @media (min-width: 300px) {
+		    width: 100%;
+		}
+	    @media (min-width: 768px) {
+		    width: 300px;
+		}
 	}
 	.btn:hover {
 		background: ${colors.darkBlack};
@@ -34,34 +47,87 @@ const Button = styled.span`
 	.btn--disabled, .btn--disabled:hover {
 		background: ${colors.darkGrey};
 	}
+	.centermargin {
+		margin: auto;
+	}
 `;
 
-export default (props: { onClick?: any, type?: string, to?: string, disabled?: boolean, text: string }) => {
+export default (props: { onClick?: any, type?: string, to?: string, disabled?: boolean, text: string, margin?: string, icon?: string }) => {
 	const { disabled, text, to, type, ...rest } = props;
 	if (props.disabled) {
+		if (props.margin === "center") {
 		return (
 			<Button>
-				<div className="btn btn--disabled" {...removeEventListener}>{text}</div>
+				<div className="btn btn--disabled centermargin" {...removeEventListener}>
+				{text}
+				{<i className={`fa fa-${props.icon}`}/>}
+				</div>
 			</Button>
 		);
+		} else {
+		return (
+			<Button>
+				<div className="btn btn--disabled" {...removeEventListener}>
+				{text}
+				{<i className={`fa fa-${props.icon}`}/>}
+				</div>
+			</Button>
+		);
+		}
 	}
 	if (to) {
+		if (props.margin === "center") { 
 		return (
 			<Button>
-				<Link className="btn" to={to} {...rest}>{text}</Link>
+				<Link className="btn centermargin" to={to} {...rest}>
+				{text}
+				{<i className={`fa fa-${props.icon}`}/>}
+				</Link>
 			</Button>
 		);
+		} else {
+		return (
+			<Button>
+				<Link className="btn" to={to} {...rest}>
+				{text}
+				{<i className={`fa fa-${props.icon}`}/>}
+				</Link>
+			</Button>
+		);
+		}
 	}
 	if (type === "submit") {
+		if (props.margin === "center") { 
+		return (
+			<Button>
+				<input className="btn centermargin" type="submit" {...rest} value={text} />
+			</Button>
+		);
+		} else {
 		return (
 			<Button>
 				<input className="btn" type="submit" {...rest} value={text} />
 			</Button>
 		);
+		}
 	}
+	if (!props.disabled && props.margin === "center") {
 	return (
 		<Button>
-			<div className="btn" {...rest}>{text}</div>
+			<div className="btn centermargin" {...rest}>
+			{text}
+			{<i className={`fa fa-${props.icon}`}/>}
+			</div>
 		</Button>
 	);
+	} else {
+	return (
+		<Button>
+			<div className="btn" {...rest}>
+			{text}
+			{<i className={`fa fa-${props.icon}`}/>}
+			</div>
+		</Button>
+	);
+	}
 };

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ReactElement } from "react";
+import ThinContainer from "../components/ThinContainer";
 import { useSelector } from "react-redux";
 import { colors, formatAddress, hexDecode } from "../helpers";
 import styled from "styled-components";
@@ -34,26 +35,48 @@ const Transactions = styled.div`
 		display: flex;
 		justify-content: space-between;
 	}
+	.transactions__li__details span:last-child {
+		color: ${colors.darkGrey};
+	}
 	.transactions__li__tx {
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
 	}
 	.transactions__li--green {
-		background: ${colors.green}
+		background: ${colors.green};
+		-webkit-transition: all .35s ease;
+    	-o-transition: all .35s ease;
+    	transition: all .35s ease;
 	}
 	.transactions__li--green a:hover {
-		background: ${colors.darkGreen};
+		background: #d9ffab;
 	}
 	.transactions__li--red {
-		background: ${colors.red}
+		background: ${colors.red};
+		-webkit-transition: all .35s ease;
+    	-o-transition: all .35s ease;
+    	transition: all .35s ease;
 	}
 	.transactions__li--red a:hover {
-		background: ${colors.darkRed};
+		background: #ffc9bd;
 	}
 	.transactions__li--red a:hover span,
 	.transactions__li--green a:hover span {
-		color: ${colors.white};
+		color: ${colors.black};
+	}
+	.desc {
+	margin: auto;
+	text-align: center;
+	margin-bottom: 2em;
+	}
+	.empty {
+	margin: auto;
+	margin-top: 1em;
+	text-align: center;
+	}
+	.empty fa {
+	color: ${colors.red};
 	}
 `;
 
@@ -67,8 +90,11 @@ export default (): ReactElement => {
 	});
 
 	return (
+		<ThinContainer>
 		<Transactions>
-			{(storage.transactions.length === 0) && <p>No transactions :(</p>}
+			{(storage.transactions.length === 0) && <h1 className="empty">
+			&#128546;</h1>}
+			<p className="desc">No transactions</p> 
 			<ul className="transactions">
 				{(storage.transactions||[]).map((tx, key) => (
 					<li className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'} key={key}>
@@ -80,7 +106,7 @@ export default (): ReactElement => {
 									(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
 									<span>{formatAddress(tx.to, 10)}</span>
 								}
-								<span>{tx.amount} DNA</span>
+								<span>{tx.amount} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
 							</div>
 							<span className="transactions__li__details">
 								<span>{tx.timestamp.slice(0, 10)}</span>
@@ -95,5 +121,6 @@ export default (): ReactElement => {
 				))}
 			</ul>
 		</Transactions>
+		</ThinContainer>
 	);
 }

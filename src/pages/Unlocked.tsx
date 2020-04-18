@@ -16,40 +16,80 @@ const Unlocked = styled.div`
 		padding: 1em 0;
 		display: flex;
 		flex-direction: column;
-		border-bottom: 1px dotted ${colors.darkGrey};
+		padding: 2.5em 0;
+    	border-radius: 4px;
+    	background: rgb(41, 44, 46);
+    	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	.balance__value {
-		font-size: 2.5em;
+		font-size: 1.3125rem;
+		color: ${colors.white};
+		font-weight: 500;
+    	margin-bottom: 10px;
 	}
 	.balance__dollar {
 		font-size: 1em;
+		color: ${colors.darkGrey};
 	}
 	.menu {
-		display: flex;
-		height: 100px;
+		background: #efefef;
+    	border-radius: 6em;
+    	overflow: hidden;
 		align-items: center;
+		display: flex;
+		margin: 1.3em 0px;
+    	justify-content: space-between;
 	}
 	.menu__li {
 		list-style: none;
+		display: flex;
+		cursor: pointer;
+		flex: 1;
 	}
 	.menu__li a {
-		color: ${colors.white};
-		margin-right: 1em;
+		color: ${colors.black};
+		margin: auto;
 		padding: .5em;
-		background: ${colors.black};
-		border-radius: 3px;
+		background: #efefef;
+		text-align: center;
+    	width: 100%;
 		text-decoration: none;
 	}
-	.menu__li--active a, .menu__li a:hover {
-		background: ${colors.darkBlack};
+	.menu__li--active a {
+		background: ${colors.white};
+    	border-radius: 5em;
+    	color: ${colors.darkBlack};
+    	border: 1px solid ${colors.lightGrey};
+    	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	}
+	.menu__li a:hover {
+		color: ${colors.darkBlack};
 	}
 	.footer {
 		width: 100%;
 		text-align: center;
-		padding: 4em 0;
 		font-family: 'Courier New', Courier, monospace;
 		color: ${colors.darkGrey};
 		font-size: .8em;
+		padding-top: 4em;
+    	padding-bottom: 1em;
+    	border-bottom: 1px dotted ${colors.lightGrey};
+	}
+	.donate {
+		text-align: center;
+		line-height: 1.9em;
+    	padding-bottom: 4em;
+    	padding-top: 1em;
+    	font-size: 0.9em;
+    	color: ${colors.darkGrey};
+	}
+	.donate strong {
+		font-weight: 400;
+    	background: #efefef;
+    	border-radius: 4px;
+    	padding: 4px;
 	}
 `;
 
@@ -93,7 +133,8 @@ export default (props): ReactElement => {
 					</li>
 				</ul>
 				{props.children}
-				<p className="footer">spero che ritorni presto l'era del cinghiale bianco ♪</p>
+				<p className="footer">♪ spero che ritorni presto l'era del cinghiale bianco ♪</p>
+				<p className="donate">Consider supporting idena-pocket by donating to <strong>0x62449c9b1029db6df55ecf215d0aaa0cea23c66d</strong></p>
 			</Unlocked>
 		</Wrap>
 	);

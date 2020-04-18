@@ -5,6 +5,7 @@ import { formatAmount, validateInputAddresses, hexEncode } from "../helpers";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Button from "../components/Button";
+import Container from "../components/Container";
 import Input from "../components/Input";
 import { sendTx } from "../actions";
 
@@ -39,11 +40,13 @@ export default (): ReactElement => {
 
 	return (
 		<SendTx>
+			<Container>
 			<form onSubmit={handleSubmit(onTransactionSent)}>
 				<Input
 					name="destination"
 					label="Destination address *"
 					type="text"
+					placeholder="enter destination address here"
 					ref={register({
 						validate: destination => validateInputAddresses(destination),
 					})}
@@ -52,6 +55,7 @@ export default (): ReactElement => {
 					name="amount"
 					label="Amount *"
 					type="text"
+					placeholder="0.1"
 					ref={register({
 						validate: amount => {
 							amount = formatAmount(amount);
@@ -65,8 +69,9 @@ export default (): ReactElement => {
 					type="textarea"
 					ref={register()}
 					error={errors.message ? "Insert valid message" : ""} />
-				<Button disabled={storage.sending} type="submit" text="Send" />
+				<Button disabled={storage.sending} type="submit" text="Send" margin="center"/>
 			</form>
+			</Container>
 		</SendTx>
 	);
 }

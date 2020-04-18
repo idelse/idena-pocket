@@ -6,17 +6,19 @@ export const colors = {
 	white: "#ffffff",
 	green: "#F4FFE6",
 	darkGreen: "#96D14B",
-	red: "#FFD2C9",
+	red: "#FFE6E2",
+    lightRed: "#FFA692",
 	darkRed: "#FF5733",
 	blue: "#BFEEFF",
 	darkBlue: "#4BACD1",
+    lightGrey: "#BBB",
 };
 
 export const shuffle = array => [...array].sort(() => Math.random() - 0.5);
 
 export const formatAddress = (address, l = 6) => `${address.slice(0, l+2)}...${address.slice(address.length-l, address.length)}`
 
-export const formatNumber = number => Math.floor(number*100)/100;
+export const formatNumber = number => Math.floor(number*10000)/10000;
 
 export const validateInputAddresses = address => (/^(0x){1}[0-9a-fA-F]{40}$/i.test(address));
 

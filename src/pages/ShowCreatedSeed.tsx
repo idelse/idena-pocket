@@ -2,6 +2,8 @@ import * as React from "react";
 import { ReactElement, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Wrap from "../components/Wrap";
+import Container from "../components/Container";
+import Progress from "../components/Progress";
 import styled from "styled-components";
 import { colors } from "../helpers";
 import Button from "../components/Button";
@@ -12,13 +14,14 @@ const ShowCreatedSeed = styled.div`
 		margin-bottom: .5em;
 	}
 	.seed {
-		margin-top: 2em;
-		background: ${colors.white};
-		border: 1px solid ${colors.darkGrey};
+		background: ${colors.grey};
+		border: 1px solid ${colors.lightGrey};
 		box-sizing: border-box;
 		padding: 1em;
+		height: 15vh;
 		border-radius: 3px;
 		position: relative;
+		word-wrap: break-word;
 		margin-bottom: 1em;
 	}
 	.seed__text {
@@ -48,6 +51,30 @@ const ShowCreatedSeed = styled.div`
 		color: ${colors.black};
 		text-shadow: none!important;
 	}
+	.textcontain {
+	margin: auto;
+	text-align: center;
+    margin-bottom: 2em;
+	}
+	.textcontain p, p {
+	color: ${colors.darkGrey};
+	text-align: center;
+	}
+	.extramargin {
+	margin-bottom: 2em;
+	}
+	@media (min-width: 300px) {
+		width: 100%;
+		margin-top: 3em;
+	}
+	@media (min-width: 576px) {
+		width: 90%;
+	    margin-top: 4em;
+	}
+	@media (min-width: 768px) {
+		width: 85%;
+	    margin-top: 6em;
+	}
 `;
 
 export default (): ReactElement => {
@@ -69,17 +96,22 @@ export default (): ReactElement => {
 	return (
 		<Wrap>
 			<ShowCreatedSeed>
-				<h1>Secret seed phrase</h1>
-				<p>Your secret backup phrase makes it easy to backup and restore your account.</p>
-				<p>ATTENTION: Never tell anyone this backup phrase. Anyone with this phrase can steal your DNA forever.</p>
-				<p>Please write your seed words below and store them in a secure place. These can be used to restore your wallet.</p>
+				<Progress wide="66"/>
+				<div className="textcontain">
+				<h3>Secret seed phrase</h3>
+				<p className="extramargin">Your secret backup phrase makes it easy to backup and restore your account.</p>
+				</div>
+				<p><strong>ATTENTION:</strong> Never tell anyone this backup phrase. Anyone with this phrase can steal your DNA forever.</p>
+				<p className="extramargin">Please write your seed words below and store them in a secure place. These can be used to restore your wallet.</p>
+				<Container>
 				<div className={`seed ${show ? 'seed--showed' : ''}`}>
 					<div onClick={() => setShow(true)} className="seed__click">
 						Click here to show seed phrase
 					</div>
-					<span className="seed__text">{storage.seed.join(' ')}</span>
+					<span className="seed__text">{storage.seed.join('  ')}</span>
 				</div>
-				<Button disabled={!show} to="confirm-seed" text="Next" />
+				<Button disabled={!show} to="confirm-seed" text="Next" margin="center" icon="arrow-right"/>
+				</Container>
 			</ShowCreatedSeed>
 		</Wrap>
 	);
