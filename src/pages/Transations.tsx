@@ -8,7 +8,7 @@ import Container from "../components/Container";
 const Transactions = styled.div`
 	.transactions {
 		width: 100%;
-		background: #fff;
+		background: ${colors.white};
 		border-radius: 5px;
 	}
 	.transactions li {
@@ -18,8 +18,8 @@ const Transactions = styled.div`
 	}
 	.transactions li a {
 		display: flex;
-		flex-direction: column;
-		padding: 1em;
+		flex-direction: initial;
+		padding: 0.6em;
 		text-decoration: none;
 		display: flex;
 		justify-content: space-around;
@@ -50,7 +50,10 @@ const Transactions = styled.div`
     	transition: all .35s ease;
 	}
 	.transactions__li--green a:hover {
-		background: #d9ffab;
+		background: ${colors.lightGreen};
+	}
+	.transactions__li--green .thumbnail img {
+		background: ${colors.lightGreen};
 	}
 	.transactions__li--red {
 		background: ${colors.red};
@@ -58,8 +61,11 @@ const Transactions = styled.div`
     	-o-transition: all .35s ease;
     	transition: all .35s ease;
 	}
+	.transactions__li--red .thumbnail img {
+		background: ${colors.lighterRed};
+	}
 	.transactions__li--red a:hover {
-		background: #ffc9bd;
+		background: ${colors.lighterRed};
 	}
 	.transactions__li--red a:hover span,
 	.transactions__li--green a:hover span {
@@ -80,6 +86,40 @@ const Transactions = styled.div`
 	}
 	.empty fa {
 	color: ${colors.red};
+	}
+
+	.thumbnail {
+		width: 9% !important;
+    	height: inherit;
+    	float: left;
+    	padding-right: 15px;
+    	display: block;
+	}
+	.thumbnail img {
+		width: 90%;
+		margin-top: 2px;
+		border-radius: 4em;
+	}
+	.tx {
+		width: 89% !important;
+		float: right;
+		display: block;
+	}
+	@media (max-width: 991px) {
+		.thumbnail {
+		display: none;
+		width: 0% !important;
+		float: none;
+		}
+		.tx {
+		width: 100% !important;
+		display: block;
+		float: none;
+		}
+		.transactions li a {
+		flex-direction: column;
+		padding: 1em;
+		}
 	}
 `;
 
@@ -106,7 +146,12 @@ export default (): ReactElement => {
 							${tx.pending ? 'transactions__li--pending' : ''}
 						`} key={key}>
 							<a target={tx.pending ? '_self' : '_blank'} href={tx.pending ? '#/unlocked/transactions' : `https://scan.idena.io/tx?tx=${tx.hash}`}>
-								<div className="transactions__li__tx">
+								<div className="thumbnail">
+							  {tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <img src ={`https://robohash.org/${tx.from.toLowerCase()}`}/>}
+							  {tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && <img src ={`https://robohash.org/${tx.to.toLowerCase()}`}/>}	
+							  </div>
+                <div className="tx">
+                <div className="transactions__li__tx">
 									{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 10)}</span>}
 									{
 										(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
@@ -123,6 +168,7 @@ export default (): ReactElement => {
 										return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
 									})()}</span>}
 								</span>
+                </div>
 							</a>
 						</li>
 					))}
