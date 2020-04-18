@@ -12,19 +12,19 @@ const Container = styled.div`
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
     @media (min-width: 300px) {
 	    width: 100%;
-	    padding: 1.5em !important;
+	    padding: 1em !important;
 	}
     @media (min-width: 576px) {
 	    width: 100%;
-	    padding: 1.5em !important;
+	    padding: 1em !important;
 	}
     @media (min-width: 768px) {
 	    width: 100%;
-	    padding: 2em !important;
+	    padding: 1em !important;
 	}
     @media (min-width: 992px) {
 	    width: 100%;
-	    padding: 2em !important;
+	    padding: 1.5em !important;
 	 }
 `;
 
