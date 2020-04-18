@@ -44,6 +44,15 @@ export default (defaultState: any) => {
 					...state,
 					encryptedSeed: action.result
 				}
+			case UNLOCK+'_REQUESTED':
+				return {
+					...state,
+					toast: {
+						type: "info",
+						message: "Unlocking account",
+						autoclose: false,
+					}
+				}
 			case UNLOCK:
 				return {
 					...state,
@@ -53,6 +62,11 @@ export default (defaultState: any) => {
 					currentAddress: action.result.address,
 					privateKey: action.result.privateKey,
 					unlocked: true,
+					toast: {
+						message: "",
+						type: "",
+						autoclose: false,
+					}
 				}
 			case REFRESH+'_REQUESTED':
 				return {
