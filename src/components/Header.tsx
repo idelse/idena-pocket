@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import Logo from "../components/Logolight";
+import Logo from "../components/Logo";
 import { formatAddress, colors } from "../libs/helpers";
 import { lock } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -56,7 +56,7 @@ export default () => {
 	return (
 		<Header>
 			<div className="darkbg"></div>
-			<Logo width={50} />
+			<Logo theme="light" width={50} />
 			<CopyToClipboard text={storage.address}>
 				<span className="address">{formatAddress(storage.address, 6)}</span>
 			</CopyToClipboard>
