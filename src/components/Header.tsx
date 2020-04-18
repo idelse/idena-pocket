@@ -21,7 +21,7 @@ const Header = styled.div`
 	    z-index: -13;
 	    height: 56vh;
 	    left: 0;
-	    background-color: rgb(57, 60, 62);
+	    background-color: ${colors.medBlack};
 	    position: absolute;
 	}
 	.address {

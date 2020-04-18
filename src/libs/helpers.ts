@@ -3,7 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 export const colors = {
 	grey: "#f5f6f7",
 	darkGrey: "#999",
+	lightGrey: "#BBB",
 	black: "#444",
+	medBlack: "#393c3e",
 	darkBlack: "#101010",
 	white: "#ffffff",
 	green: "#F4FFE6",
@@ -13,7 +15,6 @@ export const colors = {
 	darkRed: "#FF5733",
 	blue: "#BFEEFF",
 	darkBlue: "#4BACD1",
-    lightGrey: "#BBB",
 };
 
 export const shuffle = array => [...array].sort(() => Math.random() - 0.5);
