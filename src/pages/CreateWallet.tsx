@@ -2,6 +2,7 @@ import * as React from "react";
 import { ReactElement } from "react";
 import Wrap from "../components/Wrap";
 import Container from "../components/Container";
+import Progress from "../components/Progress";
 import styled from "styled-components";
 import Button from "../components/Button";
 import { colors } from "../helpers";
@@ -38,6 +39,7 @@ const CreateWallet = styled.div`
 		width: 85%;
 	    margin-top: 6em;
 	}
+	
 `;
 
 export default (): ReactElement => {
@@ -53,6 +55,7 @@ export default (): ReactElement => {
 	return (
 		<Wrap>
 			<CreateWallet>
+				<Progress wide="33"/>
 			    <div className="textcontain">
 				<h3>Create password</h3>
 				<p>Enter your browser encryption data password.</p>
