@@ -62,11 +62,7 @@ export default (defaultState: any) => {
 					currentAddress: action.result.address,
 					privateKey: action.result.privateKey,
 					unlocked: true,
-					toast: {
-						message: "",
-						type: "",
-						autoclose: false,
-					}
+					toast: {}
 				}
 			case REFRESH+'_REQUESTED':
 				return {
@@ -74,7 +70,7 @@ export default (defaultState: any) => {
 					toast: action.showToast
 						? {
 							type: "info",
-							message: "Account refreshed",
+							message: "Refreshing",
 							autoclose: true,
 						}
 						: state.toast,
@@ -86,6 +82,7 @@ export default (defaultState: any) => {
 					balance: action.result.balance,
 					transactions: action.result.transactions,
 					currentAddress: action.result.address,
+					toast: {}
 				}
 			case SEND_TX+'_REQUESTED':
 				return {

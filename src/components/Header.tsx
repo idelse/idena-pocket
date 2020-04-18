@@ -8,8 +8,8 @@ import CopyToClipboard from "react-copy-to-clipboard";
 
 const Header = styled.div`
 	display: flex;
+	padding: 1em 0;
 	justify-content: space-between;
-	min-height: 10vh;
 	align-content: center;
 	align-items: center;
 	.fa {
@@ -18,8 +18,8 @@ const Header = styled.div`
 	}
 	.darkbg {
 		width: 100%;
-	    z-index: -13;
-	    height: 56vh;
+	    z-index: -10;
+	    height: 40em;
 	    left: 0;
 	    background-color: ${colors.medBlack};
 	    position: absolute;
@@ -28,8 +28,8 @@ const Header = styled.div`
 		cursor: pointer;
 		color: ${colors.darkRed};
 	}
-	.logout:hover {
-		text-decoration: underline;
+	.logout:hover, .logout:hover * {
+		color: ${colors.white};
 	}
 `;
 

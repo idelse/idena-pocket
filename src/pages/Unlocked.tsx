@@ -8,26 +8,23 @@ import { push } from "connected-react-router";
 import { colors, formatNumber, useInterval } from "../libs/helpers";
 import { Link } from "react-router-dom";
 import { refresh } from "../actions";
+import config from "../config";
 
 const Unlocked = styled.div`
 	.balance {
-		width: 100%;
 		text-align: center;
-		font-weight: bold;
-		padding: 1em 0;
 		display: flex;
 		flex-direction: column;
 		padding: 2.5em 0;
     	border-radius: 4px;
     	background: rgb(41, 44, 46);
-    	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
     	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	.balance__value {
-		font-size: 1.3125rem;
+		font-size: 1.5em;
 		color: ${colors.white};
 		font-weight: 500;
-    	margin-bottom: 10px;
+    	margin-bottom: .5em;
 	}
 	.balance__value__refresh {
 		color: ${colors.lightGrey};
@@ -67,33 +64,21 @@ const Unlocked = styled.div`
     	border-radius: 5em;
     	color: ${colors.darkBlack};
     	border: 1px solid ${colors.lightGrey};
-    	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
     	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	.menu__li a:hover {
 		color: ${colors.darkBlack};
 	}
-	.footer {
-		width: 100%;
-		text-align: center;
-		font-family: 'Courier New', Courier, monospace;
-		color: ${colors.darkGrey};
-		font-size: .8em;
-		padding-top: 4em;
-    	padding-bottom: 1em;
-    	border-bottom: 1px dotted ${colors.lightGrey};
-	}
 	.donate {
 		text-align: center;
-		line-height: 1.9em;
-    	padding-bottom: 4em;
-    	padding-top: 1em;
-    	font-size: 0.9em;
+		line-height: 2em;
+    	padding: 1em 0 4em 0;
+    	font-size: 0.8em;
     	color: ${colors.darkGrey};
 	}
 	.donate strong {
 		font-weight: 400;
-    	background: #efefef;
+    	background: ${colors.lightGrey};
     	border-radius: 4px;
     	padding: 4px;
 	}
@@ -121,36 +106,26 @@ export default (props): ReactElement => {
 			dispatch(push("/"));
 	}, [storage.unlocked]);
 
-	useInterval(() => {
-		refreshAccountState();
-	}, 30000);
+	useInterval(() => refreshAccountState(), 30000);
 
 	return (
 		<Wrap>
 			<Header />
 			<Unlocked>
 				<div className="balance">
-					
 					<span className="balance__value">
 						{formatNumber(storage.balance)} DNA
 						<i onClick={() => refreshAccountState(true)} className="balance__value__refresh fa fa-refresh" />
 					</span>
 					<span className="balance__dollar">${formatNumber(storage.balance*storage.price)}</span>
 				</div>
-				<ul className="menu">
-					<li className={`menu__li ${storage.pathname === '/unlocked/send' ? 'menu__li--active' : ''}`}>
-						<Link to="/unlocked/send">Send</Link>
-					</li>
-					<li className={`menu__li ${storage.pathname === '/unlocked/transactions' ? 'menu__li--active' : ''}`}>
-						<Link to="/unlocked/transactions">Transactions</Link>
-					</li>
-					<li className={`menu__li ${storage.pathname === '/unlocked/settings' ? 'menu__li--active' : ''}`}>
-						<Link to="/unlocked/settings">Settings</Link>
-					</li>
+				<ul className="menu">{config.menu.map(({ path, name }, key) => 
+					<li key={key} className={`menu__li ${storage.pathname === path ? 'menu__li--active' : ''}`}>
+						<Link to={path}>{name}</Link>
+					</li>)}
 				</ul>
 				{props.children}
-				<p className="footer">♪ spero che ritorni presto l'era del cinghiale bianco ♪</p>
-				<p className="donate">Consider supporting idena-pocket by donating to <strong>0x62449c9b1029db6df55ecf215d0aaa0cea23c66d</strong></p>
+				<p className="donate">Consider supporting idena-pocket by donating to <strong>{config.donationAddress}</strong></p>
 			</Unlocked>
 		</Wrap>
 	);
