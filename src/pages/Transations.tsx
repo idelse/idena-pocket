@@ -65,6 +65,9 @@ const Transactions = styled.div`
 	.transactions__li--green a:hover span {
 		color: ${colors.black};
 	}
+	.transactions__li--pending {
+		opacity: .5;
+	}
 	.desc {
 	margin: auto;
 	text-align: center;
@@ -98,8 +101,11 @@ export default (): ReactElement => {
 			</>}
 			<ul className="transactions">
 				{(storage.transactions||[]).map((tx, key) => (
-					<li className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'} key={key}>
-						<a target="_blank" href={`https://scan.idena.io/tx?tx=${tx.hash}`}>
+					<li className={`
+						${tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'}
+						${tx.pending ? 'transactions__li--pending' : ''}
+					`} key={key}>
+						<a target={tx.pending ? '_self' : '_blank'} href={tx.pending ? '#/unlocked/transactions' : `https://scan.idena.io/tx?tx=${tx.hash}`}>
 							<div className="transactions__li__tx">
 								{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 10)}</span>}
 								{

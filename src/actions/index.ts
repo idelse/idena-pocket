@@ -61,6 +61,12 @@ export const lock = (): any => ({
 export const SEND_TX = "SEND_TX";
 export const sendTx = (privateKey, { amount, to, payload }): any => ({
 	type: SEND_TX,
+	request: {
+		to,
+		amount,
+		payload,
+		timestamp: formatDate(new Date()),
+	},
 	result: api.sendTransaction(privateKey, { amount, to, payload }),
 });
 

@@ -86,12 +86,19 @@ export default (defaultState: any) => {
 					balance: action.result.balance,
 					transactions: action.result.transactions,
 					currentAddress: action.result.address,
-					
 				}
 			case SEND_TX+'_REQUESTED':
 				return {
 					...state,
 					sending: true,
+					transactions: [
+						{
+							from: state.currentAddress,
+							...action.request,
+							pending: true,
+						},
+						...state.transactions,
+					],
 					toast: {
 						type: "info",
 						message: "Sending transaction",
@@ -108,7 +115,7 @@ export default (defaultState: any) => {
 							from: state.currentAddress,
 							...action.result,
 						},
-						...state.transactions,
+						...state.transactions.filter(tx => tx.pending !== true),
 					],
 					toast: {
 						type: "success",
@@ -120,6 +127,7 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					sending: false,
+					transactions: state.transactions.filter(tx => tx.pending === false),
 					toast: {
 						type: "error",
 						message: "Transaction failed",
