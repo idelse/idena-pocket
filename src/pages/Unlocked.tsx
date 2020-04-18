@@ -29,6 +29,11 @@ const Unlocked = styled.div`
 		font-weight: 500;
     	margin-bottom: 10px;
 	}
+	.balance__value__refresh {
+		color: ${colors.lightGrey};
+		margin-left: .5em;
+		cursor: pointer;
+	}
 	.balance__dollar {
 		font-size: 1em;
 		color: ${colors.darkGrey};
@@ -109,13 +114,15 @@ export default (props): ReactElement => {
         };
 	});
 	
+	const refreshAccountState = (showToast = false) => dispatch(refresh(storage.currentAddress, showToast));
+
 	useEffect(() => {
 		if (!storage.unlocked)
 			dispatch(push("/"));
 	}, [storage.unlocked]);
 
 	useInterval(() => {
-		dispatch(refresh(storage.currentAddress));
+		refreshAccountState();
 	}, 30000);
 
 	return (
@@ -123,7 +130,11 @@ export default (props): ReactElement => {
 			<Header />
 			<Unlocked>
 				<div className="balance">
-					<span className="balance__value">{formatNumber(storage.balance)} DNA</span>
+					
+					<span className="balance__value">
+						{formatNumber(storage.balance)} DNA
+						<i onClick={() => refreshAccountState(true)} className="balance__value__refresh fa fa-refresh" />
+					</span>
 					<span className="balance__dollar">${formatNumber(storage.balance*storage.price)}</span>
 				</div>
 				<ul className="menu">

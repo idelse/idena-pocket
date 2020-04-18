@@ -79,7 +79,14 @@ export const reset = () => {
 };
 
 export const REFRESH = "REFRESH";
-export const refresh = (address): any => ({
-	type: UNLOCK,
-	result: api.retrieveAccountState(address),
+export const refresh = (address, showToast = false): any => ({
+	type: REFRESH,
+	showToast,
+	result: (async () => {
+		const refreshedAccountState = await api.retrieveAccountState(address);
+		return {
+			...refreshedAccountState,
+			showToast,
+		};
+	})(),
 });

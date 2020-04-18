@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { colors } from "../libs/helpers";
-
+import Toast from "./Toast";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -32,6 +32,7 @@ export default (props) => {
 	return (
 		<Container>
 			{props.children}
+			<Toast />
 		</Container>
 	);
 };

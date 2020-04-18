@@ -1,4 +1,4 @@
-import { UPDATE_CREATION_WALLET_PASSWORD, UPDATE_SEED, UPDATE_ENCRYPTED_SEED, UNLOCK, LOCK, TOAST, SEND_TX, RESET } from "../actions";
+import { UPDATE_CREATION_WALLET_PASSWORD, UPDATE_SEED, UPDATE_ENCRYPTED_SEED, UNLOCK, LOCK, TOAST, SEND_TX, RESET, REFRESH } from "../actions";
 
 export const defaultState: any = {
 	encryptedSeed: "",
@@ -44,6 +44,15 @@ export default (defaultState: any) => {
 					...state,
 					encryptedSeed: action.result
 				}
+			case UNLOCK+'_REQUESTED':
+				return {
+					...state,
+					toast: {
+						type: "info",
+						message: "Unlocking account",
+						autoclose: false,
+					}
+				}
 			case UNLOCK:
 				return {
 					...state,
@@ -53,6 +62,31 @@ export default (defaultState: any) => {
 					currentAddress: action.result.address,
 					privateKey: action.result.privateKey,
 					unlocked: true,
+					toast: {
+						message: "",
+						type: "",
+						autoclose: false,
+					}
+				}
+			case REFRESH+'_REQUESTED':
+				return {
+					...state,
+					toast: action.showToast
+						? {
+							type: "info",
+							message: "Account refreshed",
+							autoclose: true,
+						}
+						: state.toast,
+				}
+			case REFRESH:
+				return {
+					...state,
+					price: action.result.price,
+					balance: action.result.balance,
+					transactions: action.result.transactions,
+					currentAddress: action.result.address,
+					
 				}
 			case SEND_TX+'_REQUESTED':
 				return {
