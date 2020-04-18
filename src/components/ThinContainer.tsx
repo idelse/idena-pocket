@@ -19,11 +19,15 @@ const ThinContainer = styled.div`
 	    padding: 0.5em !important;
 	}
     @media (min-width: 768px) {
-	    width: 100%;
+	    width: 120%;
+    	margin-left: -10%;
+    	margin-right: -10%;
 	    padding: 1em !important;
 	}
     @media (min-width: 992px) {
-	    width: 100%;
+	    width: 120%;
+    	margin-left: -10%;
+    	margin-right: -10%;
 	    padding: 1em !important;
 	 }
 `;

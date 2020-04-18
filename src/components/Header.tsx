@@ -22,7 +22,7 @@ const Header = styled.div`
 	    z-index: -13;
 	    height: 56vh;
 	    left: 0;
-	    background-color: rgb(57, 60, 62);
+	    background-color: ${colors.medBlack};
 	    position: absolute;
 	}
 	.address {
@@ -52,22 +52,22 @@ const Header = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: #fff;
+		color: ${colors.white};
 		background: ${colors.darkGreen};
 		position: absolute;
 		bottom: 0;
 		left: 0;
 	}
 	.toast--success {
-		color: #fff;
+		color: ${colors.white};
 		background: ${colors.darkGreen};
 	}
 	.toast--info {
-		color: #fff;
+		color: ${colors.white};
 		background: ${colors.darkBlue};
 	}
 	.toast--error {
-		color: #fff;
+		color: ${colors.white};
 		background: ${colors.darkRed};
 	}
 `;
