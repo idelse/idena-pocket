@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import Progress from "../components/Progress";
 import styled from "styled-components";
 import Button from "../components/Button";
-import { colors } from "../helpers";
+import { colors } from "../libs/helpers";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";

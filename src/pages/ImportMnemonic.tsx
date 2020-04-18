@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
-import { colors } from "../helpers";
+import { colors } from "../libs/helpers";
 import { useDispatch } from "react-redux";
 import { updateEncryptedSeed } from "../actions";
 import { push } from "connected-react-router";

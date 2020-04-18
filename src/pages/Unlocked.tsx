@@ -5,8 +5,9 @@ import Wrap from "../components/Wrap";
 import Header from "../components/Header";
 import styled from "styled-components";
 import { push } from "connected-react-router";
-import { colors, formatNumber } from "../helpers";
+import { colors, formatNumber, useInterval } from "../libs/helpers";
 import { Link } from "react-router-dom";
+import { refresh } from "../actions";
 
 const Unlocked = styled.div`
 	.balance {
@@ -112,6 +113,10 @@ export default (props): ReactElement => {
 		if (!storage.unlocked)
 			dispatch(push("/"));
 	}, [storage.unlocked]);
+
+	useInterval(() => {
+		dispatch(refresh(storage.currentAddress));
+	}, 30000);
 
 	return (
 		<Wrap>

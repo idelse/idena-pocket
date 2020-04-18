@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { retrieveEncryptedSeed, unlock } from "../actions";
-import { shuffle, colors } from "../helpers";
+import { shuffle, colors } from "../libs/helpers";
 import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
 import { reset } from "../actions";
@@ -94,8 +94,8 @@ export default () => {
 		<Wrap>
 			<Login>
 				<Logo width={100} />
-				<h1 className="title">Idena-pocket</h1>
-				<p className="description extrapadding">Web-wallet for Idena</p>
+				<h1 className="title">idena-pocket</h1>
+				<p className="description extrapadding">web-wallet for Idena</p>
 
 				<Container>
 				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" margin="center"/>}
@@ -111,7 +111,7 @@ export default () => {
 								try {
 									const bytes =  AES.decrypt(storage.encryptedSeed, password);
 									const seed = JSON.parse(bytes.toString(enc.Utf8));
-									return seed.length === 12;
+									return seed.length >= 12;
 								} catch(e) {
 									return false;
 								}

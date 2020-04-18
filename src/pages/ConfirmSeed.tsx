@@ -5,11 +5,11 @@ import Wrap from "../components/Wrap";
 import Container from "../components/Container";
 import Progress from "../components/Progress";
 import styled from "styled-components";
-import { colors } from "../helpers";
+import { colors } from "../libs/helpers";
 import Button from "../components/Button";
 import { push } from "connected-react-router";
 import { updateEncryptedSeed } from "../actions";
-import { shuffle } from "../helpers";
+import { shuffle } from "../libs/helpers";
 
 const ConfirmSeed = styled.div`
 	.shuffled-seed {
