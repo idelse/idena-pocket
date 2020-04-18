@@ -24,20 +24,6 @@ const Header = styled.div`
 	    background-color: ${colors.medBlack};
 	    position: absolute;
 	}
-	.address {
-		text-align: center;
-		background: ${colors.black};
-		color: ${colors.white};
-		padding: .5em;
-		border-radius: 3px;
-		display: block;
-		text-decoration: none;
-		cursor: pointer;
-	}
-	.address:hover {
-		color: ${colors.white};
-		background: ${colors.darkBlack};
-	}
 	.logout {
 		cursor: pointer;
 		color: ${colors.darkRed};
@@ -57,9 +43,6 @@ export default () => {
 		<Header>
 			<div className="darkbg"></div>
 			<Logo theme="light" width={50} />
-			<CopyToClipboard text={storage.address}>
-				<span className="address">{formatAddress(storage.address, 6)}</span>
-			</CopyToClipboard>
 			<span className="logout" onClick={() => dispatch(lock())}>
 				<i className="fa fa-power-off"/>
 				Logout
