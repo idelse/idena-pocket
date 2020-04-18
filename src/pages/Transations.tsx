@@ -1,9 +1,9 @@
 import * as React from "react";
 import { ReactElement } from "react";
-import ThinContainer from "../components/ThinContainer";
 import { useSelector } from "react-redux";
 import { colors, formatAddress, hexDecode } from "../libs/helpers";
 import styled from "styled-components";
+import Container from "../components/Container";
 
 const Transactions = styled.div`
 	.transactions {
@@ -93,41 +93,41 @@ export default (): ReactElement => {
 	});
 
 	return (
-		<ThinContainer>
-		<Transactions>
-			{(storage.transactions.length === 0) && <>
-				<h1 className="empty">&#128546;</h1>
-				<p className="desc">No transactions</p> 
-			</>}
-			<ul className="transactions">
-				{(storage.transactions||[]).map((tx, key) => (
-					<li className={`
-						${tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'}
-						${tx.pending ? 'transactions__li--pending' : ''}
-					`} key={key}>
-						<a target={tx.pending ? '_self' : '_blank'} href={tx.pending ? '#/unlocked/transactions' : `https://scan.idena.io/tx?tx=${tx.hash}`}>
-							<div className="transactions__li__tx">
-								{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 10)}</span>}
-								{
-									(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
-									(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
-									<span>{formatAddress(tx.to, 10)}</span>
-								}
-								<span>{tx.amount} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
-							</div>
-							<span className="transactions__li__details">
-								<span>{tx.timestamp.slice(0, 10)}</span>
-								{tx.payload === "0x" && <span></span>}
-								{tx.payload !== "0x" && <span>{(() => {
-									const decoded = hexDecode(tx.payload.slice(2, tx.payload.length-1));
-									return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
-								})()}</span>}
-							</span>
-						</a>
-					</li>
-				))}
-			</ul>
-		</Transactions>
-		</ThinContainer>
+		<Container>
+			<Transactions>
+				{(storage.transactions.length === 0) && <>
+					<h1 className="empty">&#128546;</h1>
+					<p className="desc">No transactions</p> 
+				</>}
+				<ul className="transactions">
+					{(storage.transactions||[]).map((tx, key) => (
+						<li className={`
+							${tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'}
+							${tx.pending ? 'transactions__li--pending' : ''}
+						`} key={key}>
+							<a target={tx.pending ? '_self' : '_blank'} href={tx.pending ? '#/unlocked/transactions' : `https://scan.idena.io/tx?tx=${tx.hash}`}>
+								<div className="transactions__li__tx">
+									{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 10)}</span>}
+									{
+										(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
+										(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
+										<span>{formatAddress(tx.to, 10)}</span>
+									}
+									<span>{tx.amount} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
+								</div>
+								<span className="transactions__li__details">
+									<span>{tx.timestamp.slice(0, 10)}</span>
+									{tx.payload === "0x" && <span></span>}
+									{tx.payload !== "0x" && <span>{(() => {
+										const decoded = hexDecode(tx.payload.slice(2, tx.payload.length-1));
+										return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
+									})()}</span>}
+								</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</Transactions>
+		</Container>
 	);
 }
