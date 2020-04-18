@@ -1,7 +1,8 @@
 import * as React from "react"
+import { colors } from "../libs/helpers";
 
 function Logo(props: any) {
-	const color = props.theme === "light" ? "#bbb" : "#000";
+	const color = props.theme === "light" ? colors.lightGrey : colors.black;
 	return (
 		<svg
 		id="prefix__Layer_1"

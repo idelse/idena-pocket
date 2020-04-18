@@ -93,7 +93,7 @@ export default (): ReactElement => {
 	});
 
 	return (
-		<Container>
+		<Container paddingHalving={2}>
 			<Transactions>
 				{(storage.transactions.length === 0) && <>
 					<h1 className="empty">&#128546;</h1>
