@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import Logo from "../components/Logolight";
-import { formatAddress, colors } from "../helpers";
+import { formatAddress, colors } from "../libs/helpers";
 import { lock, toast } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
 

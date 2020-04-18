@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactElement } from "react";
 import ThinContainer from "../components/ThinContainer";
 import { useSelector } from "react-redux";
-import { colors, formatAddress, hexDecode } from "../helpers";
+import { colors, formatAddress, hexDecode } from "../libs/helpers";
 import styled from "styled-components";
 
 const Transactions = styled.div`

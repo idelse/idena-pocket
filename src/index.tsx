@@ -6,7 +6,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { store, history } from "./store";
 import Login from "./pages/Login";
 import { createGlobalStyle } from 'styled-components';
-import { colors } from "./helpers";
+import { colors } from "./libs/helpers";
 import ImportMnemonic from "./pages/ImportMnemonic";
 import CreateWallet from "./pages/CreateWallet";
 import ShowCreatedSeed from "./pages/ShowCreatedSeed";

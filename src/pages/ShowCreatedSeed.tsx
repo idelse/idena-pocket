@@ -5,7 +5,7 @@ import Wrap from "../components/Wrap";
 import Container from "../components/Container";
 import Progress from "../components/Progress";
 import styled from "styled-components";
-import { colors } from "../helpers";
+import { colors } from "../libs/helpers";
 import Button from "../components/Button";
 import { updatedSeed } from "../actions";
 

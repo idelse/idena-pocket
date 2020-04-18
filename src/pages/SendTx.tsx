@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { formatAmount, validateInputAddresses, hexEncode } from "../helpers";
+import { formatAmount, validateInputAddresses, hexEncode } from "../libs/helpers";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Button from "../components/Button";
