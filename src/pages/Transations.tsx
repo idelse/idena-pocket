@@ -162,7 +162,7 @@ export default (): ReactElement => {
 									<span>{tx.timestamp.slice(0, 10)}</span>
 									{tx.payload === "0x" && <span></span>}
 									{tx.payload !== "0x" && <span>{(() => {
-										const decoded = hexDecode(tx.payload.slice(2, tx.payload.length-1));
+										const decoded = hexDecode(tx.payload.slice(2, tx.payload.length));
 										return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
 									})()}</span>}
 								</span>

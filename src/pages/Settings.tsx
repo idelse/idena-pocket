@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { colors, formatAddress } from "../libs/helpers";
+import { colors } from "../libs/helpers";
 import Container from "../components/Container";
 import { reset } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
