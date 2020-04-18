@@ -111,9 +111,23 @@ export default (props: { onClick?: any, type?: string, to?: string, disabled?: b
 		);
 		}
 	}
+	if (props.margin === "center") {
 	return (
 		<Button>
-			<div className="btn" {...rest}>{text}</div>
+			<div className="btn centermargin">
+			{text}
+			{<i className={`fa fa-${props.icon}`}/>}
+			</div>
 		</Button>
 	);
+	} else {
+	return (
+		<Button>
+			<div className="btn">
+			{text}
+			{<i className={`fa fa-${props.icon}`}/>}
+			</div>
+		</Button>
+	);
+	}
 };

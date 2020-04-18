@@ -13,6 +13,8 @@ import { retrieveEncryptedSeed, unlock } from "../actions";
 import { shuffle, colors } from "../helpers";
 import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
+import { reset } from "../actions";
+
 
 const Login = styled.div`
 	display: flex;
@@ -32,6 +34,15 @@ const Login = styled.div`
 	.extrapadding {
 		padding-bottom: 2em;
 		font-size: 1em;
+	}
+	.forget {
+		text-align: center;
+		margin: auto;
+		cursor: pointer;
+		margin-top: 1em;
+	}
+	.forget .fa {
+		padding-right: 1em;
 	}
 `;
 
@@ -55,6 +66,14 @@ export default () => {
 			unlocked: state.app.unlocked,
         };
 	});
+
+	const resetWallet = () => {
+		dispatch(reset());
+	};
+
+	const exportSeed = () => {
+		dispatch(reset());
+	};
 
 	useEffect(() => {
 		if (storage.unlocked)
@@ -104,6 +123,11 @@ export default () => {
 						type="password" />
 						<Button type="submit" text="Login" margin="center"/>
 				</form>}
+				{storage.encryptedSeed && <p className="forget" onClick={resetWallet}>
+				<i className="fa fa-unlock-alt"/>
+				Use a different wallet
+				</p>}
+				
 				</Container>
 
 			</Login>
