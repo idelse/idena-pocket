@@ -13,7 +13,7 @@ import ShowCreatedSeed from "./pages/ShowCreatedSeed";
 import ConfirmSeed from "./pages/ConfirmSeed";
 import Unlocked from "./pages/Unlocked";
 import Transations from "./pages/Transations";
-import Settings from "./pages/Settings";
+import Settings from "./pages/Profile";
 import SendTx from "./pages/SendTx";
 
 const GlobalStyle = createGlobalStyle`

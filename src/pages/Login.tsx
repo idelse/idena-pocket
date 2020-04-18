@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
+import Confirmation from "../components/Confirmation";
 import Wrap from "../components/Wrap";
 import Container from "../components/Container";
 import Or from "../components/OrSeparator";
@@ -123,11 +124,13 @@ export default () => {
 						type="password" />
 						<Button type="submit" text="Login" margin="center"/>
 				</form>}
-				{storage.encryptedSeed && <p className="forget" onClick={resetWallet}>
-				<i className="fa fa-unlock-alt"/>
-				Use a different wallet
-				</p>}
-				
+					{storage.encryptedSeed && 
+					<Confirmation text="Are you sure you want to erase your wallet?">
+						<p className="forget" onClick={resetWallet}>
+							<i className="fa fa-unlock-alt"/>
+							Use a different wallet
+						</p>
+					</Confirmation>}
 				</Container>
 
 			</Login>
