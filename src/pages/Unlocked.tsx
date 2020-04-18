@@ -61,6 +61,8 @@ const Unlocked = styled.div`
     	border-radius: 5em;
     	color: ${colors.darkBlack};
     	border: 1px solid ${colors.lightGrey};
+    	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	.menu__li a:hover {
 		color: ${colors.darkBlack};
@@ -68,10 +70,26 @@ const Unlocked = styled.div`
 	.footer {
 		width: 100%;
 		text-align: center;
-		padding: 4em 0;
 		font-family: 'Courier New', Courier, monospace;
 		color: ${colors.darkGrey};
 		font-size: .8em;
+		padding-top: 4em;
+    	padding-bottom: 1em;
+    	border-bottom: 1px dotted ${colors.lightGrey};
+	}
+	.donate {
+		text-align: center;
+		line-height: 1.9em;
+    	padding-bottom: 4em;
+    	padding-top: 1em;
+    	font-size: 0.9em;
+    	color: ${colors.darkGrey};
+	}
+	.donate strong {
+		font-weight: 400;
+    	background: #efefef;
+    	border-radius: 4px;
+    	padding: 4px;
 	}
 `;
 
@@ -115,7 +133,8 @@ export default (props): ReactElement => {
 					</li>
 				</ul>
 				{props.children}
-				<p className="footer">spero che ritorni presto l'era del cinghiale bianco ♪</p>
+				<p className="footer">♪ spero che ritorni presto l'era del cinghiale bianco ♪</p>
+				<p className="donate">Consider supporting idena-pocket by donating to <strong>0x62449c9b1029db6df55ecf215d0aaa0cea23c66d</strong></p>
 			</Unlocked>
 		</Wrap>
 	);

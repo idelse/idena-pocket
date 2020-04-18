@@ -35,6 +35,9 @@ const Transactions = styled.div`
 		display: flex;
 		justify-content: space-between;
 	}
+	.transactions__li__details span:last-child {
+		color: ${colors.darkGrey};
+	}
 	.transactions__li__tx {
 		width: 100%;
 		display: flex;
