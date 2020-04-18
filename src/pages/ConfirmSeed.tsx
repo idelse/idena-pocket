@@ -84,6 +84,14 @@ const ConfirmSeed = styled.div`
 		width: 85%;
 	    margin-top: 6em;
 	}
+	.tickmark {
+	margin: auto;
+    text-align: center;
+    color: ${colors.green};
+	}
+	.tickmark .fa {
+	color: ${colors.darkGreen};
+	}
 `;
 
 export default (): ReactElement => {
@@ -129,7 +137,9 @@ export default (): ReactElement => {
 		<Wrap>
 			<ConfirmSeed>
 				{!sorted && <Progress wide="66"/>}
-				{sorted && <Progress wide="100"/>}
+				{sorted && <h1 className="tickmark">
+    			<i className="fa fa-check"></i></h1>}
+
 				<div className="textcontain">
 				<h3>Confirm you secret seed</h3>
 				<p className="extramargin">Please re-enter your seed words and passphrase in full from the previous step. This is to confirm that you have correctly recorded these down.</p>
