@@ -7,10 +7,10 @@ import Container from "../components/Container";
 import { reset } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
 
-const Settings = styled.div`
-	.forget {
-		text-decoration: underline;
+const Profile = styled.div`
+	.forget, .forget > * {
 		cursor: pointer;
+		color: ${colors.darkRed}
 	}
 	.fa {
 		padding-right: 1em;
@@ -98,7 +98,7 @@ export default (): ReactElement => {
 	});
 
 	return (
-		<Settings>
+		<Profile>
 			<Container>
 			<div className="image">
 			<img src={`https://robohash.org/${storage.currentAddress.toLowerCase()}`}/>
@@ -110,11 +110,11 @@ export default (): ReactElement => {
 			</CopyToClipboard>
 			<div className="line"></div>
 			<p className="forget" onClick={resetWallet}>
-			<i className="fa fa-undo"/>
-			Reset wallet
+				<i className="fa fa-undo"/>
+				Reset wallet
 			</p>
 			<p className="desc">Clear browser storage and use another wallet</p>
 			</Container>
-		</Settings>
+		</Profile>
 	);
 }

@@ -50,11 +50,11 @@ ReactDOM.render(
 				<Route path="/unlocked">
 					<Unlocked>
 						<Route path="/">
-							<Redirect to="/unlocked/send" />
+							<Redirect to="/unlocked/profile" />
 						</Route>
+						<Route path="/unlocked/profile" component={Settings} />
 						<Route path="/unlocked/send" component={SendTx} />
 						<Route path="/unlocked/transactions" component={Transations} />
-						<Route path="/unlocked/settings" component={Settings} />
 					</Unlocked>
 				</Route>
 			</Switch>
