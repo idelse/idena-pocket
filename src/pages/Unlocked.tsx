@@ -18,15 +18,19 @@ const Unlocked = styled.div`
 		flex-direction: column;
 		padding: 2.5em 0;
     	border-radius: 4px;
-    	background: ${colors.white};
+    	background: rgb(41, 44, 46);
     	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
     	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	.balance__value {
-		font-size: 2.5em;
+		font-size: 1.3125rem;
+		color: ${colors.white};
+		font-weight: 500;
+    	margin-bottom: 10px;
 	}
 	.balance__dollar {
 		font-size: 1em;
+		color: ${colors.darkGrey};
 	}
 	.menu {
 		background: #efefef;
