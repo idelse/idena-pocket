@@ -80,9 +80,20 @@ export default (defaultState: any) => {
 					...state,
 					price: action.result.price,
 					balance: action.result.balance,
-					transactions: action.result.transactions,
+					transactions: (() => {
+						const previousTransactions = state.transactions;
+						const nextTransactions = action.result.transactions;
+						const newTrasactions = nextTransactions.filter(currentNewTransaction => {
+							const isNew = !previousTransactions
+								.some(previousCurrentTransaction => previousCurrentTransaction.hash === currentNewTransaction.hash);
+							return isNew;
+						});
+						return [
+							...newTrasactions,
+							...previousTransactions,
+						].sort((a, b) => b.timestamp - a.timestamp);
+					})(),
 					currentAddress: action.result.address,
-					toast: {}
 				}
 			case SEND_TX+'_REQUESTED':
 				return {
@@ -99,7 +110,6 @@ export default (defaultState: any) => {
 					toast: {
 						type: "info",
 						message: "Sending transaction",
-						autoclose: true,
 					}
 				}
 			case SEND_TX:
