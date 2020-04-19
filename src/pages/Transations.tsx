@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { colors, formatAddress, hexDecode } from "../libs/helpers";
+import { colors, formatAddress, hexDecode, formatNumber } from "../libs/helpers";
 import styled from "styled-components";
 import Container from "../components/Container";
 
@@ -154,9 +154,9 @@ export default (): ReactElement => {
 									{
 										(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
 										(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
-										<span>{formatAddress(tx.to, 10)}</span>
+										<span>{formatAddress(tx.to, 6)}</span>
 									}
-									<span>{tx.amount} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
+									<span>{formatNumber(tx.amount, 4)} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
 								</div>
 								<span className="transactions__li__details">
 									<span>{tx.timestamp.slice(0, 10)}</span>

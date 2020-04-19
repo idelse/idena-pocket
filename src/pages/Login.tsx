@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { retrieveEncryptedSeed, unlock } from "../actions";
-import { shuffle, colors } from "../libs/helpers";
 import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
 import { reset } from "../actions";
@@ -52,15 +51,6 @@ export default () => {
 	const { register, handleSubmit, errors } = useForm();
 	const dispatch = useDispatch();
 
-	const placeholder = shuffle([
-		"follow the white rabbit",
-		"the matrix has you",
-		"digital pimp at work",
-		"he is the one",
-		"dodge this",
-		"I know kung fu",
-	])[0];
-
 	const storage = useSelector((state: any) => {
         return {
 			encryptedSeed: state.app.encryptedSeed,
@@ -99,10 +89,10 @@ export default () => {
 				<p className="description extrapadding">web-wallet for Idena</p>
 
 				<Container>
-				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" margin="center"/>}
+				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" />}
 				{!storage.encryptedSeed && <Or />}
 
-				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" icon="arrow-right" margin="center"/>}
+				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" icon="arrow-right" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
 						name="password"
@@ -118,11 +108,10 @@ export default () => {
 								}
 							},
 						})}
-						placeholder={placeholder}
 						label="Enter your password"
 						error={errors.password ? "Wrong password. Please try again." : ""}
 						type="password" />
-						<Button type="submit" text="Login" margin="center"/>
+						<Button type="submit" text="Login" />
 				</form>}
 					{storage.encryptedSeed && 
 					<Confirmation text="Are you sure you want to erase your wallet?">

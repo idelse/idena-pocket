@@ -71,9 +71,13 @@ export const sendTx = (privateKey, { amount, to, payload }): any => ({
 });
 
 export const TOAST = "TOAST";
-export const toast = ({ message, type }): any => ({
+export const toast = (options): any => ({
 	type: TOAST,
-	toast: { message, type },
+	toast: {
+		message: options.message || "",
+		type: options.type || "info",
+		autoclose: options.autoclose || false
+	},
 });
 
 export const RESET = "RESET";

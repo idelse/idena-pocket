@@ -110,7 +110,7 @@ export default (): ReactElement => {
 					</div>
 					<span className="seed__text">{storage.seed.join('  ')}</span>
 				</div>
-				<Button disabled={!show} to="confirm-seed" text="Next" margin="center" icon="arrow-right"/>
+				<Button disabled={!show} to="confirm-seed" text="Next" icon="arrow-right"/>
 				</Container>
 			</ShowCreatedSeed>
 		</Wrap>

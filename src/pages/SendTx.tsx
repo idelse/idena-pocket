@@ -65,11 +65,11 @@ export default (): ReactElement => {
 					error={errors.amount ? `Insert valid amount.` : ""} />
 				<Input
 					name="message"
-					label="Attach custom message to your transaction (e.g. receipt id)"
+					label="Custom message (e.g. receipt id)"
 					type="textarea"
 					ref={register()}
 					error={errors.message ? "Insert valid message" : ""} />
-				<Button disabled={storage.sending} type="submit" text="Send" margin="center"/>
+				<Button disabled={storage.sending} type="submit" text="Send" />
 			</form>
 			</Container>
 		</SendTx>

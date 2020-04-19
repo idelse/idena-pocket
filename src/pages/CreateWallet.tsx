@@ -79,7 +79,7 @@ export default (): ReactElement => {
 						label="Confirm password"
 						error={errors.password2 ? "Password must match" : ""}
 						type="password" />
-					<Button type="submit" text="Create" margin="center"/>
+					<Button type="submit" text="Create" />
 				</form>
 				</Container>
 			</CreateWallet>

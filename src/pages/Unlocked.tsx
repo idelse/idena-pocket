@@ -45,6 +45,7 @@ const Unlocked = styled.div`
     	justify-content: space-between;
 	}
 	.menu__li {
+		font-size: .9em;
 		list-style: none;
 		display: flex;
 		cursor: pointer;
@@ -114,7 +115,7 @@ export default (props): ReactElement => {
 			<Unlocked>
 				<div className="balance">
 					<span className="balance__value">
-						{formatNumber(storage.balance)} DNA
+						{formatNumber(storage.balance, 4)} DNA
 						<i onClick={() => refreshAccountState(true)} className="balance__value__refresh fa fa-refresh" />
 					</span>
 					<span className="balance__dollar">${formatNumber(storage.balance*storage.price)}</span>
