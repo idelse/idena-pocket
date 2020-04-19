@@ -23,7 +23,7 @@ export const shuffle = array => [...array].sort(() => Math.random() - 0.5);
 
 export const formatAddress = (address, l = 6) => `${address.slice(0, l+2)}...${address.slice(address.length-l, address.length)}`
 
-export const formatNumber = number => Math.floor(number*10000)/10000;
+export const formatNumber = (number, pow = 2) => Math.floor(number*10**pow)/10**pow;
 
 export const validateInputAddresses = address => (/^(0x){1}[0-9a-fA-F]{40}$/i.test(address));
 
