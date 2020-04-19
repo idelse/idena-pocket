@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { colors } from "../libs/helpers";
 import Container from "../components/Container";
-import { reset } from "../actions";
+import { reset, toast } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
 import Confirmation from "../components/Confirmation";
 import Button from "../components/Button";
@@ -84,8 +84,11 @@ export default (): ReactElement => {
 		dispatch(reset());
 	}
 
-	const exportSeed = () => {
-		dispatch(reset());
+	const onAddressCopied = () => {
+		dispatch(toast({
+			message: "Address copied",
+			type: "info",
+		}));
 	}
 
 	const storage = useSelector((state: any) => {
@@ -107,7 +110,7 @@ export default (): ReactElement => {
 				
 				<div className="copyButton">
 					<CopyToClipboard text={storage.currentAddress}>
-						<Button icon="copy" theme="blue" text="Click to copy address" />
+						<Button onClick={onAddressCopied} icon="copy" theme="blue" text="Copy address" />
 					</CopyToClipboard>
 				</div>
 				

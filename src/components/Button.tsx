@@ -13,12 +13,13 @@ const Button: any = styled.span`
 		margin-left: 1em;
 	}
 	.btn {
+		display: flex;
+		justify-content: center;
 		background: ${(props: any) => props.theme[0]};
 		border-radius: 4px;
 		padding: .65em 2.5em;
 		box-sizing: border-box;
 		cursor: pointer;
-		display: block;
 		text-align: center;
 		color: ${colors.white};
 		text-decoration: none;
@@ -43,9 +44,6 @@ const Button: any = styled.span`
 	}
 	.btn--disabled, .btn--disabled:hover {
 		background: ${colors.darkGrey};
-	}
-	.centermargin {
-		margin: auto;
 	}
 `;
 
@@ -88,8 +86,8 @@ export default (props: { onClick?: any, align?: string, theme?: string, type?: s
 	return (
 		<Button align={align} theme={theme}>
 			<div className="btn" {...rest}>
-			{text}
-			{<i className={`fa fa-${props.icon}`}/>}
+				{text}
+				{<i className={`fa fa-${props.icon}`}/>}
 			</div>
 		</Button>
 	);

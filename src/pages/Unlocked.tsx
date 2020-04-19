@@ -45,6 +45,7 @@ const Unlocked = styled.div`
     	justify-content: space-between;
 	}
 	.menu__li {
+		font-size: .9em;
 		list-style: none;
 		display: flex;
 		cursor: pointer;

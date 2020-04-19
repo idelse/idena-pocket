@@ -99,7 +99,7 @@ export default (defaultState: any) => {
 					toast: {
 						type: "info",
 						message: "Sending transaction",
-						autoclose: false,
+						autoclose: true,
 					}
 				}
 			case SEND_TX:
