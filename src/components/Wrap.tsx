@@ -9,6 +9,7 @@ const Wrap = styled.div`
 	margin: 0 auto;
 	padding: 0 1em;
 	box-sizing: border-box;
+	height: 100vh;
 `;
 
 export default (props) => {

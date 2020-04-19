@@ -1,8 +1,11 @@
 import * as React from "react";
 import { ReactElement } from "react";
 import Wrap from "../components/Wrap";
+import Container from "../components/Container";
+import Progress from "../components/Progress";
 import styled from "styled-components";
 import Button from "../components/Button";
+import { colors } from "../libs/helpers";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -11,11 +14,32 @@ import { updateCreationWalletPassword } from "../actions";
 
 const CreateWallet = styled.div`
 	form {
-		margin-top: 2em;
+		margin-top: 1.2em;
 	}
 	input, textarea {
 		margin-bottom: 1em;
 	}
+	.textcontain {
+	margin: auto;
+	text-align: center;
+    margin-bottom: 2em;
+	}
+	.textcontain p {
+	color: ${colors.darkGrey};
+	}
+	@media (min-width: 300px) {
+		width: 100%;
+		margin-top: 3em;
+	}
+	@media (min-width: 576px) {
+		width: 90%;
+	    margin-top: 4em;
+	}
+	@media (min-width: 768px) {
+		width: 85%;
+	    margin-top: 6em;
+	}
+	
 `;
 
 export default (): ReactElement => {
@@ -31,8 +55,12 @@ export default (): ReactElement => {
 	return (
 		<Wrap>
 			<CreateWallet>
-				<h1>Create password</h1>
-				<h2>Enter your browser encryption data password.</h2>
+				<Progress wide="33"/>
+			    <div className="textcontain">
+				<h3>Create password</h3>
+				<p>Enter your browser encryption data password.</p>
+				</div>
+				<Container>
 				<form onSubmit={handleSubmit(onCreationWalletPassword)}>
 					<Input
 						name="password"
@@ -53,6 +81,7 @@ export default (): ReactElement => {
 						type="password" />
 					<Button type="submit" text="Create" />
 				</form>
+				</Container>
 			</CreateWallet>
 		</Wrap>
 	);

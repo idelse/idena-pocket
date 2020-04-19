@@ -1,12 +1,20 @@
+import React, { useState, useEffect, useRef } from "react";
+
 export const colors = {
 	grey: "#f5f6f7",
 	darkGrey: "#999",
+	lightGrey: "#BBB",
+  lightestGrey: "#dfdfdf",
 	black: "#444",
+	medBlack: "#393c3e",
 	darkBlack: "#101010",
 	white: "#ffffff",
 	green: "#F4FFE6",
+  lightGreen: "#d9ffab",
 	darkGreen: "#96D14B",
-	red: "#FFD2C9",
+	red: "#FFE6E2",
+  lightRed: "#FFA692",
+  lighterRed: "#ffc9bd",
 	darkRed: "#FF5733",
 	blue: "#BFEEFF",
 	darkBlue: "#4BACD1",
@@ -16,7 +24,7 @@ export const shuffle = array => [...array].sort(() => Math.random() - 0.5);
 
 export const formatAddress = (address, l = 6) => `${address.slice(0, l+2)}...${address.slice(address.length-l, address.length)}`
 
-export const formatNumber = number => Math.floor(number*100)/100;
+export const formatNumber = (number, pow = 2) => Math.floor(number*10**pow)/10**pow;
 
 export const validateInputAddresses = address => (/^(0x){1}[0-9a-fA-F]{40}$/i.test(address));
 
@@ -57,4 +65,24 @@ export const formatDate = date => {
         day = '0' + day;
 
     return [year, month, day].join('-');
+}
+
+export const useInterval = (callback, delay) => {
+  const savedCallback: any = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
