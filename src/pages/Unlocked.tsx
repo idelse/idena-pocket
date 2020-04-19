@@ -79,7 +79,7 @@ const Unlocked = styled.div`
 	}
 	.donate strong {
 		font-weight: 400;
-    	background: ${colors.lightGrey};
+    	background: ${colors.lightestGrey};
     	border-radius: 4px;
     	padding: 4px;
 	}
