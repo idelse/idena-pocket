@@ -88,6 +88,7 @@ export default (): ReactElement => {
 		dispatch(toast({
 			message: "Address copied",
 			type: "info",
+			autoclose: true,
 		}));
 	}
 
