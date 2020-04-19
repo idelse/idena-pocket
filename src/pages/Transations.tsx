@@ -7,9 +7,7 @@ import Container from "../components/Container";
 
 const Transactions = styled.div`
 	.transactions {
-		width: 100%;
 		background: ${colors.white};
-		border-radius: 5px;
 	}
 	.transactions li {
 		list-style: none;
@@ -43,32 +41,32 @@ const Transactions = styled.div`
 		display: flex;
 		justify-content: space-between;
 	}
-	.transactions__li--green {
+	.transactions__li--received {
 		background: ${colors.green};
 		-webkit-transition: all .35s ease;
     	-o-transition: all .35s ease;
     	transition: all .35s ease;
 	}
-	.transactions__li--green a:hover {
+	.transactions__li--received a:hover {
 		background: ${colors.lightGreen};
 	}
-	.transactions__li--green .thumbnail img {
+	.transactions__li--received .thumbnail img {
 		background: ${colors.lightGreen};
 	}
-	.transactions__li--red {
+	.transactions__li--sent {
 		background: ${colors.red};
 		-webkit-transition: all .35s ease;
     	-o-transition: all .35s ease;
     	transition: all .35s ease;
 	}
-	.transactions__li--red .thumbnail img {
+	.transactions__li--sent .thumbnail img {
 		background: ${colors.lighterRed};
 	}
-	.transactions__li--red a:hover {
+	.transactions__li--sent a:hover {
 		background: ${colors.lighterRed};
 	}
-	.transactions__li--red a:hover span,
-	.transactions__li--green a:hover span {
+	.transactions__li--sent a:hover span,
+	.transactions__li--received a:hover span {
 		color: ${colors.black};
 	}
 	.transactions__li--pending {
@@ -142,7 +140,7 @@ export default (): ReactElement => {
 				<ul className="transactions">
 					{(storage.transactions||[]).map((tx, key) => (
 						<li className={`
-							${tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--red' : 'transactions__li--green'}
+							${tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--sent' : 'transactions__li--received'}
 							${tx.pending ? 'transactions__li--pending' : ''}
 						`} key={key}>
 							<a target={tx.pending ? '_self' : '_blank'} href={tx.pending ? '#/unlocked/transactions' : `https://scan.idena.io/tx?tx=${tx.hash}`}>
@@ -164,7 +162,7 @@ export default (): ReactElement => {
 									<span>{tx.timestamp.slice(0, 10)}</span>
 									{tx.payload === "0x" && <span></span>}
 									{tx.payload !== "0x" && <span>{(() => {
-										const decoded = hexDecode(tx.payload.slice(2, tx.payload.length-1));
+										const decoded = hexDecode(tx.payload.slice(2, tx.payload.length));
 										return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
 									})()}</span>}
 								</span>

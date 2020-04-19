@@ -21,7 +21,8 @@
 		"react-router-dom": "^5.1.2",
 		"react-tooltip": "^4.2.0",
 		"redux": "^4.0.5",
-		"styled-components": "^5.0.1"
+		"styled-components": "^5.0.1",
+		"sweetalert": "^2.1.2"
 	},
 	"devDependencies": {
 		"@types/react": "^16.9.25",

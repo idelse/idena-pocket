@@ -5,6 +5,10 @@ export default {
 	price: "https://price.idena-price.workers.dev/",
 	menu: [
 		{
+			path: "/unlocked/profile",
+			name: "Profile",
+		},
+		{
 			path: "/unlocked/send",
 			name: "Send",
 		},
@@ -12,10 +16,6 @@ export default {
 			path: "/unlocked/transactions",
 			name: "Transactions",
 		},
-		{
-			path: "/unlocked/settings",
-			name: "Settings",
-		}
 	],
 	donationAddress: "0x62449c9b1029db6df55ecf215d0aaa0cea23c66d"
 };

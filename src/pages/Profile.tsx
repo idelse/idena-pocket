@@ -2,15 +2,16 @@ import * as React from "react";
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { colors, formatAddress } from "../libs/helpers";
+import { colors } from "../libs/helpers";
 import Container from "../components/Container";
 import { reset } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
+import Confirmation from "../components/Confirmation";
 
-const Settings = styled.div`
-	.forget {
-		text-decoration: underline;
+const Profile = styled.div`
+	.forget, .forget > * {
 		cursor: pointer;
+		color: ${colors.darkRed}
 	}
 	.fa {
 		padding-right: 1em;
@@ -56,7 +57,6 @@ const Settings = styled.div`
 	    height: 1.6em;
 	    margin: auto;
 	    line-height: 1.6em;
-	    vertical-align: middle;
 	    margin-top: 1em;
 	    width: 200px;
 	    -webkit-text-decoration: none;
@@ -98,23 +98,25 @@ export default (): ReactElement => {
 	});
 
 	return (
-		<Settings>
+		<Profile>
 			<Container>
-			<div className="image">
-			<img src={`https://robohash.org/${storage.currentAddress.toLowerCase()}`}/>
-			</div>
-			<p className="desc desc-center">Your Full Address</p>
-			<p className="desc desc-center desc--addr">{storage.currentAddress.toLowerCase()}</p>
-			<CopyToClipboard text={storage.currentAddress}>
-				<span className="address">Click to copy address</span>
-			</CopyToClipboard>
-			<div className="line"></div>
-			<p className="forget" onClick={resetWallet}>
-			<i className="fa fa-undo"/>
-			Reset wallet
-			</p>
-			<p className="desc">Clear browser storage and use another wallet</p>
+				<div className="image">
+				<img src={`https://robohash.org/${storage.currentAddress.toLowerCase()}`}/>
+				</div>
+				<p className="desc desc-center">Your Full Address</p>
+				<p className="desc desc-center desc--addr">{storage.currentAddress.toLowerCase()}</p>
+				<CopyToClipboard text={storage.currentAddress}>
+					<span className="address">Click to copy address</span>
+				</CopyToClipboard>
+				<div className="line"></div>
+				<Confirmation text="Are you sure you want to erase your wallet?">
+					<p className="forget" onClick={resetWallet}>
+						<i className="fa fa-undo"/>
+						Reset wallet
+					</p>
+				</Confirmation>
+				<p className="desc">Clear browser storage and use another wallet</p>
 			</Container>
-		</Settings>
+		</Profile>
 	);
 }
