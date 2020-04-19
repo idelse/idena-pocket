@@ -107,7 +107,7 @@ export default (): ReactElement => {
 
 	const [sortedSeed, setSortedSeed] = useState([]);
 	const [shuffledSeed, setShuffledSeed] = useState([]);
-	
+
 	const [sorted, setSorted] = useState(false);
 	
 	useEffect(() => {
@@ -120,11 +120,11 @@ export default (): ReactElement => {
 
 	const onShuffledWordClick = (word, key) => () => {
 		setSortedSeed([ ...sortedSeed, word ]);
-		setShuffledSeed(shuffledSeed.filter((w, key) => w !== word && w !== key));
+		setShuffledSeed(shuffledSeed.filter((_, k) => k !== key));
 	}
 
 	const onOrderedWordClick = (word, key) => () => {
-		setSortedSeed(sortedSeed.filter((w, k) => w !== word && k !== key));
+		setSortedSeed(sortedSeed.filter((_, k) => k !== key));
 		setShuffledSeed([ ...shuffledSeed, word ]);
 	}
 
