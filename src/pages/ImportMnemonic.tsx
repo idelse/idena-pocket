@@ -43,11 +43,17 @@ const ImportMnemonic = styled.div`
 
 export default (): ReactElement => {
 
-	const { register, handleSubmit, errors, watch } = useForm();
+	const { register, handleSubmit, errors } = useForm({
+		defaultValues: {
+			seed: "",
+			derivationPath: "m/44'/515'/0'/0/0",
+			password: "",
+		}
+	  });
 	const dispatch = useDispatch();
 
-	const onImportSubmit = ({ seed, password }) => {
-		dispatch(updateEncryptedSeed(seed.trim().split(" "), password));
+	const onImportSubmit = ({ seed, derivationPath, password }) => {
+		dispatch(updateEncryptedSeed(seed.trim().split(" "), derivationPath, password));
 		dispatch(push("/"));
 	}
 
@@ -56,7 +62,7 @@ export default (): ReactElement => {
 			<ImportMnemonic>
 				<div className="textcontain">
 				<h3>Import an account with a seed phrase</h3>
-				<p>Enter your twelve-word secret phrase to restore the wallet.</p>
+				<p>Enter your secret phrase to restore the wallet.</p>
 				</div>
 				<Container>
 				<form onSubmit={handleSubmit(onImportSubmit)}>
@@ -68,6 +74,11 @@ export default (): ReactElement => {
 						})}
 						error={errors.seed ? "Please, insert valid bip39 seed phrase" : ""}
 						label="Seed phrase" />
+					<Input
+						type="text"
+						name="derivationPath"
+						ref={register()}
+						label="Old users could use m/44'/60'/0'/0/0" />
 					<Input
 						name="password"
 						label="Password local browser encryption"

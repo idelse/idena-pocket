@@ -102,6 +102,7 @@ export default (): ReactElement => {
         return {
 			password: state.app.creationWallet.password,
 			seed: state.app.creationWallet.seed,
+			derivationPath: state.app.creationWallet.derivationPath,
         };
     });
 
@@ -129,7 +130,7 @@ export default (): ReactElement => {
 	}
 
 	const onNextButtonClick = () => {
-		dispatch(updateEncryptedSeed(sortedSeed, storage.password));
+		dispatch(updateEncryptedSeed(sortedSeed, storage.derivationPath, storage.password));
 		dispatch(push("/"));
 	}
 

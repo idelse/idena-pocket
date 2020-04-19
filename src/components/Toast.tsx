@@ -32,6 +32,8 @@ const Toast = styled.div`
 	}
 `;
 
+let timeouts = [];
+
 export default () => {
 	const dispatch = useDispatch();
 	const storage = useSelector((state: any) => ({
@@ -42,10 +44,14 @@ export default () => {
 	}));
 
 	useEffect(() => {
+		timeouts.forEach(t => clearTimeout(t));
 		if (storage.autoclose)
-			setTimeout(() => {
-				dispatch(toast({ type: "", message: "" }))
-			}, 5000);
+			timeouts = [
+				...timeouts,
+				setTimeout(() => {
+					dispatch(toast({ type: "", message: "" }))
+				}, 5000)
+			];
 	}, [storage.message]);
 
 	return (
