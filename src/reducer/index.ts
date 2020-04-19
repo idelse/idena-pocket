@@ -1,4 +1,15 @@
-import { UPDATE_CREATION_WALLET_PASSWORD, UPDATE_SEED, UPDATE_ENCRYPTED_SEED, UNLOCK, LOCK, TOAST, SEND_TX, RESET, REFRESH } from "../actions";
+import {
+	UPDATE_CREATION_WALLET_PASSWORD,
+	UPDATE_SEED,
+	UPDATE_ENCRYPTED_SEED,
+	UNLOCK,
+	LOCK,
+	TOAST,
+	SEND_TX,
+	RESET,
+	REFRESH,
+	RETRIEVE_ENCRYPTED_SEED
+} from "../actions";
 
 export const defaultState: any = {
 	encryptedSeed: "",
@@ -40,9 +51,11 @@ export default (defaultState: any) => {
 					}
 				};
 			case UPDATE_ENCRYPTED_SEED:
+			case RETRIEVE_ENCRYPTED_SEED:
 				return {
 					...state,
-					encryptedSeed: action.result
+					encryptedSeed: action.result.encryptedSeed,
+					derivationPath: action.result.derivationPath,
 				}
 			case UNLOCK+'_REQUESTED':
 				return {

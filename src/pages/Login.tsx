@@ -14,6 +14,7 @@ import { retrieveEncryptedSeed, unlock } from "../actions";
 import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
 import { reset } from "../actions";
+import config from "../config";
 
 
 const Login = styled.div`
@@ -54,15 +55,12 @@ export default () => {
 	const storage = useSelector((state: any) => {
         return {
 			encryptedSeed: state.app.encryptedSeed,
+			derivationPath: state.app.derivationPath || config.oldDerivationPath,
 			unlocked: state.app.unlocked,
         };
 	});
 
 	const resetWallet = () => {
-		dispatch(reset());
-	};
-
-	const exportSeed = () => {
 		dispatch(reset());
 	};
 
@@ -78,7 +76,7 @@ export default () => {
 	const onLogin = (data: any) => {
 		const bytes =  AES.decrypt(storage.encryptedSeed, data.password);
 		const seed = JSON.parse(bytes.toString(enc.Utf8));
-		dispatch(unlock(seed));
+		dispatch(unlock(seed, storage.derivationPath));
 	}
 	
 	return (

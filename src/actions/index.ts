@@ -21,30 +21,37 @@ export const updatedSeed = () => ({
 });
 
 export const UPDATE_ENCRYPTED_SEED = "UPDATE_ENCRYPTED_SEED";
-export const updateEncryptedSeed = (seed, password) => ({
+export const updateEncryptedSeed = (seed, derivationPath, password) => ({
 	type: UPDATE_ENCRYPTED_SEED,
 	result: (async () => {
 		const encryptedSeed = AES.encrypt(JSON.stringify(seed), password).toString();
 		localStorage.setItem('encrypted_seed', encryptedSeed);
-		return encryptedSeed;
+		localStorage.setItem('derivation_path', derivationPath);
+		return {
+			encryptedSeed,
+			derivationPath,
+		};
 	})(),
 });
 
 export const RETRIEVE_ENCRYPTED_SEED = "RETRIEVE_ENCRYPTED_SEED";
 export const retrieveEncryptedSeed = () => ({
-	type: UPDATE_ENCRYPTED_SEED,
+	type: RETRIEVE_ENCRYPTED_SEED,
 	result: (async () => {
-		return localStorage.getItem('encrypted_seed');
+		return {
+			encryptedSeed: localStorage.getItem('encrypted_seed'),
+			derivationPath: localStorage.getItem('derivation_path') || config.oldDerivationPath,
+		};
 	})(),
 });
 
 export const UNLOCK = "UNLOCK";
-export const unlock = (seed): any => ({
+export const unlock = (seed, derivationPath): any => ({
 	type: UNLOCK,
 	result: (async () => {
 		const hdwallet = HDWallet.fromMnemonic(seed.join(' '));
-		const address = `0x${hdwallet.derive(config.derivationPath).getAddress().toString('hex')}`;
-		const privateKey = hdwallet.derive(config.derivationPath).getPrivateKey().toString('hex');
+		const address = `0x${hdwallet.derive(derivationPath).getAddress().toString('hex')}`;
+		const privateKey = hdwallet.derive(derivationPath).getPrivateKey().toString('hex');
 		const retrievedAccountState = await api.retrieveAccountState(address);
 		return {
 			...retrievedAccountState,
@@ -83,6 +90,7 @@ export const toast = (options): any => ({
 export const RESET = "RESET";
 export const reset = () => {
 	localStorage.removeItem('encrypted_seed');
+	localStorage.removeItem('derivation_path');
 	return {
 		type: RESET,
 	};
