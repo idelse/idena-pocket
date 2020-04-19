@@ -7,6 +7,7 @@ import Container from "../components/Container";
 import { reset } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
 import Confirmation from "../components/Confirmation";
+import Button from "../components/Button";
 
 const Profile = styled.div`
 	.forget, .forget > * {
@@ -59,14 +60,9 @@ const Profile = styled.div`
 	    line-height: 1.6em;
 	    margin-top: 1em;
 	    width: 200px;
-	    -webkit-text-decoration: none;
 	    text-decoration: none;
 	    cursor: pointer;
-	    -webkit-transition: all .35s ease;
-    	-o-transition: all .35s ease;
-    	-webkit-transition: all .35s ease;
     	transition: all .35s ease;
-    	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.2);
     	box-shadow: 0 1px 3px rgba(0,0,0,.2);
 	}
 	.address:hover {
@@ -74,6 +70,9 @@ const Profile = styled.div`
 		background: #0c9bd2;
 		-webkit-box-shadow: 0 2px 12px rgba(0,0,0,.2);
     	box-shadow: 0 2px 12px rgba(0,0,0,.2);
+	}
+	.copyButton {
+		margin: 2em 0;
 	}
 `;
 
@@ -105,9 +104,13 @@ export default (): ReactElement => {
 				</div>
 				<p className="desc desc-center">Your Full Address</p>
 				<p className="desc desc-center desc--addr">{storage.currentAddress.toLowerCase()}</p>
-				<CopyToClipboard text={storage.currentAddress}>
-					<span className="address">Click to copy address</span>
-				</CopyToClipboard>
+				
+				<div className="copyButton">
+					<CopyToClipboard text={storage.currentAddress}>
+						<Button icon="copy" theme="blue" text="Click to copy address" />
+					</CopyToClipboard>
+				</div>
+				
 				<div className="line"></div>
 				<Confirmation text="Are you sure you want to erase your wallet?">
 					<p className="forget" onClick={resetWallet}>

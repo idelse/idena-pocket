@@ -152,7 +152,7 @@ export default (): ReactElement => {
 				<ul className="shuffled-seed">
 					{shuffledSeed.map((word, key) => <li onClick={onShuffledWordClick(word, key)} className={`shuffled-seed__li`} key={key}>{word}</li>)}
 				</ul>
-				<Button disabled={!sorted} onClick={onNextButtonClick} text="Next" margin="center" icon="arrow-right"/>
+				<Button disabled={!sorted} onClick={onNextButtonClick} text="Next" icon="arrow-right"/>
 				</Container>
 			</ConfirmSeed>
 		</Wrap>

@@ -8,14 +8,12 @@ const Input = styled.span`
 		width: 100%;
 		border: 1px solid ${colors.lightGrey};
     	border-radius: 4px;
-		padding: .75em;
+		padding: .75em .75em;
 		box-sizing: border-box;
 		font-size: 1em;
 		resize: none;
 		margin: 0!important;
 		resize: none;
-		-webkit-transition: all .35s ease;
-    	-o-transition: all .35s ease;
     	transition: all .35s ease;
 	}
 	input:focus, input:active {
