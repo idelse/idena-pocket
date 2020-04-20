@@ -3,22 +3,26 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
+import Confirmation from "../components/Confirmation";
 import Wrap from "../components/Wrap";
+import Container from "../components/Container";
 import Or from "../components/OrSeparator";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { retrieveEncryptedSeed, unlock } from "../actions";
-import { shuffle, colors } from "../helpers";
 import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
+import { reset } from "../actions";
+import config from "../config";
+
 
 const Login = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	height: 80vh;
+	height: 100vh;
 	* {
 		padding: .5em 0;
 	}
@@ -32,6 +36,15 @@ const Login = styled.div`
 		padding-bottom: 2em;
 		font-size: 1em;
 	}
+	.forget {
+		text-align: center;
+		margin: auto;
+		cursor: pointer;
+		margin-top: 1em;
+	}
+	.forget .fa {
+		padding-right: 1em;
+	}
 `;
 
 export default () => {
@@ -39,21 +52,17 @@ export default () => {
 	const { register, handleSubmit, errors } = useForm();
 	const dispatch = useDispatch();
 
-	const placeholder = shuffle([
-		"follow the white rabbit",
-		"the matrix has you",
-		"digital pimp at work",
-		"he is the one",
-		"dodge this",
-		"I know kung fu",
-	])[0];
-
 	const storage = useSelector((state: any) => {
         return {
 			encryptedSeed: state.app.encryptedSeed,
+			derivationPath: state.app.derivationPath || config.oldDerivationPath,
 			unlocked: state.app.unlocked,
         };
 	});
+
+	const resetWallet = () => {
+		dispatch(reset());
+	};
 
 	useEffect(() => {
 		if (storage.unlocked)
@@ -67,7 +76,7 @@ export default () => {
 	const onLogin = (data: any) => {
 		const bytes =  AES.decrypt(storage.encryptedSeed, data.password);
 		const seed = JSON.parse(bytes.toString(enc.Utf8));
-		dispatch(unlock(seed));
+		dispatch(unlock(seed, storage.derivationPath));
 	}
 	
 	return (
@@ -77,10 +86,11 @@ export default () => {
 				<h1 className="title">idena-pocket</h1>
 				<p className="description extrapadding">web-wallet for Idena</p>
 
-				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" />}
+				<Container>
+				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" />}
 				{!storage.encryptedSeed && <Or />}
 
-				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" />}
+				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" icon="arrow-right" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
 						name="password"
@@ -90,18 +100,26 @@ export default () => {
 								try {
 									const bytes =  AES.decrypt(storage.encryptedSeed, password);
 									const seed = JSON.parse(bytes.toString(enc.Utf8));
-									return seed.length === 12;
+									return seed.length >= 12;
 								} catch(e) {
 									return false;
 								}
 							},
 						})}
-						placeholder={placeholder}
-						label="Password"
-						error={errors.password ? "Wrong password" : ""}
+						label="Enter your password"
+						error={errors.password ? "Wrong password. Please try again." : ""}
 						type="password" />
-					<Button type="submit" text="Login" />
+						<Button type="submit" text="Login" />
 				</form>}
+					{storage.encryptedSeed && 
+					<Confirmation text="Are you sure you want to erase your wallet?">
+						<p className="forget" onClick={resetWallet}>
+							<i className="fa fa-unlock-alt"/>
+							Use a different wallet
+						</p>
+					</Confirmation>}
+				</Container>
+
 			</Login>
 		</Wrap>
 	);

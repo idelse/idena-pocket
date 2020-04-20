@@ -1,12 +1,9 @@
 import AES from "crypto-js/aes";
+import { formatDate } from "../libs/helpers";
+import api from "../libs/api";
 import config from "../config";
-import { Idena, LocalKeyStore } from "idena-js";
-import { formatDate } from "../helpers";
 const HDWallet = require("ethereum-hdwallet");
 const bip39 = require("bip39");
-
-const provider = new LocalKeyStore();
-const idena = new Idena(provider);
 
 export const UPDATE_CREATION_WALLET_PASSWORD = "UPDATE_CREATION_WALLET_PASSWORD";
 export const updateCreationWalletPassword = (password: string) => ({
@@ -24,67 +21,42 @@ export const updatedSeed = () => ({
 });
 
 export const UPDATE_ENCRYPTED_SEED = "UPDATE_ENCRYPTED_SEED";
-export const updateEncryptedSeed = (seed, password) => ({
+export const updateEncryptedSeed = (seed, derivationPath, password) => ({
 	type: UPDATE_ENCRYPTED_SEED,
 	result: (async () => {
 		const encryptedSeed = AES.encrypt(JSON.stringify(seed), password).toString();
 		localStorage.setItem('encrypted_seed', encryptedSeed);
-		return encryptedSeed;
+		localStorage.setItem('derivation_path', derivationPath);
+		return {
+			encryptedSeed,
+			derivationPath,
+		};
 	})(),
 });
 
 export const RETRIEVE_ENCRYPTED_SEED = "RETRIEVE_ENCRYPTED_SEED";
 export const retrieveEncryptedSeed = () => ({
-	type: UPDATE_ENCRYPTED_SEED,
+	type: RETRIEVE_ENCRYPTED_SEED,
 	result: (async () => {
-		return localStorage.getItem('encrypted_seed');
+		return {
+			encryptedSeed: localStorage.getItem('encrypted_seed'),
+			derivationPath: localStorage.getItem('derivation_path') || config.oldDerivationPath,
+		};
 	})(),
 });
 
 export const UNLOCK = "UNLOCK";
-export const unlock = (seed): any => ({
+export const unlock = (seed, derivationPath): any => ({
 	type: UNLOCK,
 	result: (async () => {
 		const hdwallet = HDWallet.fromMnemonic(seed.join(' '));
-		const address = `0x${hdwallet.derive(config.derivationPath).getAddress().toString('hex')}`;
-		const privateKey = hdwallet.derive(config.derivationPath).getPrivateKey().toString('hex');
-		const transactions = await fetch(`https://api.idena.org/api/Address/${address}/Txs?skip=0&limit=30`)
-			.then(res => res.json())
-			.then(res => res.result)
-			.then(txs => (txs || []).filter(tx => tx.type === "SendTx"))
-			.then(async txs => {
-				for (let i = 0; i < txs.length; i++) {
-					const payload = txs[i].size <= 107 ? "0x" : await fetch(config.rpc, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							method: "bcn_transaction",
-							id: 2,
-							params: [txs[i].hash]
-						})
-					})
-					.then(r => r.json())
-					.then((r: any) => {
-						return r?.result?.payload || "0x";
-					});
-					txs[i] = {
-						...txs[i],
-						payload,
-					}
-				}
-				return txs;
-			});
-		const balance = await idena.getBalanceByAddress(address).then((r: any) => parseFloat(r.balance));
-		const price = await fetch(config.price)
-			.then(res => res.json())
-			.then((res: any) => res.price);
+		const address = `0x${hdwallet.derive(derivationPath).getAddress().toString('hex')}`;
+		const privateKey = hdwallet.derive(derivationPath).getPrivateKey().toString('hex');
+		const retrievedAccountState = await api.retrieveAccountState(address);
 		return {
-			price: price || 0,
-			address,
-			privateKey,
-			transactions: transactions || [],
-			balance: balance || 0
-		};
+			...retrievedAccountState,
+			privateKey
+		}
 	})(),
 });
 
@@ -96,31 +68,43 @@ export const lock = (): any => ({
 export const SEND_TX = "SEND_TX";
 export const sendTx = (privateKey, { amount, to, payload }): any => ({
 	type: SEND_TX,
-	result: (async () => {
-		const provider = new LocalKeyStore(privateKey);
-		const idena = new Idena(provider);
-		const operation = await idena.transfer({ amount, to, payload });
-		await operation.confirmation();
-		return {
-			to,
-			amount,
-			payload,
-			timestamp: formatDate(new Date()),
-			hash: operation.hash,
-		};
-	})(),
+	request: {
+		to,
+		amount,
+		payload,
+		timestamp: formatDate(new Date()),
+	},
+	result: api.sendTransaction(privateKey, { amount, to, payload }),
 });
 
 export const TOAST = "TOAST";
-export const toast = ({ message, type }): any => ({
+export const toast = (options): any => ({
 	type: TOAST,
-	toast: { message, type },
+	toast: {
+		message: options.message || "",
+		type: options.type || "info",
+		autoclose: options.autoclose || false
+	},
 });
 
 export const RESET = "RESET";
 export const reset = () => {
 	localStorage.removeItem('encrypted_seed');
+	localStorage.removeItem('derivation_path');
 	return {
 		type: RESET,
 	};
 };
+
+export const REFRESH = "REFRESH";
+export const refresh = (address, showToast = false): any => ({
+	type: REFRESH,
+	showToast,
+	result: (async () => {
+		const refreshedAccountState = await api.retrieveAccountState(address);
+		return {
+			...refreshedAccountState,
+			showToast,
+		};
+	})(),
+});

@@ -1,4 +1,15 @@
-import { UPDATE_CREATION_WALLET_PASSWORD, UPDATE_SEED, UPDATE_ENCRYPTED_SEED, UNLOCK, LOCK, TOAST, SEND_TX, RESET } from "../actions";
+import {
+	UPDATE_CREATION_WALLET_PASSWORD,
+	UPDATE_SEED,
+	UPDATE_ENCRYPTED_SEED,
+	UNLOCK,
+	LOCK,
+	TOAST,
+	SEND_TX,
+	RESET,
+	REFRESH,
+	RETRIEVE_ENCRYPTED_SEED
+} from "../actions";
 
 export const defaultState: any = {
 	encryptedSeed: "",
@@ -40,9 +51,20 @@ export default (defaultState: any) => {
 					}
 				};
 			case UPDATE_ENCRYPTED_SEED:
+			case RETRIEVE_ENCRYPTED_SEED:
 				return {
 					...state,
-					encryptedSeed: action.result
+					encryptedSeed: action.result.encryptedSeed,
+					derivationPath: action.result.derivationPath,
+				}
+			case UNLOCK+'_REQUESTED':
+				return {
+					...state,
+					toast: {
+						type: "info",
+						message: "Unlocking account",
+						autoclose: false,
+					}
 				}
 			case UNLOCK:
 				return {
@@ -53,15 +75,54 @@ export default (defaultState: any) => {
 					currentAddress: action.result.address,
 					privateKey: action.result.privateKey,
 					unlocked: true,
+					toast: {}
+				}
+			case REFRESH+'_REQUESTED':
+				return {
+					...state,
+					toast: action.showToast
+						? {
+							type: "info",
+							message: "Refreshing",
+							autoclose: true,
+						}
+						: state.toast,
+				}
+			case REFRESH:
+				return {
+					...state,
+					price: action.result.price,
+					balance: action.result.balance,
+					transactions: (() => {
+						const previousTransactions = state.transactions;
+						const nextTransactions = action.result.transactions;
+						const newTrasactions = nextTransactions.filter(currentNewTransaction => {
+							const isNew = !previousTransactions
+								.some(previousCurrentTransaction => previousCurrentTransaction.hash === currentNewTransaction.hash);
+							return isNew;
+						});
+						return [
+							...newTrasactions,
+							...previousTransactions,
+						].sort((a, b) => b.timestamp - a.timestamp);
+					})(),
+					currentAddress: action.result.address,
 				}
 			case SEND_TX+'_REQUESTED':
 				return {
 					...state,
 					sending: true,
+					transactions: [
+						{
+							from: state.currentAddress,
+							...action.request,
+							pending: true,
+						},
+						...state.transactions,
+					],
 					toast: {
 						type: "info",
 						message: "Sending transaction",
-						autoclose: false,
 					}
 				}
 			case SEND_TX:
@@ -74,7 +135,7 @@ export default (defaultState: any) => {
 							from: state.currentAddress,
 							...action.result,
 						},
-						...state.transactions,
+						...state.transactions.filter(tx => tx.pending !== true),
 					],
 					toast: {
 						type: "success",
@@ -86,6 +147,7 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					sending: false,
+					transactions: state.transactions.filter(tx => tx.pending === false),
 					toast: {
 						type: "error",
 						message: "Transaction failed",
