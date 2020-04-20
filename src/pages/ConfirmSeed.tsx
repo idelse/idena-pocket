@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { push } from "connected-react-router";
 import { updateEncryptedSeed } from "../actions";
 import { shuffle } from "../libs/helpers";
+import config from "../config";
 
 const ConfirmSeed = styled.div`
 	.shuffled-seed {
@@ -102,7 +103,6 @@ export default (): ReactElement => {
         return {
 			password: state.app.creationWallet.password,
 			seed: state.app.creationWallet.seed,
-			derivationPath: state.app.creationWallet.derivationPath,
         };
     });
 
@@ -130,7 +130,7 @@ export default (): ReactElement => {
 	}
 
 	const onNextButtonClick = () => {
-		dispatch(updateEncryptedSeed(sortedSeed, storage.derivationPath, storage.password));
+		dispatch(updateEncryptedSeed(sortedSeed, config.derivationPath, storage.password));
 		dispatch(push("/"));
 	}
 
