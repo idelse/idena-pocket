@@ -19,7 +19,7 @@ const Header = styled.div`
 	.darkbg {
 		width: 100%;
 	    z-index: -10;
-	    height: 40em;
+	    height: 28em;
 	    left: 0;
 	    background-color: ${colors.medBlack};
 	    position: absolute;
