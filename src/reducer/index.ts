@@ -7,8 +7,10 @@ import {
 	TOAST,
 	SEND_TX,
 	RESET,
-	REFRESH,
-	RETRIEVE_ENCRYPTED_SEED
+	GET_TRANSACTIONS,
+	RETRIEVE_ENCRYPTED_SEED,
+	GET_BALANCE,
+	GET_PRICE,
 } from "../actions";
 
 export const defaultState: any = {
@@ -69,15 +71,12 @@ export default (defaultState: any) => {
 			case UNLOCK:
 				return {
 					...state,
-					price: action.result.price,
-					balance: action.result.balance,
-					transactions: action.result.transactions,
 					currentAddress: action.result.address,
 					privateKey: action.result.privateKey,
 					unlocked: true,
-					toast: {}
+					toast: {},
 				}
-			case REFRESH+'_REQUESTED':
+			case GET_TRANSACTIONS+'_REQUESTED':
 				return {
 					...state,
 					toast: action.showToast
@@ -88,11 +87,9 @@ export default (defaultState: any) => {
 						}
 						: state.toast,
 				}
-			case REFRESH:
+			case GET_TRANSACTIONS:
 				return {
 					...state,
-					price: action.result.price,
-					balance: action.result.balance,
 					transactions: (() => {
 						const previousTransactions = state.transactions;
 						const nextTransactions = action.result.transactions;
@@ -107,6 +104,16 @@ export default (defaultState: any) => {
 						].sort((a, b) => b.timestamp - a.timestamp);
 					})(),
 					currentAddress: action.result.address,
+				}
+			case GET_BALANCE:
+				return {
+					...state,
+					balance: action.result.balance,
+				}
+			case GET_PRICE:
+				return {
+					...state,
+					price: action.result.price,
 				}
 			case SEND_TX+'_REQUESTED':
 				return {

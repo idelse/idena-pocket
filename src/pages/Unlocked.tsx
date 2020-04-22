@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { push } from "connected-react-router";
 import { colors, formatNumber, useInterval } from "../libs/helpers";
 import { Link } from "react-router-dom";
-import { refresh } from "../actions";
+import { getTransactions, getBalance, getPrice } from "../actions";
 import config from "../config";
 
 const Unlocked = styled.div`
@@ -100,9 +100,14 @@ export default (props): ReactElement => {
         };
 	});
 	
-	const refreshAccountState = (showToast = false) => dispatch(refresh(storage.currentAddress, showToast));
+	const refreshAccountState = (showToast = false) => {
+		dispatch(getPrice());
+		dispatch(getBalance(storage.currentAddress));
+		dispatch(getTransactions(storage.currentAddress, showToast));
+	};
 
 	useEffect(() => {
+		refreshAccountState();
 		if (!storage.unlocked)
 			dispatch(push("/"));
 	}, [storage.unlocked]);
