@@ -109,11 +109,11 @@ export const getTransactions = (address, showToast = false): any => ({
 });
 
 export const GET_BALANCE = "GET_BALANCE";
-export const getBalance = (address): any => ({
+export const getBalance = (address, noToast = false): any => ({
 	type: GET_BALANCE,
 	result: (async () => {
 		const balance = await api.getBalance(address);
-		return { balance };
+		return { balance, noToast };
 	})(),
 });
 

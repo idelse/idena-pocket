@@ -12,6 +12,7 @@ import {
 	GET_BALANCE,
 	GET_PRICE,
 } from "../actions";
+import { formatNumber } from "../libs/helpers";
 
 export const defaultState: any = {
 	encryptedSeed: "",
@@ -109,6 +110,11 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					balance: action.result.balance,
+					toast: action.result.noToast && action.result.balance > state.balance ? {
+						type: "info",
+						message: `You received ${formatNumber(action.result.balance-state.balance)} DNA`,
+						autoclose: true,
+					} : state.toast,
 				}
 			case GET_PRICE:
 				return {

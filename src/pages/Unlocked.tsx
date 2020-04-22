@@ -99,20 +99,24 @@ export default (props): ReactElement => {
 			price: state.app.price,
         };
 	});
-	
-	const refreshAccountState = (showToast = false) => {
+
+	const refreshAccountState = () => {
 		dispatch(getPrice());
-		dispatch(getBalance(storage.currentAddress));
-		dispatch(getTransactions(storage.currentAddress, showToast));
-	};
+		dispatch(getBalance(storage.currentAddress, true));
+		dispatch(getTransactions(storage.currentAddress, true));
+	}
 
 	useEffect(() => {
-		refreshAccountState();
+		dispatch(getPrice());
+		dispatch(getBalance(storage.currentAddress, false));
+		dispatch(getTransactions(storage.currentAddress, false));
 		if (!storage.unlocked)
 			dispatch(push("/"));
 	}, [storage.unlocked]);
 
-	useInterval(() => refreshAccountState(), 90000);
+	useInterval(() => {
+		refreshAccountState();
+	}, 90000);
 
 	return (
 		<Wrap>
@@ -121,7 +125,7 @@ export default (props): ReactElement => {
 				<div className="balance">
 					<span className="balance__value">
 						{formatNumber(storage.balance, 4)} DNA
-						<i onClick={() => refreshAccountState(true)} className="balance__value__refresh fa fa-refresh" />
+						<i onClick={() => refreshAccountState()} className="balance__value__refresh fa fa-refresh" />
 					</span>
 					<span className="balance__dollar">${formatNumber(storage.balance*storage.price)}</span>
 				</div>
