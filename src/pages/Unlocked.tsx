@@ -112,7 +112,7 @@ export default (props): ReactElement => {
 			dispatch(push("/"));
 	}, [storage.unlocked]);
 
-	useInterval(() => refreshAccountState(), 30000);
+	useInterval(() => refreshAccountState(), 90000);
 
 	return (
 		<Wrap>
