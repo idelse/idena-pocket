@@ -21,7 +21,9 @@ const Confirmation = styled.div`
 
 export default (props: any) => {
 	const text = props.text || "Are you sure you want to do this?";
+	const disabled = !!props.disabled;
 	const handleClick = async () => {
+		if (disabled) return;
 		const confirmed = await swal(text, {
 			buttons: ["Cancel", "Confirm"],
 		});
