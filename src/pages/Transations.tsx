@@ -25,6 +25,10 @@ const Transactions = styled.div`
 	.transactions li a > * {
 		width: 100%;
 	}
+	.transactions li a .fa {
+		float: right;
+		margin-left: 0.5em;
+	}
 	.transactions__li__details {
 		padding-top: .5em;
 		font-size: .8em;
@@ -112,6 +116,12 @@ const Transactions = styled.div`
 		float: right;
 		display: block;
 	}
+	.transactions__li__amount {
+		font-weight: 600;
+	}
+	.transactions__li__amount .transactions__li__currency {
+		font-weight: inherit;
+	}
 	@media (max-width: 991px) {
 		.thumbnail {
 		display: none;
@@ -126,6 +136,11 @@ const Transactions = styled.div`
 		.transactions li a {
 		flex-direction: column;
 		padding: 1em;
+		}
+	}
+	@media (max-width: 400px) {
+		.transactions__li__currency {
+		   display: none;
 		}
 	}
 `;
@@ -159,13 +174,13 @@ export default (): ReactElement => {
 							  </div>
                 <div className="tx">
                 <div className="transactions__li__tx">
-									{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 10)}</span>}
+									{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 6)}</span>}
 									{
 										(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
 										(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
 										<span>{formatAddress(tx.to, 6)}</span>
 									}
-									<span>{formatNumber(tx.amount, 4)} DNA <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
+									<span className="transactions__li__amount">{formatNumber(tx.amount, 4)} <span className="transactions__li__currency">DNA</span> <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
 								</div>
 								<span className="transactions__li__details">
 									<span>{tx.pending ? 'Pending...' : tx.timestamp.slice(0, 10)}</span>
