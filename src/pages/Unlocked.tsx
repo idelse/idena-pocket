@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { push } from "connected-react-router";
 import { colors, formatNumber, useInterval } from "../libs/helpers";
 import { Link } from "react-router-dom";
-import { refresh } from "../actions";
+import { getTransactions, getBalance, getPrice } from "../actions";
 import config from "../config";
 
 const Unlocked = styled.div`
@@ -99,15 +99,24 @@ export default (props): ReactElement => {
 			price: state.app.price,
         };
 	});
-	
-	const refreshAccountState = (showToast = false) => dispatch(refresh(storage.currentAddress, showToast));
+
+	const refreshAccountState = () => {
+		dispatch(getPrice());
+		dispatch(getBalance(storage.currentAddress, true));
+		dispatch(getTransactions(storage.currentAddress, true));
+	}
 
 	useEffect(() => {
+		dispatch(getPrice());
+		dispatch(getBalance(storage.currentAddress, false));
+		dispatch(getTransactions(storage.currentAddress, false));
 		if (!storage.unlocked)
 			dispatch(push("/"));
 	}, [storage.unlocked]);
 
-	useInterval(() => refreshAccountState(), 30000);
+	useInterval(() => {
+		refreshAccountState();
+	}, 90000);
 
 	return (
 		<Wrap>
@@ -116,7 +125,7 @@ export default (props): ReactElement => {
 				<div className="balance">
 					<span className="balance__value">
 						{formatNumber(storage.balance, 4)} DNA
-						<i onClick={() => refreshAccountState(true)} className="balance__value__refresh fa fa-refresh" />
+						<i onClick={() => refreshAccountState()} className="balance__value__refresh fa fa-refresh" />
 					</span>
 					<span className="balance__dollar">${formatNumber(storage.balance*storage.price)}</span>
 				</div>

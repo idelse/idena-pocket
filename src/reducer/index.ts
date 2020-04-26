@@ -7,9 +7,12 @@ import {
 	TOAST,
 	SEND_TX,
 	RESET,
-	REFRESH,
-	RETRIEVE_ENCRYPTED_SEED
+	GET_TRANSACTIONS,
+	RETRIEVE_ENCRYPTED_SEED,
+	GET_BALANCE,
+	GET_PRICE,
 } from "../actions";
+import { formatNumber } from "../libs/helpers";
 
 export const defaultState: any = {
 	encryptedSeed: "",
@@ -69,15 +72,12 @@ export default (defaultState: any) => {
 			case UNLOCK:
 				return {
 					...state,
-					price: action.result.price,
-					balance: action.result.balance,
-					transactions: action.result.transactions,
 					currentAddress: action.result.address,
 					privateKey: action.result.privateKey,
 					unlocked: true,
-					toast: {}
+					toast: {},
 				}
-			case REFRESH+'_REQUESTED':
+			case GET_TRANSACTIONS+'_REQUESTED':
 				return {
 					...state,
 					toast: action.showToast
@@ -88,11 +88,9 @@ export default (defaultState: any) => {
 						}
 						: state.toast,
 				}
-			case REFRESH:
+			case GET_TRANSACTIONS:
 				return {
 					...state,
-					price: action.result.price,
-					balance: action.result.balance,
 					transactions: (() => {
 						const previousTransactions = state.transactions;
 						const nextTransactions = action.result.transactions;
@@ -107,6 +105,21 @@ export default (defaultState: any) => {
 						].sort((a, b) => b.timestamp - a.timestamp);
 					})(),
 					currentAddress: action.result.address,
+				}
+			case GET_BALANCE:
+				return {
+					...state,
+					balance: action.result.balance,
+					toast: action.result.noToast && action.result.balance > state.balance ? {
+						type: "info",
+						message: `You received ${formatNumber(action.result.balance-state.balance)} DNA`,
+						autoclose: true,
+					} : state.toast,
+				}
+			case GET_PRICE:
+				return {
+					...state,
+					price: action.result.price,
 				}
 			case SEND_TX+'_REQUESTED':
 				return {

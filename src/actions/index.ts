@@ -52,9 +52,8 @@ export const unlock = (seed, derivationPath): any => ({
 		const hdwallet = HDWallet.fromMnemonic(seed.join(' '));
 		const address = `0x${hdwallet.derive(derivationPath).getAddress().toString('hex')}`;
 		const privateKey = hdwallet.derive(derivationPath).getPrivateKey().toString('hex');
-		const retrievedAccountState = await api.retrieveAccountState(address);
 		return {
-			...retrievedAccountState,
+			address,
 			privateKey
 		}
 	})(),
@@ -96,15 +95,33 @@ export const reset = () => {
 	};
 };
 
-export const REFRESH = "REFRESH";
-export const refresh = (address, showToast = false): any => ({
-	type: REFRESH,
+export const GET_TRANSACTIONS = "GET_TRANSACTIONS";
+export const getTransactions = (address, showToast = false): any => ({
+	type: GET_TRANSACTIONS,
 	showToast,
 	result: (async () => {
-		const refreshedAccountState = await api.retrieveAccountState(address);
+		const transactions = await api.getTransactions(address);
 		return {
-			...refreshedAccountState,
+			...transactions,
 			showToast,
 		};
+	})(),
+});
+
+export const GET_BALANCE = "GET_BALANCE";
+export const getBalance = (address, noToast = false): any => ({
+	type: GET_BALANCE,
+	result: (async () => {
+		const balance = await api.getBalance(address);
+		return { balance, noToast };
+	})(),
+});
+
+export const GET_PRICE = "GET_PRICE";
+export const getPrice = (): any => ({
+	type: GET_PRICE,
+	result: (async () => {
+		const price = await api.getPrice();
+		return { price };
 	})(),
 });

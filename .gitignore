@@ -3,6 +3,5 @@ node_modules
 /*.log
 *.tar.gz
 /dist
-package-lock.json
 yarn.lock
 .DS_Store

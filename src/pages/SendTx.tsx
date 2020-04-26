@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import Container from "../components/Container";
 import Input from "../components/Input";
 import { sendTx } from "../actions";
+import Confirmation from "../components/Confirmation";
 
 const SendTx = styled.div`
 
@@ -18,6 +19,7 @@ export default (): ReactElement => {
 	const dispatch = useDispatch();
 
 	const storage = useSelector((state: any) => {
+
         return {
 			privateKey: state.app.privateKey,
 			balance: state.app.balance,
@@ -27,8 +29,9 @@ export default (): ReactElement => {
         };
 	});
 
-	const { register, handleSubmit, errors } = useForm();
-	
+	const { register, handleSubmit, errors, formState, watch } = useForm({ mode: "onChange" });
+	const watchAllFields = watch();
+
 	const onTransactionSent = (data) => {
 		const fee = 0.0000001;
 		const to = data.destination;
@@ -41,7 +44,7 @@ export default (): ReactElement => {
 	return (
 		<SendTx>
 			<Container>
-			<form onSubmit={handleSubmit(onTransactionSent)}>
+			<form>
 				<Input
 					name="destination"
 					label="Destination address *"
@@ -69,7 +72,9 @@ export default (): ReactElement => {
 					type="textarea"
 					ref={register()}
 					error={errors.message ? "Insert valid message" : ""} />
-				<Button disabled={storage.sending} type="submit" text="Send" />
+				<Confirmation disabled={!formState.isValid || storage.sending} text={`I'm sending ${watchAllFields.amount} DNA to ${watchAllFields.destination}`}>
+					<Button disabled={!formState.isValid || storage.sending} onClick={handleSubmit(onTransactionSent)} text="Send" />
+				</Confirmation>
 			</form>
 			</Container>
 		</SendTx>
