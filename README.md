@@ -7,7 +7,7 @@ idena-pocket is based on idena-js library developed by [@idena-dev](https://gith
 ### Will this be open source?
 💯. Feel free to improve on Idena-pocket. Forks and PRs are welcome.
 
-### How to run
+### 🔧 How to run
 Install dependencies
 ```
 npm install
