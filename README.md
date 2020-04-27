@@ -9,8 +9,11 @@ idena-pocket is based on idena-js library developed by [@idena-dev](https://gith
 
 ### How to run
 Install dependencies
+
 ```npm install```
+
 Run
+
 ```npm run dev```
 
 ### 🌐 Useful Links 
