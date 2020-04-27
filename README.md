@@ -7,6 +7,12 @@ idena-pocket is based on idena-js library developed by [@idena-dev](https://gith
 ### Will this be open source?
 💯. Feel free to improve on Idena-pocket. Forks and PRs are welcome.
 
+### How to run
+Install dependencies
+```npm install```
+Run
+```npm run dev```
+
 ### 🌐 Useful Links 
 - [idena-js documentation](https://www.idena.dev/idena-js/quick-start)
 - [idena-rpc documentation](https://github.com/idena-dev/idena-rpc)
