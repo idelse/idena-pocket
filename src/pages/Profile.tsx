@@ -28,16 +28,35 @@ const Profile = styled.div`
 	    border: 1px solid ${colors.grey};
 	}
 	.image {
-		margin: 1.5em auto;
+		margin: 1.5em 0;
 		width: 8em;
 		height: 8em;
 		border-radius: 1em;
 		background: ${colors.grey};
 		overflow: hidden;
 	}
+	.image-left{
+		float: left;
+		display: block;
+	}
+	.image-right{
+		float: right;
+		display: block;
+	}
 	.image img {
 		width: 100%;
 	}
+	.image-qr {
+		padding: 6px;
+    	box-sizing: border-box;
+	}
+	@media (max-width: 400px) {
+		.image {
+		width: 6em;
+		height: 6em;
+		}
+	}
+
 	.desc-center {
 		text-align: center;
 	}
@@ -74,6 +93,24 @@ const Profile = styled.div`
 	.copyButton {
 		margin: 2em 0;
 	}
+	.clearfix {
+		clear: both;
+	}
+	.imgContainer {
+		display: block;
+		width: 72%;
+		margin: auto;
+	}
+	@media (max-width: 578px) {
+		.imgContainer {
+		width: 80% !important;
+		}
+	}
+	@media (max-width: 380px) {
+		.imgContainer {
+		width: 85% !important;
+		}
+	}
 `;
 
 export default (): ReactElement => {
@@ -103,8 +140,14 @@ export default (): ReactElement => {
 	return (
 		<Profile>
 			<Container>
-				<div className="image">
-				<img src={`https://robohash.org/${storage.currentAddress.toLowerCase()}`}/>
+				<div className="imgContainer">
+					<div className="image image-left">
+					<img src={`https://robohash.org/${storage.currentAddress.toLowerCase()}`}/>
+					</div>
+					<div className="image image-right">
+					<img className="image-qr" src={`https://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=${storage.currentAddress.toLowerCase()}&chld=H|0`}/>
+					</div>
+					<div className="clearfix"></div>
 				</div>
 				<p className="desc desc-center">Your Full Address</p>
 				<p className="desc desc-center desc--addr">{storage.currentAddress.toLowerCase()}</p>
