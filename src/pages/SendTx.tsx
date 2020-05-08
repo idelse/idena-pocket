@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { formatAmount, validateInputAddresses, hexEncode } from "../libs/helpers";
+import { parseAmount, validateInputAddresses, hexEncode } from "../libs/helpers";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Button from "../components/Button";
@@ -33,11 +33,9 @@ export default (): ReactElement => {
 	const watchAllFields = watch();
 
 	const onTransactionSent = (data) => {
-		const fee = 0.0000001;
 		const to = data.destination;
-		let amount = formatAmount(data.amount);
-		amount = amount === storage.balance ? amount-fee : amount;
 		const payload = data.message !== "" ? "0x"+hexEncode(data.message) : "0x";
+		let amount = parseAmount(data.amount);
 		dispatch(sendTx(storage.privateKey, { amount, to, payload }));
 	}
 
@@ -61,7 +59,7 @@ export default (): ReactElement => {
 					placeholder="0.1"
 					ref={register({
 						validate: amount => {
-							amount = formatAmount(amount);
+							amount = parseAmount(amount);
 							return amount > 0 && amount <= storage.balance;
 						},
 					})}
