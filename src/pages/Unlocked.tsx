@@ -100,10 +100,10 @@ export default (props): ReactElement => {
         };
 	});
 
-	const refreshAccountState = () => {
+	const refreshAccountState = (showToast = true) => {
 		dispatch(getPrice());
-		dispatch(getBalance(storage.currentAddress, true));
-		dispatch(getTransactions(storage.currentAddress, true));
+		dispatch(getBalance(storage.currentAddress, showToast));
+		dispatch(getTransactions(storage.currentAddress, showToast));
 	}
 
 	useEffect(() => {
@@ -115,7 +115,7 @@ export default (props): ReactElement => {
 	}, [storage.unlocked]);
 
 	useInterval(() => {
-		refreshAccountState();
+		refreshAccountState(false);
 	}, 90000);
 
 	return (

@@ -28,7 +28,7 @@ export const formatNumber = (number, pow = 2) => Math.floor(number*10**pow)/10**
 
 export const validateInputAddresses = address => (/^(0x){1}[0-9a-fA-F]{40}$/i.test(address));
 
-export const formatAmount = amount => parseFloat(amount.replace(",","."));
+export const parseAmount = amount => parseFloat(amount.replace(",","."));
 
 export const hexEncode = (str) => {
     var hex, i;
