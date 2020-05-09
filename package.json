@@ -12,11 +12,13 @@
 		"crypto-js": "^4.0.0",
 		"ethereum-hdwallet": "0.0.26",
 		"history": "^4.10.1",
+		"i18next": "^19.4.4",
 		"idena-js": "^1.0.14",
 		"react": "^16.13.1",
 		"react-copy-to-clipboard": "^5.0.2",
 		"react-dom": "^16.13.1",
 		"react-hook-form": "^5.5.3",
+		"react-i18next": "^11.4.0",
 		"react-redux": "^7.2.0",
 		"react-router-dom": "^5.1.2",
 		"react-tooltip": "^4.2.5",
@@ -42,6 +44,6 @@
 		"webpack": "^4.43.0",
 		"webpack-bundle-analyzer": "^3.7.0",
 		"webpack-cli": "^3.3.11",
-		"webpack-dev-server": "^3.10.3"
+		"webpack-dev-server": "^3.11.0"
 	}
 }
