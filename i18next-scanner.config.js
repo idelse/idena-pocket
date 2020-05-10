@@ -21,9 +21,7 @@ module.exports = {
         ],
         defaultLng: 'en',
         defaultNs: 'translation',
-        defaultValue(_lng, _ns, key) {
-        return key
-        },
+        defaultValue: '__STRING_NOT_TRANSLATED__',
     resource: {
             loadPath: 'public/locales/{{lng}}/{{ns}}.json',
             savePath: 'public/locales/{{lng}}/{{ns}}.json',
