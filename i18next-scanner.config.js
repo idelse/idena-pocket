@@ -1,6 +1,7 @@
 
 const AVAILABLE_LANGS = [
   'en',
+  'hi',
 ]
 
 module.exports = {
