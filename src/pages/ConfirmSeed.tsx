@@ -11,6 +11,7 @@ import { push } from "connected-react-router";
 import { updateEncryptedSeed } from "../actions";
 import { shuffle } from "../libs/helpers";
 import config from "../config";
+import { useTranslation } from 'react-i18next';
 
 const ConfirmSeed = styled.div`
 	.shuffled-seed {
@@ -96,6 +97,7 @@ const ConfirmSeed = styled.div`
 `;
 
 export default (): ReactElement => {
+	const { t, i18n } = useTranslation();
 
 	const dispatch = useDispatch();
 
@@ -142,8 +144,8 @@ export default (): ReactElement => {
     			<i className="fa fa-check"></i></h1>}
 
 				<div className="textcontain">
-				<h3>Confirm you secret seed</h3>
-				<p className="extramargin">Please re-enter your seed words and passphrase in full from the previous step. This is to confirm that you have correctly recorded these down.</p>
+				<h3>{t('Confirm you secret seed')}</h3>
+				<p className="extramargin">{t('Please re-enter your seed words and passphrase in full from the previous step. This is to confirm that you have correctly recorded these down.')}</p>
 				</div>
 				
 				<Container>
@@ -153,7 +155,7 @@ export default (): ReactElement => {
 				<ul className="shuffled-seed">
 					{shuffledSeed.map((word, key) => <li onClick={onShuffledWordClick(word, key)} className={`shuffled-seed__li`} key={key}>{word}</li>)}
 				</ul>
-				<Button disabled={!sorted} onClick={onNextButtonClick} text="Next" icon="arrow-right"/>
+				<Button disabled={!sorted} onClick={onNextButtonClick} text={t('Next')} icon="arrow-right"/>
 				</Container>
 			</ConfirmSeed>
 		</Wrap>

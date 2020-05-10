@@ -89,10 +89,10 @@ export default () => {
 				<p className="description extrapadding">{t('web-wallet for Idena')}</p>
 
 				<Container>
-				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" />}
+				{!storage.encryptedSeed && <Button to="import-mnemonic" text={t('Import mnemonic')} icon="arrow-right" />}
 				{!storage.encryptedSeed && <Or />}
 
-				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" icon="arrow-right" />}
+				{!storage.encryptedSeed && <Button to="create-wallet" text={t('Create wallet')} icon="arrow-right" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
 						name="password"

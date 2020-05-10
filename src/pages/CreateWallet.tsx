@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { updateCreationWalletPassword } from "../actions";
+import { useTranslation } from 'react-i18next';
 
 const CreateWallet = styled.div`
 	form {
@@ -43,6 +44,7 @@ const CreateWallet = styled.div`
 `;
 
 export default (): ReactElement => {
+	const { t, i18n } = useTranslation();
 
 	const { register, handleSubmit, errors, watch } = useForm();
 	const dispatch = useDispatch();
@@ -57,8 +59,8 @@ export default (): ReactElement => {
 			<CreateWallet>
 				<Progress wide="33"/>
 			    <div className="textcontain">
-				<h3>Create password</h3>
-				<p>Enter your browser encryption data password.</p>
+				<h3>{t('Create password')}</h3>
+				<p>{t('Enter your browser encryption data password.')}</p>
 				</div>
 				<Container>
 				<form onSubmit={handleSubmit(onCreationWalletPassword)}>
@@ -68,8 +70,8 @@ export default (): ReactElement => {
 							required: true,
 							minLength: 8,
 						})}
-						label="Password (min 8 characters)"
-						error={errors.password ? "Password min length is 8 characters" : ""}
+						label={t('Password (min 8 characters)')}
+						error={errors.password ? t('Password min length is 8 characters') : ""}
 						type="password" />
 					<Input
 						name="password2"
@@ -77,9 +79,9 @@ export default (): ReactElement => {
 							validate: password2 => watch('password') === password2
 						  })}
 						label="Confirm password"
-						error={errors.password2 ? "Password must match" : ""}
+						error={errors.password2 ? t('Password must match') : ""}
 						type="password" />
-					<Button type="submit" text="Create" />
+					<Button type="submit" text={t('Create')} />
 				</form>
 				</Container>
 			</CreateWallet>

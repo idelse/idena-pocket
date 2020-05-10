@@ -10,6 +10,8 @@ import { colors } from "../libs/helpers";
 import { useDispatch } from "react-redux";
 import { updateEncryptedSeed } from "../actions";
 import { push } from "connected-react-router";
+import { useTranslation } from 'react-i18next';
+
 const bip39 = require("bip39");
 
 const ImportMnemonic = styled.div`
@@ -43,6 +45,8 @@ const ImportMnemonic = styled.div`
 
 export default (): ReactElement => {
 
+		const { t, i18n } = useTranslation();
+
 	const { register, handleSubmit, errors } = useForm({
 		defaultValues: {
 			seed: "",
@@ -61,8 +65,8 @@ export default (): ReactElement => {
 		<Wrap>
 			<ImportMnemonic>
 				<div className="textcontain">
-				<h3>Import an account with a seed phrase</h3>
-				<p>Enter your secret phrase to restore the wallet.</p>
+				<h3>{t('Import an account with a seed phrase')}</h3>
+				<p>{t('Enter your secret phrase to restore the wallet.')}</p>
 				</div>
 				<Container>
 				<form onSubmit={handleSubmit(onImportSubmit)}>
@@ -72,7 +76,7 @@ export default (): ReactElement => {
 						ref={register({
 							validate: seed => bip39.validateMnemonic(seed),
 						})}
-						error={errors.seed ? "Please, insert valid bip39 seed phrase" : ""}
+						error={errors.seed ? t('Please, insert valid bip39 seed phrase') : ""}
 						label="Seed phrase" />
 					<Input
 						type="text"
@@ -81,13 +85,13 @@ export default (): ReactElement => {
 						label="Old users could use m/44'/60'/0'/0/0" />
 					<Input
 						name="password"
-						label="Password local browser encryption"
+						label={t('Password local browser encryption')}
 						type="password"
 						ref={register({
 							required: true,
 							minLength: 8,
 						})}
-						error={errors.password ? "Password min length is 8 characters" : ""} />
+						error={errors.password ? t('Password min length is 8 characters') : ""} />
 					<Button type="submit" text="Import" />
 				</form>
 				</Container>

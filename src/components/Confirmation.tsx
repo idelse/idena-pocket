@@ -3,6 +3,8 @@ import styled from "styled-components";
 import swal from 'sweetalert';
 import { createGlobalStyle } from 'styled-components';
 import { colors } from "../libs/helpers";
+import { useTranslation } from 'react-i18next';
+
 
 const GlobalStyle = createGlobalStyle`
 	.swal-button {
@@ -20,12 +22,16 @@ const Confirmation = styled.div`
 `;
 
 export default (props: any) => {
-	const text = props.text || "Are you sure you want to do this?";
+	const { t, i18n } = useTranslation();
+	const conftext = t('Confirm');
+	const canctext = t('Cancel');
+
+	const text = props.text || t('Are you sure you want to do this?');
 	const disabled = !!props.disabled;
 	const handleClick = async () => {
 		if (disabled) return;
 		const confirmed = await swal(text, {
-			buttons: ["Cancel", "Confirm"],
+			buttons: [canctext, conftext],
 		});
 		if (confirmed) props.children.props.onClick();
 	}
