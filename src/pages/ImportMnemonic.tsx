@@ -82,7 +82,7 @@ export default (): ReactElement => {
 						type="text"
 						name="derivationPath"
 						ref={register()}
-						label="Old users could use m/44'/60'/0'/0/0" />
+						label={t("Old users could use m/44'/60'/0'/0/0")} />
 					<Input
 						name="password"
 						label={t('Password local browser encryption')}

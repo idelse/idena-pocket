@@ -47,5 +47,6 @@
     "Clear browser storage and use another wallet": "Clear browser storage and use another wallet",
     "Logout": "Logout",
     "Profile": "Profile",
-    "Transactions": "Transactions"
+    "Transactions": "Transactions",
+    "Old users could use m/44'/60'/0'/0/0": "Old users could use m/44'/60'/0'/0/0"
 }

@@ -47,5 +47,6 @@
     "Clear browser storage and use another wallet": "ब्राउज़र स्टोरेज को क्लियर करें और दूसरे वॉलेट का इस्तेमाल करें",
     "Logout": "लॉग आउट",
     "Profile": "प्रोफ़ाइल",
-    "Transactions": "लेन-देन"
+    "Transactions": "लेन-देन",
+    "Old users could use m/44'/60'/0'/0/0": "Old users could use m/44'/60'/0'/0/0"
 }
