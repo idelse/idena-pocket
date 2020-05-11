@@ -45,5 +45,7 @@
     "Copy address": "Copy address",
     "Reset wallet": "Reset wallet",
     "Clear browser storage and use another wallet": "Clear browser storage and use another wallet",
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "Profile": "Profile",
+    "Transactions": "Transactions"
 }

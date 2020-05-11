@@ -45,5 +45,7 @@
     "Copy address": "कॉपी पता",
     "Reset wallet": "वॉलेट को रीसेट करें",
     "Clear browser storage and use another wallet": "ब्राउज़र स्टोरेज को क्लियर करें और दूसरे वॉलेट का इस्तेमाल करें",
-    "Logout": "लॉग आउट"
+    "Logout": "लॉग आउट",
+    "Profile": "प्रोफ़ाइल",
+    "Transactions": "लेन-देन"
 }

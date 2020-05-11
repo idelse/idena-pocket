@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "export NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --open",
-		"build": "webpack"
+		"build": "webpack",
+		"i18-scanner": "i18next-scanner src/**/*.{js,jsx,ts,tsx,html}"
 	},
 	"dependencies": {
 		"bip39": "^3.0.2",
