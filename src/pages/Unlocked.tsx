@@ -9,6 +9,8 @@ import { colors, formatNumber, useInterval } from "../libs/helpers";
 import { Link } from "react-router-dom";
 import { getTransactions, getBalance, getPrice } from "../actions";
 import config from "../config";
+import { useTranslation } from 'react-i18next';
+
 
 const Unlocked = styled.div`
 	.balance {
@@ -86,6 +88,7 @@ const Unlocked = styled.div`
 `;
 
 export default (props): ReactElement => {
+	const { t, i18n } = useTranslation();
 
 	const dispatch = useDispatch();
 

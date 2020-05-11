@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { colors } from "../libs/helpers";
+import { useTranslation } from 'react-i18next';
 
 
 const Or = styled.div`
@@ -34,9 +35,10 @@ const Or = styled.div`
 `;
 
 export default (props) => {
+const { t, i18n } = useTranslation();
 	return (
 		<Or>
-			<span className="greyback"><p className="description">Or</p></span><span className="separator"></span>
+			<span className="greyback"><p className="description">{t('Or')}</p></span><span className="separator"></span>
 		</Or>
 	);
 };

@@ -18,6 +18,18 @@ Run
 npm run dev
 ```
 
+### 🗺️ How to update translation files post development
+Run
+```
+./node_modules/.bin/i18next-scanner src/**/*.{js,jsx,ts,tsx,html}
+```
+to extract the translations. They will be appended under the files at 
+```
+public/locales/{{lng}}/translation.json
+```
+Keys to be translated will have the value ```__STRING_NOT_TRANSLATED__.```
+
+
 ### 🌐 Useful Links 
 - [idena-js documentation](https://www.idena.dev/idena-js/quick-start)
 - [idena-rpc documentation](https://github.com/idena-dev/idena-rpc)

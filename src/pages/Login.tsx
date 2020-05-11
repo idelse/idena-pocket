@@ -15,6 +15,7 @@ import { AES, enc } from "crypto-js";
 import { push } from "connected-react-router";
 import { reset } from "../actions";
 import config from "../config";
+import { useTranslation } from 'react-i18next';
 
 
 const Login = styled.div`
@@ -49,6 +50,7 @@ const Login = styled.div`
 
 export default () => {
 
+	const { t, i18n } = useTranslation();
 	const { register, handleSubmit, errors } = useForm();
 	const dispatch = useDispatch();
 
@@ -83,14 +85,14 @@ export default () => {
 		<Wrap>
 			<Login>
 				<Logo width={100} />
-				<h1 className="title">idena-pocket</h1>
-				<p className="description extrapadding">web-wallet for Idena</p>
+				<h1 className="title">{t('idena-pocket')}</h1>
+				<p className="description extrapadding">{t('web-wallet for Idena')}</p>
 
 				<Container>
-				{!storage.encryptedSeed && <Button to="import-mnemonic" text="Import mnemonic" icon="arrow-right" />}
+				{!storage.encryptedSeed && <Button to="import-mnemonic" text={t('Import mnemonic')} icon="arrow-right" />}
 				{!storage.encryptedSeed && <Or />}
 
-				{!storage.encryptedSeed && <Button to="create-wallet" text="Create wallet" icon="arrow-right" />}
+				{!storage.encryptedSeed && <Button to="create-wallet" text={t('Create wallet')} icon="arrow-right" />}
 				{storage.encryptedSeed && <form onSubmit={handleSubmit(onLogin)}>
 					<Input
 						name="password"
@@ -106,16 +108,16 @@ export default () => {
 								}
 							},
 						})}
-						label="Enter your password"
-						error={errors.password ? "Wrong password. Please try again." : ""}
+						label={t('Enter your password')}
+						error={errors.password ? t('Wrong password. Please try again.') : ""}
 						type="password" />
-						<Button type="submit" text="Login" />
+						<Button type="submit" text={t('Login')} />
 				</form>}
 					{storage.encryptedSeed && 
-					<Confirmation text="Are you sure you want to erase your wallet?">
+					<Confirmation text={t('Are you sure you want to erase your wallet?')}>
 						<p className="forget" onClick={resetWallet}>
 							<i className="fa fa-unlock-alt"/>
-							Use a different wallet
+							{t('Use a different wallet')}
 						</p>
 					</Confirmation>}
 				</Container>
