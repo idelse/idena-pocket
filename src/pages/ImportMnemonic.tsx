@@ -92,7 +92,7 @@ export default (): ReactElement => {
 							minLength: 8,
 						})}
 						error={errors.password ? t('Password min length is 8 characters') : ""} />
-					<Button type="submit" text="Import" />
+					<Button type="submit" text={t("Import")} />
 				</form>
 				</Container>
 			</ImportMnemonic>
