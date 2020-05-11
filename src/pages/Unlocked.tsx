@@ -138,7 +138,7 @@ export default (props): ReactElement => {
 					</li>)}
 				</ul>
 				{props.children}
-				<p className="donate">Consider supporting idena-pocket by donating to <strong>{config.donationAddress}</strong></p>
+				<p className="donate">{t("Consider supporting idena-pocket by donating to")} <strong>{config.donationAddress}</strong></p>
 			</Unlocked>
 		</Wrap>
 	);
