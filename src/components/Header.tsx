@@ -5,6 +5,7 @@ import Logo from "../components/Logo";
 import { formatAddress, colors } from "../libs/helpers";
 import { lock } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useTranslation } from 'react-i18next';
 
 const Header = styled.div`
 	display: flex;
@@ -35,6 +36,7 @@ const Header = styled.div`
 
 export default () => {
 	const dispatch = useDispatch();
+	const { t, i18n } = useTranslation();
 	const storage = useSelector((state: any) => ({
 		address: state.app.currentAddress,
 	}));
@@ -45,7 +47,7 @@ export default () => {
 			<Logo theme="light" width={50} />
 			<span className="logout" onClick={() => dispatch(lock())}>
 				<i className="fa fa-power-off"/>
-				Logout
+				{t('Logout')}
 			</span>
 		</Header>
 	);

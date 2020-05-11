@@ -8,6 +8,8 @@ import { reset, toast } from "../actions";
 import CopyToClipboard from "react-copy-to-clipboard";
 import Confirmation from "../components/Confirmation";
 import Button from "../components/Button";
+import { useTranslation } from 'react-i18next';
+
 
 const Profile = styled.div`
 	.forget, .forget > * {
@@ -115,6 +117,8 @@ const Profile = styled.div`
 
 export default (): ReactElement => {
 
+	const { t, i18n } = useTranslation();
+
 	const dispatch = useDispatch();
 	
 	const resetWallet = () => {
@@ -149,23 +153,23 @@ export default (): ReactElement => {
 					</div>
 					<div className="clearfix"></div>
 				</div>
-				<p className="desc desc-center">Your Full Address</p>
+				<p className="desc desc-center">{t('Your Full Address')}</p>
 				<p className="desc desc-center desc--addr">{storage.currentAddress.toLowerCase()}</p>
 				
 				<div className="copyButton">
 					<CopyToClipboard text={storage.currentAddress}>
-						<Button onClick={onAddressCopied} icon="copy" theme="blue" text="Copy address" />
+						<Button onClick={onAddressCopied} icon="copy" theme="blue" text={t('Copy address')} />
 					</CopyToClipboard>
 				</div>
 				
 				<div className="line"></div>
-				<Confirmation text="Are you sure you want to erase your wallet?">
+				<Confirmation text={t('Are you sure you want to erase your wallet?')}>
 					<p className="forget" onClick={resetWallet}>
 						<i className="fa fa-undo"/>
-						Reset wallet
+						{t('Reset wallet')}
 					</p>
 				</Confirmation>
-				<p className="desc">Clear browser storage and use another wallet</p>
+				<p className="desc">{t('Clear browser storage and use another wallet')}</p>
 			</Container>
 		</Profile>
 	);

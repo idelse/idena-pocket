@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { colors } from "../libs/helpers";
 import Button from "../components/Button";
 import { updatedSeed } from "../actions";
+import { useTranslation } from 'react-i18next';
+
 
 const ShowCreatedSeed = styled.div`
 	p {
@@ -78,6 +80,8 @@ const ShowCreatedSeed = styled.div`
 `;
 
 export default (): ReactElement => {
+	const { t, i18n } = useTranslation();
+
 	const dispatch = useDispatch();
 
 	const [show, setShow] = useState(false);
@@ -98,19 +102,19 @@ export default (): ReactElement => {
 			<ShowCreatedSeed>
 				<Progress wide="66"/>
 				<div className="textcontain">
-				<h3>Secret seed phrase</h3>
-				<p className="extramargin">Your secret backup phrase makes it easy to backup and restore your account.</p>
+				<h3>{t('Secret seed phrase')}</h3>
+				<p className="extramargin">{t('Your secret backup phrase makes it easy to backup and restore your account.')}</p>
 				</div>
-				<p><strong>ATTENTION:</strong> Never tell anyone this backup phrase. Anyone with this phrase can steal your DNA forever.</p>
-				<p className="extramargin">Please write your seed words below and store them in a secure place. These can be used to restore your wallet.</p>
+				<p><strong>{t('ATTENTION:')}</strong> {t('Never tell anyone this backup phrase. Anyone with this phrase can steal your DNA forever.')}</p>
+				<p className="extramargin">{t('Please write your seed words below and store them in a secure place. These can be used to restore your wallet.')}</p>
 				<Container>
 				<div className={`seed ${show ? 'seed--showed' : ''}`}>
 					<div onClick={() => setShow(true)} className="seed__click">
-						Click here to show seed phrase
+						{t('Click here to show seed phrase')}
 					</div>
 					<span className="seed__text">{storage.seed.join('  ')}</span>
 				</div>
-				<Button disabled={!show} to="confirm-seed" text="Next" icon="arrow-right"/>
+				<Button disabled={!show} to="confirm-seed" text={t('Next')} icon="arrow-right"/>
 				</Container>
 			</ShowCreatedSeed>
 		</Wrap>

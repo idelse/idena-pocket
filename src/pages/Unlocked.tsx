@@ -9,6 +9,8 @@ import { colors, formatNumber, useInterval } from "../libs/helpers";
 import { Link } from "react-router-dom";
 import { getTransactions, getBalance, getPrice } from "../actions";
 import config from "../config";
+import { useTranslation } from 'react-i18next';
+
 
 const Unlocked = styled.div`
 	.balance {
@@ -86,6 +88,7 @@ const Unlocked = styled.div`
 `;
 
 export default (props): ReactElement => {
+	const { t, i18n } = useTranslation();
 
 	const dispatch = useDispatch();
 
@@ -131,11 +134,11 @@ export default (props): ReactElement => {
 				</div>
 				<ul className="menu">{config.menu.map(({ path, name }, key) => 
 					<li key={key} className={`menu__li ${storage.pathname === path ? 'menu__li--active' : ''}`}>
-						<Link to={path}>{name}</Link>
+						<Link to={path}>{t(name)}</Link>
 					</li>)}
 				</ul>
 				{props.children}
-				<p className="donate">Consider supporting idena-pocket by donating to <strong>{config.donationAddress}</strong></p>
+				<p className="donate">{t("Consider supporting idena-pocket by donating to")} <strong>{config.donationAddress}</strong></p>
 			</Unlocked>
 		</Wrap>
 	);

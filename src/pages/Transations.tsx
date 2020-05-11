@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { colors, formatAddress, hexDecode, formatNumber } from "../libs/helpers";
 import styled from "styled-components";
 import Container from "../components/Container";
+import { useTranslation } from 'react-i18next';
+
 
 const Transactions = styled.div`
 	.transactions {
@@ -146,6 +148,7 @@ const Transactions = styled.div`
 `;
 
 export default (): ReactElement => {
+	const { t, i18n } = useTranslation();
 
 	const storage = useSelector((state: any) => {
         return {
@@ -159,7 +162,7 @@ export default (): ReactElement => {
 			<Transactions>
 				{(storage.transactions.length === 0) && <>
 					<h1 className="empty">&#128546;</h1>
-					<p className="desc">No transactions</p> 
+					<p className="desc">{t('No transactions')}</p> 
 				</>}
 				<ul className="transactions">
 					{(storage.transactions||[]).map((tx, key) => (

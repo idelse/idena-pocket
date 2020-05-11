@@ -9,12 +9,15 @@ import Container from "../components/Container";
 import Input from "../components/Input";
 import { sendTx } from "../actions";
 import Confirmation from "../components/Confirmation";
+import { useTranslation } from 'react-i18next';
+
 
 const SendTx = styled.div`
 
 `;
 
 export default (): ReactElement => {
+	const { t, i18n } = useTranslation();
 
 	const dispatch = useDispatch();
 
@@ -45,16 +48,16 @@ export default (): ReactElement => {
 			<form>
 				<Input
 					name="destination"
-					label="Destination address *"
+					label={t('Destination address *')}
 					type="text"
-					placeholder="enter destination address here"
+					placeholder={t('enter destination address here')}
 					ref={register({
 						validate: destination => validateInputAddresses(destination),
 					})}
-					error={errors.destination ? "Insert valid destination address" : ""} />
+					error={errors.destination ? t('Insert valid destination address') : ""} />
 				<Input
 					name="amount"
-					label="Amount *"
+					label={t('Amount *')}
 					type="text"
 					placeholder="0.1"
 					ref={register({
@@ -63,15 +66,15 @@ export default (): ReactElement => {
 							return amount > 0 && amount <= storage.balance;
 						},
 					})}
-					error={errors.amount ? `Insert valid amount.` : ""} />
+					error={errors.amount ? t('Insert valid amount.') : ""} />
 				<Input
 					name="message"
-					label="Custom message (e.g. receipt id)"
+					label={t('Custom message e.g. receipt id')}
 					type="textarea"
 					ref={register()}
-					error={errors.message ? "Insert valid message" : ""} />
+					error={errors.message ? t('Insert valid message') : ""} />
 				<Confirmation disabled={!formState.isValid || storage.sending} text={`I'm sending ${watchAllFields.amount} DNA to ${watchAllFields.destination}`}>
-					<Button disabled={!formState.isValid || storage.sending} onClick={handleSubmit(onTransactionSent)} text="Send" />
+					<Button disabled={!formState.isValid || storage.sending} onClick={handleSubmit(onTransactionSent)} text={t('Send')} />
 				</Confirmation>
 			</form>
 			</Container>

@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { store, history } from "./store";
+import "./i18n";
 import Login from "./pages/Login";
 import { createGlobalStyle } from 'styled-components';
 import { colors } from "./libs/helpers";
