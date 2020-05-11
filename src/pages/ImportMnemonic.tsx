@@ -77,7 +77,7 @@ export default (): ReactElement => {
 							validate: seed => bip39.validateMnemonic(seed),
 						})}
 						error={errors.seed ? t('Please, insert valid bip39 seed phrase') : ""}
-						label="Seed phrase" />
+						label={t("Seed phrase")} />
 					<Input
 						type="text"
 						name="derivationPath"
