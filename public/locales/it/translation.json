@@ -49,6 +49,7 @@
     "Profile": "Profilo",
     "Transactions": "Transazioni",
     "Old users could use m/44'/60'/0'/0/0": "I vecchi utenti potrebbero usare m/44'/60'/0'/0/0",
-	"Import": "Importa",
-	"Seed phrase": "Frase segreta"
+    "Import": "Importa",
+    "Seed phrase": "Frase segreta",
+    "Address copied": "Indirizzo copiato"
 }

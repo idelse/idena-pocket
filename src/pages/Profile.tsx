@@ -127,7 +127,7 @@ export default (): ReactElement => {
 
 	const onAddressCopied = () => {
 		dispatch(toast({
-			message: "Address copied",
+			message: t("Address copied"),
 			type: "info",
 			autoclose: true,
 		}));
