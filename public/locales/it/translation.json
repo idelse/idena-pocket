@@ -13,7 +13,7 @@
     "Password min length is 8 characters": "La password deve avere almeno 8 caratteri",
     "Confirm you secret seed": "Conferma la tua frase segreta",
     "Please re-enter your seed words and passphrase in full from the previous step. This is to confirm that you have correctly recorded these down.": "Inserisci nuovamente la tua frase segreta e la tua password. Questo serve ad essere certi che siano stati memorizzati correttamente.",
-    "Or": "Oppure",
+    "Or": "O",
     "Import mnemonic": "Import frase segreta",
     "Create wallet": "Crea wallet",
     "Next": "Avanti",
