@@ -134,11 +134,11 @@ export default (props): ReactElement => {
 				</div>
 				<ul className="menu">{config.menu.map(({ path, name }, key) => 
 					<li key={key} className={`menu__li ${storage.pathname === path ? 'menu__li--active' : ''}`}>
-						<Link to={path}>{name}</Link>
+						<Link to={path}>{t(name)}</Link>
 					</li>)}
 				</ul>
 				{props.children}
-				<p className="donate">Consider supporting idena-pocket by donating to <strong>{config.donationAddress}</strong></p>
+				<p className="donate">{t("Consider supporting idena-pocket by donating to")} <strong>{config.donationAddress}</strong></p>
 			</Unlocked>
 		</Wrap>
 	);
