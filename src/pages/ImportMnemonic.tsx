@@ -77,12 +77,12 @@ export default (): ReactElement => {
 							validate: seed => bip39.validateMnemonic(seed),
 						})}
 						error={errors.seed ? t('Please, insert valid bip39 seed phrase') : ""}
-						label="Seed phrase" />
+						label={t("Seed phrase")} />
 					<Input
 						type="text"
 						name="derivationPath"
 						ref={register()}
-						label="Old users could use m/44'/60'/0'/0/0" />
+						label={t("Old users could use m/44'/60'/0'/0/0")} />
 					<Input
 						name="password"
 						label={t('Password local browser encryption')}
@@ -92,7 +92,7 @@ export default (): ReactElement => {
 							minLength: 8,
 						})}
 						error={errors.password ? t('Password min length is 8 characters') : ""} />
-					<Button type="submit" text="Import" />
+					<Button type="submit" text={t("Import")} />
 				</form>
 				</Container>
 			</ImportMnemonic>
