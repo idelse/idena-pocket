@@ -21,7 +21,7 @@ npm run dev
 ### 🗺️ How to update translation files post development
 Run
 ```
-./node_modules/.bin/i18next-scanner src/**/*.{js,jsx,ts,tsx,html}
+npm run i18-scanner
 ```
 to extract the translations. They will be appended under the files at 
 ```
