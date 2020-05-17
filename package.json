@@ -3,9 +3,10 @@
 	"name": "idena-pocket",
 	"private": true,
 	"scripts": {
-		"dev": "export NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --open",
+		"dev": "export NODE_ENV=development && webpack-dev-server --https --host 0.0.0.0 --open",
 		"build": "webpack",
-		"i18-scanner": "i18next-scanner src/**/*.{js,jsx,ts,tsx,html}"
+		"i18-scanner": "i18next-scanner src/**/*.{js,jsx,ts,tsx,html}",
+		"format": "prettier-standard --format"
 	},
 	"dependencies": {
 		"bip39": "^3.0.2",
@@ -16,7 +17,7 @@
 		"i18next": "^19.4.4",
 		"i18next-browser-languagedetector": "^4.1.1",
 		"i18next-scanner": "^2.11.0",
-		"idena-js": "^1.0.14",
+		"idena-js": "^1.0.18",
 		"react": "^16.13.1",
 		"react-copy-to-clipboard": "^5.0.2",
 		"react-dom": "^16.13.1",
@@ -40,6 +41,8 @@
 		"css-loader": "^3.4.2",
 		"file-loader": "^6.0.0",
 		"html-webpack-plugin": "^3.2.0",
+		"pre-commit": "^1.2.2",
+		"prettier-standard": "^16.3.0",
 		"react-hot-loader": "^4.12.20",
 		"ts-loader": "^6.2.1",
 		"typescript": "^3.8.3",

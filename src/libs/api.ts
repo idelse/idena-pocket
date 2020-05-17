@@ -40,7 +40,10 @@ const getTransactions = async (address) => {
 
 const getBalance = async (address) => idena.getBalanceByAddress(address)
 	.then((r: any) => parseFloat(r.balance))
-	.catch(() => 0);
+	.catch((error) => {
+		console.error({ error })
+		return 0
+	});
 
 const getPrice = async () => fetch(config.price)
 	.then(res => res.json())
@@ -48,7 +51,8 @@ const getPrice = async () => fetch(config.price)
 	.catch(() => 0);
 
 const sendTransaction = async (privateKey, { amount, to, payload }) => {
-	const provider = new LocalKeyStore(privateKey);
+	try {
+		const provider = new LocalKeyStore(privateKey);
 		const idena = new Idena(provider);
 		const operation = await idena.transfer({ amount, to, payload });
 		await operation.confirmation();
@@ -59,7 +63,13 @@ const sendTransaction = async (privateKey, { amount, to, payload }) => {
 			timestamp: formatDate(new Date()),
 			hash: operation.hash,
 		};
+	} catch(e) {
+		console.error(">", e);
+		throw e;
+	}
 }
+
+
 
 export default {
 	getTransactions,
