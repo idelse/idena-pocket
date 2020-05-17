@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useEffect } from "react";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "../actions";
-import { colors } from "../libs/helpers";
+import * as React from 'react'
+import { useEffect } from 'react'
+import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from '../actions'
+import { colors } from '../libs/helpers'
 
 const Toast = styled.div`
 	.toast {
@@ -30,35 +30,37 @@ const Toast = styled.div`
 		color: #fff;
 		background: ${colors.darkRed};
 	}
-`;
+`
 
-let timeouts = [];
+let timeouts = []
 
 export default () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const storage = useSelector((state: any) => ({
 		address: state.app.currentAddress,
 		message: state.app.toast.message,
 		type: state.app.toast.type,
-		autoclose: state.app.toast.autoclose,
-	}));
+		autoclose: state.app.toast.autoclose
+	}))
 
 	useEffect(() => {
-		timeouts.forEach(t => clearTimeout(t));
+		timeouts.forEach(t => clearTimeout(t))
 		if (storage.autoclose)
 			timeouts = [
 				...timeouts,
 				setTimeout(() => {
-					dispatch(toast({ type: "", message: "" }))
+					dispatch(toast({ type: '', message: '' }))
 				}, 5000)
-			];
-	}, [storage.message]);
+			]
+	}, [storage.message])
 
 	return (
 		<Toast>
-			{storage.message && <div className={`toast toast--${storage.type || "info"}`}>
-				{storage.message}
-			</div>}
+			{storage.message && (
+				<div className={`toast toast--${storage.type || 'info'}`}>
+					{storage.message}
+				</div>
+			)}
 		</Toast>
-	);
-};
+	)
+}

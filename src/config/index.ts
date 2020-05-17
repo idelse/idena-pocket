@@ -1,14 +1,14 @@
-import common from "./common";
-import development from "./development";
-import production from "./production";
+import common from './common'
+import development from './development'
+import production from './production'
 
 const configs: any = {
 	common,
 	development,
-	production,
-};
+	production
+}
 
 export default {
 	...common,
-	...configs[process.env.NODE_ENV || "development"],
-};
+	...configs[process.env.NODE_ENV || 'development']
+}

@@ -1,20 +1,20 @@
 {
-    "name": "idena-pocket",
-    "short_name": "idena-pocket",
-    "icons": [
-        {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
+	"name": "idena-pocket",
+	"short_name": "idena-pocket",
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
 	],
 	"start_url": "index.html",
-    "theme_color": "#f5f6f7",
-    "background_color": "#f5f6f7",
-    "display": "standalone"
+	"theme_color": "#f5f6f7",
+	"background_color": "#f5f6f7",
+	"display": "standalone"
 }
