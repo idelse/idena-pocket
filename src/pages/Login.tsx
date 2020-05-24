@@ -16,6 +16,7 @@ import { push } from 'connected-react-router'
 import { reset } from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
+import ConnectLedgerButton from "../components/ConnectLedgerButton";
 
 const Login = styled.div`
 	display: flex;
@@ -48,7 +49,7 @@ const Login = styled.div`
 `
 
 export default () => {
-	const { t, i18n } = useTranslation()
+	const { t } = useTranslation()
 	const { register, handleSubmit, errors } = useForm()
 	const dispatch = useDispatch()
 
@@ -97,13 +98,16 @@ export default () => {
 						/>
 					)}
 					{!storage.encryptedSeed && <Or />}
-
 					{!storage.encryptedSeed && (
 						<Button
 							to='create-wallet'
 							text={t('Create wallet')}
 							icon='arrow-right'
 						/>
+					)}
+					{!storage.encryptedSeed && <Or />}
+					{!storage.encryptedSeed && (
+						<ConnectLedgerButton />
 					)}
 					{storage.encryptedSeed && (
 						<form onSubmit={handleSubmit(onLogin)}>
@@ -135,6 +139,8 @@ export default () => {
 								type='password'
 							/>
 							<Button type='submit' text={t('Login')} />
+							<Or />
+							<ConnectLedgerButton />
 						</form>
 					)}
 					{storage.encryptedSeed && (

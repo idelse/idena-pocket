@@ -39,6 +39,7 @@ export default () => {
 	const dispatch = useDispatch()
 	const { t, i18n } = useTranslation()
 	const storage = useSelector((state: any) => ({
+		idena: state.app.idena,
 		address: state.app.currentAddress
 	}))
 
@@ -46,7 +47,7 @@ export default () => {
 		<Header>
 			<div className='darkbg'></div>
 			<Logo theme='light' width={50} />
-			<span className='logout' onClick={() => dispatch(lock())}>
+			<span className='logout' onClick={() => dispatch(lock(storage.idena))}>
 				<i className='fa fa-power-off' />
 				{t('Logout')}
 			</span>

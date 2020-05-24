@@ -1,8 +1,8 @@
-import { Idena, LocalKeyStore } from 'idena-js'
+import { Idena, ProviderLocalKeyStore } from 'idena-js'
 import config from '../config'
 import { formatDate } from './helpers'
 
-const provider = new LocalKeyStore()
+const provider = new ProviderLocalKeyStore()
 const idena = new Idena(provider)
 
 const getTransactions = async address => {
@@ -58,10 +58,8 @@ const getPrice = async () =>
 		.then((res: any) => res.price)
 		.catch(() => 0)
 
-const sendTransaction = async (privateKey, { amount, to, payload }) => {
+const sendTransaction = async (idena, { amount, to, payload }) => {
 	try {
-		const provider = new LocalKeyStore(privateKey)
-		const idena = new Idena(provider)
 		const operation = await idena.transfer({ amount, to, payload })
 		await operation.confirmation()
 		return {

@@ -184,7 +184,7 @@ export default (): ReactElement => {
 								href={
 									tx.pending
 										? '#/unlocked/transactions'
-										: `https://scan.idena.io/tx?tx=${tx.hash}`
+										: `https://scan.idena.io/transaction/${tx.hash}`
 								}
 							>
 								<div className='thumbnail'>

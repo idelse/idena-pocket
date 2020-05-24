@@ -2,6 +2,7 @@ import AES from 'crypto-js/aes'
 import { formatDate } from '../libs/helpers'
 import api from '../libs/api'
 import config from '../config'
+import {Idena, ProviderLocalKeyStore, ProviderLedger } from "idena-js";
 const HDWallet = require('ethereum-hdwallet')
 const bip39 = require('bip39')
 
@@ -63,20 +64,24 @@ export const unlock = (seed, derivationPath): any => ({
 			.derive(derivationPath)
 			.getPrivateKey()
 			.toString('hex')
+		const provider = new ProviderLocalKeyStore(privateKey)
+		const idena = new Idena(provider)
 		return {
 			address,
-			privateKey
+			idena
 		}
 	})()
 })
 
 export const LOCK = 'LOCK'
-export const lock = (): any => ({
-	type: LOCK
+export const lock = (idena): any => ({
+	type: LOCK,
+	result: idena.close()
 })
 
+
 export const SEND_TX = 'SEND_TX'
-export const sendTx = (privateKey, { amount, to, payload }): any => ({
+export const sendTx = (idena, { amount, to, payload }): any => ({
 	type: SEND_TX,
 	request: {
 		to,
@@ -84,7 +89,7 @@ export const sendTx = (privateKey, { amount, to, payload }): any => ({
 		payload,
 		timestamp: formatDate(new Date())
 	},
-	result: api.sendTransaction(privateKey, { amount, to, payload })
+	result: api.sendTransaction(idena, { amount, to, payload })
 })
 
 export const TOAST = 'TOAST'
@@ -134,5 +139,16 @@ export const getPrice = (): any => ({
 	result: (async () => {
 		const price = await api.getPrice()
 		return { price }
+	})()
+})
+
+export const CONNECT_LEDGER = 'CONNECT_LEDGER'
+export const connectLedger = (): any => ({
+	type: CONNECT_LEDGER,
+	result: (async () => {
+		const provider = new ProviderLedger()
+		const address = await provider.getAddress()
+		const idena = new Idena(provider)
+		return { idena, address }
 	})()
 })

@@ -20,7 +20,7 @@ export default (): ReactElement => {
 
 	const storage = useSelector((state: any) => {
 		return {
-			privateKey: state.app.privateKey,
+			idena: state.app.idena,
 			balance: state.app.balance,
 			currentAddress: state.app.currentAddress,
 			transactions: state.app.transactions,
@@ -38,7 +38,7 @@ export default (): ReactElement => {
 		const payload =
 			data.message !== '' ? '0x' + hexEncode(data.message) : '0x'
 		let amount = parseAmount(data.amount)
-		dispatch(sendTx(storage.privateKey, { amount, to, payload }))
+		dispatch(sendTx(storage.idena, { amount, to, payload }))
 	}
 
 	return (

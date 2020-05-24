@@ -10,14 +10,14 @@ import {
 	GET_TRANSACTIONS,
 	RETRIEVE_ENCRYPTED_SEED,
 	GET_BALANCE,
-	GET_PRICE
+	GET_PRICE, CONNECT_LEDGER
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
 
 export const defaultState: any = {
 	encryptedSeed: '',
 	currentAddress: '',
-	privateKey: '',
+	idena: null,
 	unlocked: false,
 	balance: 0,
 	transactions: [],
@@ -73,7 +73,15 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					currentAddress: action.result.address,
-					privateKey: action.result.privateKey,
+					idena: action.result.idena,
+					unlocked: true,
+					toast: {}
+				}
+			case CONNECT_LEDGER:
+				return {
+					...state,
+					currentAddress: action.result.address,
+					idena: action.result.idena,
 					unlocked: true,
 					toast: {}
 				}

@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
 const Confirmation = styled.div``
 
 export default (props: any) => {
-	const { t, i18n } = useTranslation()
+	const { t } = useTranslation()
 	const conftext = t('Confirm')
 	const canctext = t('Cancel')
 
