@@ -2,7 +2,7 @@ import AES from 'crypto-js/aes'
 import { formatDate } from '../libs/helpers'
 import api from '../libs/api'
 import config from '../config'
-import {Idena, ProviderLocalKeyStore, ProviderLedger } from "idena-js";
+import { Idena, ProviderLocalKeyStore, ProviderLedger } from 'idena-js'
 const HDWallet = require('ethereum-hdwallet')
 const bip39 = require('bip39')
 
@@ -78,7 +78,6 @@ export const lock = (idena): any => ({
 	type: LOCK,
 	result: idena.close()
 })
-
 
 export const SEND_TX = 'SEND_TX'
 export const sendTx = (idena, { amount, to, payload }): any => ({

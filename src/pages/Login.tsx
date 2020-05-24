@@ -16,7 +16,7 @@ import { push } from 'connected-react-router'
 import { reset } from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
-import ConnectLedgerButton from "../components/ConnectLedgerButton";
+import ConnectLedgerButton from '../components/ConnectLedgerButton'
 
 const Login = styled.div`
 	display: flex;
@@ -106,9 +106,7 @@ export default () => {
 						/>
 					)}
 					{!storage.encryptedSeed && <Or />}
-					{!storage.encryptedSeed && (
-						<ConnectLedgerButton />
-					)}
+					{!storage.encryptedSeed && <ConnectLedgerButton />}
 					{storage.encryptedSeed && (
 						<form onSubmit={handleSubmit(onLogin)}>
 							<Input

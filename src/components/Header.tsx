@@ -47,7 +47,10 @@ export default () => {
 		<Header>
 			<div className='darkbg'></div>
 			<Logo theme='light' width={50} />
-			<span className='logout' onClick={() => dispatch(lock(storage.idena))}>
+			<span
+				className='logout'
+				onClick={() => dispatch(lock(storage.idena))}
+			>
 				<i className='fa fa-power-off' />
 				{t('Logout')}
 			</span>

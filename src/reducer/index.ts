@@ -10,7 +10,8 @@ import {
 	GET_TRANSACTIONS,
 	RETRIEVE_ENCRYPTED_SEED,
 	GET_BALANCE,
-	GET_PRICE, CONNECT_LEDGER
+	GET_PRICE,
+	CONNECT_LEDGER
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
 
