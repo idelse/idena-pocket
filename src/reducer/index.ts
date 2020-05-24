@@ -11,28 +11,29 @@ import {
 	RETRIEVE_ENCRYPTED_SEED,
 	GET_BALANCE,
 	GET_PRICE,
-} from "../actions";
-import { formatNumber } from "../libs/helpers";
+	CONNECT_LEDGER
+} from '../actions'
+import { formatNumber } from '../libs/helpers'
 
 export const defaultState: any = {
-	encryptedSeed: "",
-	currentAddress: "",
-	privateKey: "",
+	encryptedSeed: '',
+	currentAddress: '',
+	idena: null,
 	unlocked: false,
 	balance: 0,
 	transactions: [],
 	price: 0,
 	sending: false,
 	toast: {
-		message: "",
-		type: "",
-		autoclose: false,
+		message: '',
+		type: '',
+		autoclose: false
 	},
 	creationWallet: {
-		password: "",
-		seed: [],
-	},
-};
+		password: '',
+		seed: []
+	}
+}
 
 export default (defaultState: any) => {
 	return (state: any = defaultState, action: any): any => {
@@ -42,86 +43,105 @@ export default (defaultState: any) => {
 					...state,
 					creationWallet: {
 						...state.creationWallet,
-						password: action.result,
+						password: action.result
 					}
-				};
+				}
 			case UPDATE_SEED:
 				return {
 					...state,
 					creationWallet: {
 						...state.creationWallet,
-						seed: action.result,
+						seed: action.result
 					}
-				};
+				}
 			case UPDATE_ENCRYPTED_SEED:
 			case RETRIEVE_ENCRYPTED_SEED:
 				return {
 					...state,
 					encryptedSeed: action.result.encryptedSeed,
-					derivationPath: action.result.derivationPath,
+					derivationPath: action.result.derivationPath
 				}
-			case UNLOCK+'_REQUESTED':
+			case UNLOCK + '_REQUESTED':
 				return {
 					...state,
 					toast: {
-						type: "info",
-						message: "Unlocking account",
-						autoclose: false,
+						type: 'info',
+						message: 'Unlocking account',
+						autoclose: false
 					}
 				}
 			case UNLOCK:
 				return {
 					...state,
 					currentAddress: action.result.address,
-					privateKey: action.result.privateKey,
+					idena: action.result.idena,
 					unlocked: true,
-					toast: {},
+					toast: {}
 				}
-			case GET_TRANSACTIONS+'_REQUESTED':
+			case CONNECT_LEDGER:
+				return {
+					...state,
+					currentAddress: action.result.address,
+					idena: action.result.idena,
+					unlocked: true,
+					toast: {}
+				}
+			case GET_TRANSACTIONS + '_REQUESTED':
 				return {
 					...state,
 					toast: action.showToast
 						? {
-							type: "info",
-							message: "Refreshing",
-							autoclose: true,
-						}
-						: state.toast,
+								type: 'info',
+								message: 'Refreshing',
+								autoclose: true
+						  }
+						: state.toast
 				}
 			case GET_TRANSACTIONS:
 				return {
 					...state,
 					transactions: (() => {
-						const previousTransactions = state.transactions;
-						const nextTransactions = action.result.transactions;
-						const newTrasactions = nextTransactions.filter(currentNewTransaction => {
-							const isNew = !previousTransactions
-								.some(previousCurrentTransaction => previousCurrentTransaction.hash === currentNewTransaction.hash);
-							return isNew;
-						});
+						const previousTransactions = state.transactions
+						const nextTransactions = action.result.transactions
+						const newTrasactions = nextTransactions.filter(
+							currentNewTransaction => {
+								const isNew = !previousTransactions.some(
+									previousCurrentTransaction =>
+										previousCurrentTransaction.hash ===
+										currentNewTransaction.hash
+								)
+								return isNew
+							}
+						)
 						return [
 							...newTrasactions,
-							...previousTransactions,
-						].sort((a, b) => b.timestamp - a.timestamp);
+							...previousTransactions
+						].sort((a, b) => b.timestamp - a.timestamp)
 					})(),
-					currentAddress: action.result.address,
+					currentAddress: action.result.address
 				}
 			case GET_BALANCE:
 				return {
 					...state,
 					balance: action.result.balance,
-					toast: action.result.noToast && action.result.balance > state.balance ? {
-						type: "info",
-						message: `You received ${formatNumber(action.result.balance-state.balance)} DNA`,
-						autoclose: true,
-					} : state.toast,
+					toast:
+						action.result.noToast &&
+						action.result.balance > state.balance
+							? {
+									type: 'info',
+									message: `You received ${formatNumber(
+										action.result.balance - state.balance
+									)} DNA`,
+									autoclose: true
+							  }
+							: state.toast
 				}
 			case GET_PRICE:
 				return {
 					...state,
-					price: action.result.price,
+					price: action.result.price
 				}
-			case SEND_TX+'_REQUESTED':
+			case SEND_TX + '_REQUESTED':
 				return {
 					...state,
 					sending: true,
@@ -129,58 +149,64 @@ export default (defaultState: any) => {
 						{
 							from: state.currentAddress,
 							...action.request,
-							pending: true,
+							pending: true
 						},
-						...state.transactions,
+						...state.transactions
 					],
 					toast: {
-						type: "info",
-						message: "Sending transaction",
+						type: 'info',
+						message: 'Sending transaction'
 					}
 				}
 			case SEND_TX:
 				return {
 					...state,
 					sending: false,
-					balance: (action.result.to || "").toLowerCase() === state.currentAddress.toLowerCase() ? state.balance : state.balance-action.result.amount,
+					balance:
+						(action.result.to || '').toLowerCase() ===
+						state.currentAddress.toLowerCase()
+							? state.balance
+							: state.balance - action.result.amount,
 					transactions: [
 						{
 							from: state.currentAddress,
-							...action.result,
+							...action.result
 						},
-						...state.transactions.filter(tx => tx.pending !== true),
+						...state.transactions.filter(tx => tx.pending !== true)
 					],
 					toast: {
-						type: "success",
+						type: 'success',
 						message: `Transaction confirmed.`,
-						autoclose: true,
+						autoclose: true
 					}
 				}
-			case SEND_TX+'_CATCH':
+			case SEND_TX + '_CATCH':
 				return {
 					...state,
 					sending: false,
-					transactions: state.transactions.filter(tx => tx.pending === false),
+					transactions: state.transactions.filter(
+						tx => tx.pending === false
+					),
 					toast: {
-						type: "error",
-						message: "Transaction failed",
-						autoclose: true,
+						type: 'error',
+						message: 'Transaction failed',
+						autoclose: true
 					}
 				}
 			case LOCK:
 				return {
 					...state,
-					unlocked: false,
+					unlocked: false
 				}
 			case TOAST:
 				return {
 					...state,
-					toast: action.toast,
+					toast: action.toast
 				}
 			case RESET:
-				return defaultState;
+				return defaultState
 			default:
-				return state;
+				return state
 		}
-	};
-};
+	}
+}

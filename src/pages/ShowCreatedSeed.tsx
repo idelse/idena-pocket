@@ -1,19 +1,18 @@
-import * as React from "react";
-import { ReactElement, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Wrap from "../components/Wrap";
-import Container from "../components/Container";
-import Progress from "../components/Progress";
-import styled from "styled-components";
-import { colors } from "../libs/helpers";
-import Button from "../components/Button";
-import { updatedSeed } from "../actions";
-import { useTranslation } from 'react-i18next';
-
+import * as React from 'react'
+import { ReactElement, useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Wrap from '../components/Wrap'
+import Container from '../components/Container'
+import Progress from '../components/Progress'
+import styled from 'styled-components'
+import { colors } from '../libs/helpers'
+import Button from '../components/Button'
+import { updatedSeed } from '../actions'
+import { useTranslation } from 'react-i18next'
 
 const ShowCreatedSeed = styled.div`
 	p {
-		margin-bottom: .5em;
+		margin-bottom: 0.5em;
 	}
 	.seed {
 		background: ${colors.grey};
@@ -28,7 +27,7 @@ const ShowCreatedSeed = styled.div`
 	}
 	.seed__text {
 		color: transparent;
-		text-shadow: 0 0 5px rgba(0,0,0,0.5);
+		text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	}
 	.seed__click {
 		position: absolute;
@@ -39,7 +38,7 @@ const ShowCreatedSeed = styled.div`
 		color: ${colors.white};
 		display: flex;
 		height: 100%;
-		opacity: .7;
+		opacity: 0.7;
 		align-self: center;
 		text-align: center;
 		justify-content: center;
@@ -51,19 +50,20 @@ const ShowCreatedSeed = styled.div`
 	}
 	.seed--showed .seed__text {
 		color: ${colors.black};
-		text-shadow: none!important;
+		text-shadow: none !important;
 	}
 	.textcontain {
-	margin: auto;
-	text-align: center;
-    margin-bottom: 2em;
+		margin: auto;
+		text-align: center;
+		margin-bottom: 2em;
 	}
-	.textcontain p, p {
-	color: ${colors.darkGrey};
-	text-align: center;
+	.textcontain p,
+	p {
+		color: ${colors.darkGrey};
+		text-align: center;
 	}
 	.extramargin {
-	margin-bottom: 2em;
+		margin-bottom: 2em;
 	}
 	@media (min-width: 300px) {
 		width: 100%;
@@ -71,52 +71,75 @@ const ShowCreatedSeed = styled.div`
 	}
 	@media (min-width: 576px) {
 		width: 90%;
-	    margin-top: 4em;
+		margin-top: 4em;
 	}
 	@media (min-width: 768px) {
 		width: 85%;
-	    margin-top: 6em;
+		margin-top: 6em;
 	}
-`;
+`
 
 export default (): ReactElement => {
-	const { t, i18n } = useTranslation();
+	const { t, i18n } = useTranslation()
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState(false)
 
 	const storage = useSelector((state: any) => {
-        return {
+		return {
 			password: state.app.creationWallet.password,
-			seed: state.app.creationWallet.seed,
-        };
-    });
+			seed: state.app.creationWallet.seed
+		}
+	})
 
 	useEffect(() => {
 		dispatch(updatedSeed())
-	}, []);
+	}, [])
 
 	return (
 		<Wrap>
 			<ShowCreatedSeed>
-				<Progress wide="66"/>
-				<div className="textcontain">
-				<h3>{t('Secret seed phrase')}</h3>
-				<p className="extramargin">{t('Your secret backup phrase makes it easy to backup and restore your account.')}</p>
+				<Progress wide='66' />
+				<div className='textcontain'>
+					<h3>{t('Secret seed phrase')}</h3>
+					<p className='extramargin'>
+						{t(
+							'Your secret backup phrase makes it easy to backup and restore your account.'
+						)}
+					</p>
 				</div>
-				<p><strong>{t('ATTENTION:')}</strong> {t('Never tell anyone this backup phrase. Anyone with this phrase can steal your DNA forever.')}</p>
-				<p className="extramargin">{t('Please write your seed words below and store them in a secure place. These can be used to restore your wallet.')}</p>
+				<p>
+					<strong>{t('ATTENTION:')}</strong>{' '}
+					{t(
+						'Never tell anyone this backup phrase. Anyone with this phrase can steal your DNA forever.'
+					)}
+				</p>
+				<p className='extramargin'>
+					{t(
+						'Please write your seed words below and store them in a secure place. These can be used to restore your wallet.'
+					)}
+				</p>
 				<Container>
-				<div className={`seed ${show ? 'seed--showed' : ''}`}>
-					<div onClick={() => setShow(true)} className="seed__click">
-						{t('Click here to show seed phrase')}
+					<div className={`seed ${show ? 'seed--showed' : ''}`}>
+						<div
+							onClick={() => setShow(true)}
+							className='seed__click'
+						>
+							{t('Click here to show seed phrase')}
+						</div>
+						<span className='seed__text'>
+							{storage.seed.join('  ')}
+						</span>
 					</div>
-					<span className="seed__text">{storage.seed.join('  ')}</span>
-				</div>
-				<Button disabled={!show} to="confirm-seed" text={t('Next')} icon="arrow-right"/>
+					<Button
+						disabled={!show}
+						to='confirm-seed'
+						text={t('Next')}
+						icon='arrow-right'
+					/>
 				</Container>
 			</ShowCreatedSeed>
 		</Wrap>
-	);
-};
+	)
+}
