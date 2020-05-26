@@ -1,29 +1,30 @@
-import { Middleware } from "redux";
+import { Middleware } from 'redux'
 
-const asyncAction: Middleware = () => (next) => (action: any) => {
-	if (action.result && action.result.then !== undefined && action.result.catch !== undefined) {
+const asyncAction: Middleware = () => next => (action: any) => {
+	if (
+		action.result &&
+		action.result.then !== undefined &&
+		action.result.catch !== undefined
+	) {
 		action.result
 			.then((result: any) => {
 				next({
 					type: action.type,
-					result,
-				});
+					result
+				})
 			})
 			.catch((error: any) => {
 				next({
 					type: `${action.type}_CATCH`,
-					result: error,
-				});
-			});
-		const { type, result, ...rest } = action;
-		return next({ type: `${action.type}_REQUESTED`, ...rest });
+					result: error
+				})
+			})
+		const { type, result, ...rest } = action
+		return next({ type: `${action.type}_REQUESTED`, ...rest })
 	}
-	return next(action);
-};
+	return next(action)
+}
 
-const reactRouterProps: Middleware = () => (next) => (action: any) => next(action);
+const reactRouterProps: Middleware = () => next => (action: any) => next(action)
 
-export default [
-	asyncAction,
-	reactRouterProps,
-];
+export default [asyncAction, reactRouterProps]

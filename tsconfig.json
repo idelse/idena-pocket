@@ -1,13 +1,13 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": false,
-    "module": "es6",
-    "moduleResolution": "node",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
-  }
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": false,
+		"module": "es6",
+		"moduleResolution": "node",
+		"target": "es5",
+		"jsx": "react",
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true
+	}
 }

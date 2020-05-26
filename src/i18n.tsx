@@ -24,27 +24,34 @@ const resources = {
 
 
 const detectionOptions = {
-    order: ['path', 'cookie', 'navigator', 'localStorage', 'subdomain', 'queryString', 'htmlTag'],
-    lookupFromPathIndex: 0
-
+	order: [
+		'path',
+		'cookie',
+		'navigator',
+		'localStorage',
+		'subdomain',
+		'queryString',
+		'htmlTag'
+	],
+	lookupFromPathIndex: 0
 }
 
 i18n
-  // detect user language
-  // learn more: https://github.com/i18next/i18next-browser-languageDetector
-  .use(LanguageDetector)
-  // passes i18n down to react-i18next
-  .use(initReactI18next) 
-  .init({
-    detection: detectionOptions,
-    resources,
-    fallbackLng: "en",
+	// detect user language
+	// learn more: https://github.com/i18next/i18next-browser-languageDetector
+	.use(LanguageDetector)
+	// passes i18n down to react-i18next
+	.use(initReactI18next)
+	.init({
+		detection: detectionOptions,
+		resources,
+		fallbackLng: 'en',
 
-    keySeparator: false, // we do not use keys in form messages.welcome
+		keySeparator: false, // we do not use keys in form messages.welcome
 
-    interpolation: {
-      escapeValue: false // react already safes from xss
-    }
-  });
+		interpolation: {
+			escapeValue: false // react already safes from xss
+		}
+	})
 
-export default i18n;
+export default i18n

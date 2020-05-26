@@ -1,11 +1,10 @@
-import * as React from "react";
-import { ReactElement } from "react";
-import { useSelector } from "react-redux";
-import { colors, formatAddress, hexDecode, formatNumber } from "../libs/helpers";
-import styled from "styled-components";
-import Container from "../components/Container";
-import { useTranslation } from 'react-i18next';
-
+import * as React from 'react'
+import { ReactElement } from 'react'
+import { useSelector } from 'react-redux'
+import { colors, formatAddress, hexDecode, formatNumber } from '../libs/helpers'
+import styled from 'styled-components'
+import Container from '../components/Container'
+import { useTranslation } from 'react-i18next'
 
 const Transactions = styled.div`
 	.transactions {
@@ -145,60 +144,129 @@ const Transactions = styled.div`
 		   display: none;
 		}
 	}
-`;
+`
 
 export default (): ReactElement => {
-	const { t, i18n } = useTranslation();
+	const { t, i18n } = useTranslation()
 
 	const storage = useSelector((state: any) => {
-        return {
+		return {
 			currentAddress: state.app.currentAddress,
-			transactions: state.app.transactions,
-        };
-	});
+			transactions: state.app.transactions
+		}
+	})
 
 	return (
 		<Container paddingHalving={2}>
 			<Transactions>
-				{(storage.transactions.length === 0) && <>
-					<h1 className="empty">&#128546;</h1>
-					<p className="desc">{t('No transactions')}</p> 
-				</>}
-				<ul className="transactions">
-					{(storage.transactions||[]).map((tx, key) => (
-						<li className={`
-							${tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'transactions__li--sent' : 'transactions__li--received'}
+				{storage.transactions.length === 0 && (
+					<>
+						<h1 className='empty'>&#128546;</h1>
+						<p className='desc'>{t('No transactions')}</p>
+					</>
+				)}
+				<ul className='transactions'>
+					{(storage.transactions || []).map((tx, key) => (
+						<li
+							className={`
+							${
+								tx.from.toLowerCase() ===
+								storage.currentAddress.toLowerCase()
+									? 'transactions__li--sent'
+									: 'transactions__li--received'
+							}
 							${tx.pending ? 'transactions__li--pending' : ''}
-						`} key={key}>
-							<a target={tx.pending ? '_self' : '_blank'} href={tx.pending ? '#/unlocked/transactions' : `https://scan.idena.io/tx?tx=${tx.hash}`}>
-								<div className="thumbnail">
-							  {tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <img src ={`https://robohash.org/${tx.from.toLowerCase()}`}/>}
-							  {tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && <img src ={`https://robohash.org/${tx.to.toLowerCase()}`}/>}	
-							  </div>
-                <div className="tx">
-                <div className="transactions__li__tx">
-									{tx.from.toLowerCase() !== storage.currentAddress.toLowerCase() && <span>{formatAddress(tx.from, 6)}</span>}
-									{
-										(tx.to.toLowerCase() !== storage.currentAddress.toLowerCase() ||
-										(tx.from.toLowerCase() === storage.currentAddress.toLowerCase() && tx.to.toLowerCase() === storage.currentAddress.toLowerCase())) && 
-										<span>{formatAddress(tx.to, 6)}</span>
-									}
-									<span className="transactions__li__amount">{formatNumber(tx.amount, 4)} <span className="transactions__li__currency">DNA</span> <i className={tx.from.toLowerCase() === storage.currentAddress.toLowerCase() ? 'fa fa-arrow-up' : 'fa fa-arrow-down'}/></span>
+						`}
+							key={key}
+						>
+							<a
+								target={tx.pending ? '_self' : '_blank'}
+								href={
+									tx.pending
+										? '#/unlocked/transactions'
+										: `https://scan.idena.io/transaction/${tx.hash}`
+								}
+							>
+								<div className='thumbnail'>
+									{tx.from.toLowerCase() !==
+										storage.currentAddress.toLowerCase() && (
+										<img
+											src={`https://robohash.org/${tx.from.toLowerCase()}`}
+										/>
+									)}
+									{tx.from.toLowerCase() ===
+										storage.currentAddress.toLowerCase() && (
+										<img
+											src={`https://robohash.org/${tx.to.toLowerCase()}`}
+										/>
+									)}
 								</div>
-								<span className="transactions__li__details">
-									<span>{tx.pending ? 'Pending...' : tx.timestamp.slice(0, 10)}</span>
-									{tx.payload === "0x" && <span></span>}
-									{tx.payload !== "0x" && <span>{(() => {
-										const decoded = hexDecode(tx.payload.slice(2, tx.payload.length));
-										return decoded.slice(0, 30).concat(decoded.length > 30 ? '...' : '');
-									})()}</span>}
-								</span>
-                </div>
+								<div className='tx'>
+									<div className='transactions__li__tx'>
+										{tx.from.toLowerCase() !==
+											storage.currentAddress.toLowerCase() && (
+											<span>
+												{formatAddress(tx.from, 6)}
+											</span>
+										)}
+										{(tx.to.toLowerCase() !==
+											storage.currentAddress.toLowerCase() ||
+											(tx.from.toLowerCase() ===
+												storage.currentAddress.toLowerCase() &&
+												tx.to.toLowerCase() ===
+													storage.currentAddress.toLowerCase())) && (
+											<span>
+												{formatAddress(tx.to, 6)}
+											</span>
+										)}
+										<span className='transactions__li__amount'>
+											{formatNumber(tx.amount, 4)}{' '}
+											<span className='transactions__li__currency'>
+												DNA
+											</span>{' '}
+											<i
+												className={
+													tx.from.toLowerCase() ===
+													storage.currentAddress.toLowerCase()
+														? 'fa fa-arrow-up'
+														: 'fa fa-arrow-down'
+												}
+											/>
+										</span>
+									</div>
+									<span className='transactions__li__details'>
+										<span>
+											{tx.pending
+												? 'Pending...'
+												: tx.timestamp.slice(0, 10)}
+										</span>
+										{tx.payload === '0x' && <span></span>}
+										{tx.payload !== '0x' && (
+											<span>
+												{(() => {
+													const decoded = hexDecode(
+														tx.payload.slice(
+															2,
+															tx.payload.length
+														)
+													)
+													return decoded
+														.slice(0, 30)
+														.concat(
+															decoded.length > 30
+																? '...'
+																: ''
+														)
+												})()}
+											</span>
+										)}
+									</span>
+								</div>
 							</a>
 						</li>
 					))}
 				</ul>
 			</Transactions>
 		</Container>
-	);
+	)
 }
