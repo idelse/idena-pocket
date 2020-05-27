@@ -53,5 +53,5 @@
 	"Seed phrase": "Seed phrase",
 	"Address copied": "Address copied",
 	"Connect Ledger": "Connect Ledger",
-	"ledger_connect_confirmation": "Please, ensure idena-ledger is currently open and allow idena-pocket to read your idena ledger address."
+	"ledger_connect_confirmation": "Provjerite je li knjiga ideala trenutno otvorena i dopustite džepu idene da čita vašu idejnu knjigu."
 }

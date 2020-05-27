@@ -1,10 +1,3 @@
-const AVAILABLE_LANGS = [
-	"en",
-	"hi",
-	"it",
-    "sr"
-]
-
 const AVAILABLE_LANGS = ['en', 'hi', 'it', 'sr']
 
 module.exports = {

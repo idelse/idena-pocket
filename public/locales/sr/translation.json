@@ -1,5 +1,5 @@
 {
-    "idena-pocket": "Idena Pocket",
+	"idena-pocket": "Idena Pocket",
 	"web-wallet for Idena": "Idena web-novčanik",
 	"Login": "Prijavljivanje",
 	"Enter your password": "Unesite lozinku",
@@ -51,5 +51,7 @@
 	"Old users could use m/44'/60'/0'/0/0": "Stari korisnici mogu da koriste m/44'/60'/0'/0/0",
 	"Import": "Uvezi",
 	"Seed phrase": "Seed fraza",
-	"Address copied": "Adresa kopirana"
+	"Address copied": "Adresa kopirana",
+	"Connect Ledger": "Povežite knjigu",
+	"ledger_connect_confirmation": "Assicurati che l'app idena-ledger sia attualmente aperta e permetti a idena-pocket di leggere il tuo indirizzo."
 }
