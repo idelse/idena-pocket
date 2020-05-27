@@ -19,8 +19,8 @@ const resources = {
   },
   sr: {
     translation: translationSR
-  },
-};
+  }
+}
 
 
 const detectionOptions = {
