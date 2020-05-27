@@ -1,4 +1,9 @@
-const AVAILABLE_LANGS = ['en', 'hi', 'it']
+const AVAILABLE_LANGS = [
+	"en",
+	"hi",
+	"it",
+    "sr"
+]
 
 module.exports = {
 	input: ['src/**/*.{ts}', 'src/**/*.{tsx}'],
