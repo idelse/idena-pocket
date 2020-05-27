@@ -5,8 +5,6 @@ const AVAILABLE_LANGS = [
     "sr"
 ]
 
-const AVAILABLE_LANGS = ['en', 'hi', 'it', 'sr']
-
 module.exports = {
 	input: ['src/**/*.{ts}', 'src/**/*.{tsx}'],
 	output: './',
