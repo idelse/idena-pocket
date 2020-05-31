@@ -1,26 +1,27 @@
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
-import translationEN from '../public/locales/en/translation.json'
-import translationHI from '../public/locales/hi/translation.json'
-import translationIT from '../public/locales/it/translation.json'
-import translationSR from '../public/locales/sr/translation.json'
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import translationEN from "../public/locales/en/translation.json";
+import translationHI from "../public/locales/hi/translation.json";
+import translationIT from "../public/locales/it/translation.json";
+import translationSR from "../public/locales/sr/translation.json";
 
 // the translations
 const resources = {
-	en: {
-		translation: translationEN
-	},
-	hi: {
-		translation: translationHI
-	},
-	it: {
-		translation: translationIT
-	},
-	sr: {
-		translation: translationSR
-	}
+  en: {
+    translation: translationEN
+  },
+  hi: {
+    translation: translationHI
+  },
+  it: {
+    translation: translationIT
+  },
+  sr: {
+    translation: translationSR
+  }
 }
+
 
 const detectionOptions = {
 	order: [
