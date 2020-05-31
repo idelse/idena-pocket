@@ -1,5 +1,5 @@
 {
-    "idena-pocket": "Idena Pocket",
+	"idena-pocket": "Idena Pocket",
 	"web-wallet for Idena": "Idena web-novčanik",
 	"Login": "Prijavljivanje",
 	"Enter your password": "Unesite lozinku",
@@ -53,5 +53,9 @@
 	"Seed phrase": "Seed fraza",
 	"Address copied": "Adresa kopirana",
 	"Connect Ledger": "Povežite knjigu",
-	"ledger_connect_confirmation": "Provjerite je li knjiga ideala trenutno otvorena i dopustite džepu idene da čita vašu idejnu knjigu."
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Provjerite je li aplikacija idena-ledger trenutno otvorena i dopustite džepu idene da pročita vašu adresu.",
+	"RPC node is": "RPC čvor je",
+	"UP": "UP",
+	"latest block": "najnoviji blok",
+	"DOWN": "DOWN"
 }
