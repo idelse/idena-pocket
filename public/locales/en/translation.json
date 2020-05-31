@@ -56,6 +56,6 @@
 	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.",
 	"RPC node is": "RPC node is",
 	"UP": "UP",
-	"latest block": "latest",
+	"latest block": "latest block",
 	"DOWN": "DOWN"
 }
