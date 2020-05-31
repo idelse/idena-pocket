@@ -151,3 +151,11 @@ export const connectLedger = (): any => ({
 		return { idena, address }
 	})()
 })
+
+export const NODE_STATUS = 'NODE_STATUS'
+export const getNodeStatus = (): any => ({
+	type: NODE_STATUS,
+	result: (async () => {
+		return api.getStatus()
+	})()
+})

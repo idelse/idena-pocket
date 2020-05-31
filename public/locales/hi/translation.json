@@ -53,5 +53,9 @@
 	"Seed phrase": "बीज वाक्यांश",
 	"Address copied": "पता कॉपी किया गया",
 	"Connect Ledger": "लेजर कनेक्ट करें",
-	"ledger_connect_confirmation": "कृपया, सुनिश्चित करें कि idena-ledger वर्तमान में खुला है और idena-pocket को अपना आइडेन लेज़र पता पढ़ने की अनुमति दें।"
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "कृपया, सुनिश्चित करें कि idena-ledger वर्तमान में खुला है और idena-pocket को अपना आइडेन लेज़र पता पढ़ने की अनुमति दें।",
+	"RPC node is": "RPC नोड है",
+	"UP": "यूपी",
+	"latest block": "नवीनतम ब्लॉक",
+	"DOWN": "नीचे"
 }

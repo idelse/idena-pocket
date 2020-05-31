@@ -53,5 +53,9 @@
 	"Seed phrase": "Frase segreta",
 	"Address copied": "Indirizzo copiato",
 	"Connect Ledger": "Connetti Ledger",
-	"ledger_connect_confirmation": "Assicurati che l'app idena-ledger sia attualmente aperta e permetti a idena-pocket di leggere il tuo indirizzo."
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Assicurati che l'app idena-ledger sia attualmente aperta e permetti a idena-pocket di leggere il tuo indirizzo.",
+	"RPC node is": "Il nodo RPC è",
+	"UP": "DISPONIBILE",
+	"latest block": "ultimo blocco",
+	"DOWN": "DOWN"
 }

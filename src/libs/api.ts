@@ -75,9 +75,19 @@ const sendTransaction = async (idena, { amount, to, payload }) => {
 	}
 }
 
+const getStatus = async () =>
+	fetch(`https://rpc.idena.dev/health`)
+		.then(r => r.json())
+		.then(r => r)
+		.catch(() => ({
+			latestBlock: 0,
+			synced: false
+		}))
+
 export default {
 	getTransactions,
 	sendTransaction,
 	getBalance,
-	getPrice
+	getPrice,
+	getStatus
 }

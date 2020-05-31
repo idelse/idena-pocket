@@ -103,6 +103,23 @@ const Profile = styled.div`
 		width: 72%;
 		margin: auto;
 	}
+	.status a {
+		text-align: center;
+		padding: 0.3em 0.5em;
+		font-weight: bold;
+		font-size: 0.8em;
+		text-decoration: none;
+		margin-left: 0.4em;
+		border-radius: 2px;
+	}
+	.status--up a {
+		background: #ccff90;
+		color: #79b700;
+	}
+	.status--down a {
+		background: #ffccbc;
+		color: ${colors.darkRed};
+	}
 	@media (max-width: 578px) {
 		.imgContainer {
 			width: 80% !important;
@@ -116,7 +133,7 @@ const Profile = styled.div`
 `
 
 export default (): ReactElement => {
-	const { t, i18n } = useTranslation()
+	const { t } = useTranslation()
 
 	const dispatch = useDispatch()
 
@@ -136,6 +153,7 @@ export default (): ReactElement => {
 
 	const storage = useSelector((state: any) => {
 		return {
+			nodeStatus: state.app.nodeStatus,
 			currentAddress: state.app.currentAddress,
 			transactions: state.app.transactions,
 			copied: false
@@ -186,6 +204,26 @@ export default (): ReactElement => {
 				</Confirmation>
 				<p className='desc'>
 					{t('Clear browser storage and use another wallet')}
+				</p>
+
+				<div className='line'></div>
+				<p className='desc'>
+					<span>{t('RPC node is')}</span>
+					{storage.nodeStatus.synced && (
+						<span className='status status--up'>
+							<a target='_blank' href='http://status.idena.dev/'>
+								{t('UP')} ({t('latest block')}{' '}
+								{storage.nodeStatus.latestBlock})
+							</a>
+						</span>
+					)}
+					{!storage.nodeStatus.synced && (
+						<span className='status status--down'>
+							<a target='_blank' href='http://status.idena.dev/'>
+								{t('DOWN')}
+							</a>
+						</span>
+					)}
 				</p>
 			</Container>
 		</Profile>
