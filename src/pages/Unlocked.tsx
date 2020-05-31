@@ -7,7 +7,12 @@ import styled from 'styled-components'
 import { push } from 'connected-react-router'
 import { colors, formatNumber, useInterval } from '../libs/helpers'
 import { Link } from 'react-router-dom'
-import {getTransactions, getBalance, getPrice, getNodeStatus} from '../actions'
+import {
+	getTransactions,
+	getBalance,
+	getPrice,
+	getNodeStatus
+} from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
 

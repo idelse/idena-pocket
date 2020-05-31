@@ -11,7 +11,8 @@ import {
 	RETRIEVE_ENCRYPTED_SEED,
 	GET_BALANCE,
 	GET_PRICE,
-	CONNECT_LEDGER, NODE_STATUS
+	CONNECT_LEDGER,
+	NODE_STATUS
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
 
@@ -26,7 +27,7 @@ export const defaultState: any = {
 	sending: false,
 	nodeStatus: {
 		latestBlock: 0,
-		synced: true,
+		synced: true
 	},
 	toast: {
 		message: '',
@@ -148,7 +149,7 @@ export default (defaultState: any) => {
 			case NODE_STATUS:
 				return {
 					...state,
-					nodeStatus: action.result,
+					nodeStatus: action.result
 				}
 			case SEND_TX + '_REQUESTED':
 				return {

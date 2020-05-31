@@ -105,11 +105,11 @@ const Profile = styled.div`
 	}
 	.status a {
 		text-align: center;
-		padding: .3em .5em;
+		padding: 0.3em 0.5em;
 		font-weight: bold;
-		font-size: .8em;
+		font-size: 0.8em;
 		text-decoration: none;
-		margin-left: .4em;
+		margin-left: 0.4em;
 		border-radius: 2px;
 	}
 	.status--up a {
@@ -209,8 +209,21 @@ export default (): ReactElement => {
 				<div className='line'></div>
 				<p className='desc'>
 					<span>{t('RPC node is')}</span>
-					{storage.nodeStatus.synced && <span className="status status--up"><a target="_blank" href="http://status.idena.dev/">{t('UP')} ({t('latest block')} {storage.nodeStatus.latestBlock})</a></span>}
-					{!storage.nodeStatus.synced && <span className="status status--down"><a target="_blank" href="http://status.idena.dev/">{t('DOWN')}</a></span>}
+					{storage.nodeStatus.synced && (
+						<span className='status status--up'>
+							<a target='_blank' href='http://status.idena.dev/'>
+								{t('UP')} ({t('latest block')}{' '}
+								{storage.nodeStatus.latestBlock})
+							</a>
+						</span>
+					)}
+					{!storage.nodeStatus.synced && (
+						<span className='status status--down'>
+							<a target='_blank' href='http://status.idena.dev/'>
+								{t('DOWN')}
+							</a>
+						</span>
+					)}
 				</p>
 			</Container>
 		</Profile>

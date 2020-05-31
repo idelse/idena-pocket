@@ -75,7 +75,8 @@ const sendTransaction = async (idena, { amount, to, payload }) => {
 	}
 }
 
-const getStatus = async () => fetch(`https://rpc.idena.dev/health`)
+const getStatus = async () =>
+	fetch(`https://rpc.idena.dev/health`)
 		.then(r => r.json())
 		.then(r => r)
 		.catch(() => ({
