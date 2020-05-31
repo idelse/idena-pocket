@@ -14,7 +14,7 @@ export default () => {
 	const dispatch = useDispatch()
 	return (
 		<ConnectLedgerButton>
-			<Confirmation text={t('ledger_connect_confirmation')}>
+			<Confirmation text={t('"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.')}>
 				<Button
 					onClick={async () => {
 						dispatch(connectLedger())

@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { push } from 'connected-react-router'
 import { colors, formatNumber, useInterval } from '../libs/helpers'
 import { Link } from 'react-router-dom'
-import { getTransactions, getBalance, getPrice } from '../actions'
+import {getTransactions, getBalance, getPrice, getNodeStatus} from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
 
@@ -106,9 +106,11 @@ export default (props): ReactElement => {
 		dispatch(getPrice())
 		dispatch(getBalance(storage.currentAddress, showToast))
 		dispatch(getTransactions(storage.currentAddress, showToast))
+		dispatch(getNodeStatus())
 	}
 
 	useEffect(() => {
+		dispatch(getNodeStatus())
 		dispatch(getPrice())
 		dispatch(getBalance(storage.currentAddress, false))
 		dispatch(getTransactions(storage.currentAddress, false))
