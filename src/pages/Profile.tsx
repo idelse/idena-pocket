@@ -105,15 +105,15 @@ const Profile = styled.div`
 	}
 	.status a {
 		text-align: center;
-		padding: 0.3em 0.5em;
+		padding: 0.6em;
 		font-weight: bold;
 		font-size: 0.8em;
 		text-decoration: none;
-		border-radius: 2px;
+		border-radius: 4px;
 	}
 	.status--up a {
 		background: #ccff90;
-		color: #79b700;
+		color: #699a0a;
 	}
 	.status--down a {
 		background: #ffccbc;
