@@ -107,7 +107,9 @@ export default (defaultState: any) => {
 					...state,
 					transactions: (() => {
 						const previousTransactions = state.transactions
-						const nextTransactions = action.result.transactions.map(tx => ({ ...tx, pending: false }))
+						const nextTransactions = action.result.transactions.map(
+							tx => ({ ...tx, pending: false })
+						)
 						const newTrasactions = nextTransactions.filter(
 							currentNewTransaction => {
 								const isNew = !previousTransactions.some(

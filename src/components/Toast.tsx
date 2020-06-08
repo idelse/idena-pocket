@@ -30,6 +30,13 @@ const Toast = styled.div`
 		color: #fff;
 		background: ${colors.darkRed};
 	}
+
+	.toast p {
+		color: #fff;
+	}
+	.toast p .fa {
+		color: #fff;
+	}
 `
 
 let timeouts = []
@@ -58,7 +65,19 @@ export default () => {
 		<Toast>
 			{storage.message && (
 				<div className={`toast toast--${storage.type || 'info'}`}>
-					{storage.message}
+					{storage.type == 'info' && <p>{storage.message}</p>}
+					{storage.type == 'error' && (
+						<p>
+							<i className='fa fa-ban'></i>
+							{storage.message}
+						</p>
+					)}
+					{storage.type == 'success' && (
+						<p>
+							<i className='fa fa-check'></i>
+							{storage.message}
+						</p>
+					)}
 				</div>
 			)}
 		</Toast>
