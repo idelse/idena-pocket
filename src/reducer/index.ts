@@ -12,13 +12,17 @@ import {
 	GET_BALANCE,
 	GET_PRICE,
 	CONNECT_LEDGER,
-	NODE_STATUS
+	NODE_STATUS, RETRIEVE_GENERATED_ADDRESSES
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
+import config from '../config'
 
 export const defaultState: any = {
 	encryptedSeed: '',
 	currentAddress: '',
+	derivationIndex: 0,
+	generatedAddress: config.defaultGeneratedAddress,
+	generatedAddresses: [['', 0]],
 	idena: null,
 	unlocked: false,
 	balance: 0,
@@ -64,7 +68,8 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					encryptedSeed: action.result.encryptedSeed,
-					derivationPath: action.result.derivationPath
+					derivationPath: action.result.derivationPath,
+					derivationIndex: action.result.derivationIndex
 				}
 			case UNLOCK + '_REQUESTED':
 				return {
@@ -217,6 +222,11 @@ export default (defaultState: any) => {
 				}
 			case RESET:
 				return defaultState
+			case RETRIEVE_GENERATED_ADDRESSES:
+				return {
+					...state,
+					generatedAddresses: action.result,
+				}
 			default:
 				return state
 		}

@@ -6,6 +6,7 @@ import { formatAddress, colors } from '../libs/helpers'
 import { lock } from '../actions'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
+import MenuProfile from './MenuProfile'
 
 const Header = styled.div`
 	display: flex;
@@ -48,6 +49,8 @@ export default () => {
 		<Header>
 			<div className='darkbg'></div>
 			<Logo theme='light' width={50} />
+
+			{/*
 			<span
 				className='logout'
 				onClick={() => dispatch(lock(storage.idena))}
@@ -55,6 +58,8 @@ export default () => {
 				<i className='fa fa-power-off' />
 				{t('Logout')}
 			</span>
+			*/}
+			<MenuProfile />
 		</Header>
 	)
 }

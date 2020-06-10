@@ -48,7 +48,6 @@ const getBalance = async address =>
 		.getBalanceByAddress(address)
 		.then((r: any) => parseFloat(r.balance))
 		.catch(error => {
-			console.error({ error })
 			return 0
 		})
 

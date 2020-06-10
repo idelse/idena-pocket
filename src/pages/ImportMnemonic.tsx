@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { updateEncryptedSeed } from '../actions'
 import { push } from 'connected-react-router'
 import { useTranslation } from 'react-i18next'
+import config from '../config'
 
 const bip39 = require('bip39')
 
@@ -50,7 +51,7 @@ export default (): ReactElement => {
 	const { register, handleSubmit, errors } = useForm({
 		defaultValues: {
 			seed: '',
-			derivationPath: "m/44'/515'/0'/0/0",
+			derivationPath: config.derivationPath,
 			password: ''
 		}
 	})
@@ -61,7 +62,7 @@ export default (): ReactElement => {
 			updateEncryptedSeed(
 				seed.trim().split(' '),
 				derivationPath,
-				password
+				password,
 			)
 		)
 		dispatch(push('/'))
@@ -97,7 +98,7 @@ export default (): ReactElement => {
 							type='text'
 							name='derivationPath'
 							ref={register()}
-							label={t("Old users could use m/44'/60'/0'/0/0")}
+							label={t("Old users could use m/44'/60'/0'/0")}
 						/>
 						<Input
 							name='password'

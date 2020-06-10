@@ -11,7 +11,7 @@ import {
 	getTransactions,
 	getBalance,
 	getPrice,
-	getNodeStatus
+	getNodeStatus, retrieveGeneratedAddresses
 } from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
@@ -103,7 +103,8 @@ export default (props): ReactElement => {
 			currentAddress: state.app.currentAddress,
 			transactions: state.app.transactions,
 			balance: state.app.balance,
-			price: state.app.price
+			price: state.app.price,
+			derivationPath: state.derivationPath,
 		}
 	})
 
@@ -119,6 +120,7 @@ export default (props): ReactElement => {
 		dispatch(getPrice())
 		dispatch(getBalance(storage.currentAddress, false))
 		dispatch(getTransactions(storage.currentAddress, false))
+		dispatch(retrieveGeneratedAddresses(storage.derivationPath))
 		if (!storage.unlocked) dispatch(push('/'))
 	}, [storage.unlocked])
 
