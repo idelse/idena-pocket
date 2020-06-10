@@ -26,7 +26,7 @@ const Container = styled.div`
 		height: 40px;
 	}
 	.menu {
-		border-radius: .5em;
+		border-radius: 0.5em;
 		background: rgb(0, 0, 0, 0.95);
 		position: absolute;
 		top: 60px;
@@ -45,30 +45,35 @@ function MenuProfile () {
 	}))
 	const ref = useRef()
 	const [menuIsOpen, toggleMenu] = useState(false)
-	useOnClickOutside(ref, () => toggleMenu(false));
+	useOnClickOutside(ref, () => toggleMenu(false))
 
 	return (
 		<Container>
 			<div ref={ref} className='wrap'>
-				<div onClick={() => toggleMenu(!menuIsOpen)} className='robohash'>
+				<div
+					onClick={() => toggleMenu(!menuIsOpen)}
+					className='robohash'
+				>
 					<img
 						src={`https://robohash.org/${storage.address.toLowerCase()}`}
 					/>
 				</div>
-				{menuIsOpen && <ul className='menu'>
-					<li>
-						<a href='#'>Link 1</a>
-					</li>
-					<li>
-						<a href='#'>Link 2</a>
-					</li>
-					<li>
-						<a href='#'>Link 3</a>
-					</li>
-					<li>
-						<a href='#'>Link 4</a>
-					</li>
-				</ul>}
+				{menuIsOpen && (
+					<ul className='menu'>
+						<li>
+							<a href='#'>Link 1</a>
+						</li>
+						<li>
+							<a href='#'>Link 2</a>
+						</li>
+						<li>
+							<a href='#'>Link 3</a>
+						</li>
+						<li>
+							<a href='#'>Link 4</a>
+						</li>
+					</ul>
+				)}
 			</div>
 		</Container>
 	)

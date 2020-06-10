@@ -32,7 +32,10 @@ export const updateEncryptedSeed = (seed, derivationPath, password) => ({
 		localStorage.setItem('encrypted_seed', encryptedSeed)
 		localStorage.setItem('derivation_path', derivationPath)
 		localStorage.setItem('derivation_index', config.defaultIndexAddress)
-		localStorage.setItem('generated_addresses', config.defaultGeneratedAddress)
+		localStorage.setItem(
+			'generated_addresses',
+			config.defaultGeneratedAddress
+		)
 		return {
 			encryptedSeed,
 			derivation: `${derivationPath}/${config.defaultIndexAddress}`
@@ -49,8 +52,12 @@ export const retrieveEncryptedSeed = () => ({
 			derivationPath:
 				localStorage.getItem('derivation_path') ||
 				config.oldDerivationPath,
-			derivationIndex: localStorage.getItem('derivation_index') || config.defaultIndexAddress,
-			generatedAddresses: localStorage.getItem('generated_addresses') || config.defaultGeneratedAddress,
+			derivationIndex:
+				localStorage.getItem('derivation_index') ||
+				config.defaultIndexAddress,
+			generatedAddresses:
+				localStorage.getItem('generated_addresses') ||
+				config.defaultGeneratedAddress
 		}
 	})()
 })
@@ -167,9 +174,12 @@ export const getNodeStatus = (): any => ({
 	})()
 })
 
-
 export const RETRIEVE_GENERATED_ADDRESSES = 'RETRIEVE_GENERATED_ADDRESSES'
-export const retrieveGeneratedAddresses = (seed, derivationPath, generatedAddresses): any => ({
+export const retrieveGeneratedAddresses = (
+	seed,
+	derivationPath,
+	generatedAddresses
+): any => ({
 	type: UNLOCK,
 	result: (async () => {
 		const hdwallet = HDWallet.fromMnemonic(seed.join(' '))
@@ -182,6 +192,11 @@ export const retrieveGeneratedAddresses = (seed, derivationPath, generatedAddres
 					.getAddress()
 					.toString('hex')}`
 			]
-		return Promise.all(addresses.map(async address => [address, await api.getBalance(address)]))
+		return Promise.all(
+			addresses.map(async address => [
+				address,
+				await api.getBalance(address)
+			])
+		)
 	})()
 })

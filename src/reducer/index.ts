@@ -12,7 +12,8 @@ import {
 	GET_BALANCE,
 	GET_PRICE,
 	CONNECT_LEDGER,
-	NODE_STATUS, RETRIEVE_GENERATED_ADDRESSES
+	NODE_STATUS,
+	RETRIEVE_GENERATED_ADDRESSES
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
 import config from '../config'
@@ -225,7 +226,7 @@ export default (defaultState: any) => {
 			case RETRIEVE_GENERATED_ADDRESSES:
 				return {
 					...state,
-					generatedAddresses: action.result,
+					generatedAddresses: action.result
 				}
 			default:
 				return state

@@ -100,25 +100,22 @@ export const fetchWithTimeout = (url, options = {}, timeout = 5000) => {
 	])
 }
 
-export function useOnClickOutside(ref, handler) {
-	useEffect(
-		() => {
-			const listener = event => {
-				if (!ref.current || ref.current.contains(event.target)) {
-					return;
-				}
+export function useOnClickOutside (ref, handler) {
+	useEffect(() => {
+		const listener = event => {
+			if (!ref.current || ref.current.contains(event.target)) {
+				return
+			}
 
-				handler(event);
-			};
+			handler(event)
+		}
 
-			document.addEventListener('mousedown', listener);
-			document.addEventListener('touchstart', listener);
+		document.addEventListener('mousedown', listener)
+		document.addEventListener('touchstart', listener)
 
-			return () => {
-				document.removeEventListener('mousedown', listener);
-				document.removeEventListener('touchstart', listener);
-			};
-		},
-		[ref, handler]
-	);
+		return () => {
+			document.removeEventListener('mousedown', listener)
+			document.removeEventListener('touchstart', listener)
+		}
+	}, [ref, handler])
 }

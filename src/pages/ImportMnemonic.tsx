@@ -62,7 +62,7 @@ export default (): ReactElement => {
 			updateEncryptedSeed(
 				seed.trim().split(' '),
 				derivationPath,
-				password,
+				password
 			)
 		)
 		dispatch(push('/'))

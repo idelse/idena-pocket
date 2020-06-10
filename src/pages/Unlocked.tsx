@@ -11,7 +11,8 @@ import {
 	getTransactions,
 	getBalance,
 	getPrice,
-	getNodeStatus, retrieveGeneratedAddresses
+	getNodeStatus,
+	retrieveGeneratedAddresses
 } from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
@@ -104,7 +105,7 @@ export default (props): ReactElement => {
 			transactions: state.app.transactions,
 			balance: state.app.balance,
 			price: state.app.price,
-			derivationPath: state.derivationPath,
+			derivationPath: state.derivationPath
 		}
 	})
 
