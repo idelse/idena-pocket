@@ -121,7 +121,6 @@ export default (props): ReactElement => {
 		dispatch(getPrice())
 		dispatch(getBalance(storage.currentAddress, false))
 		dispatch(getTransactions(storage.currentAddress, false))
-		dispatch(retrieveGeneratedAddresses(storage.derivationPath))
 		if (!storage.unlocked) dispatch(push('/'))
 	}, [storage.unlocked])
 
