@@ -4,7 +4,7 @@ import { colors } from '../libs/helpers'
 import { useTranslation } from 'react-i18next'
 
 const Status = styled.div`
-		.status a {
+	.status a {
 		text-align: center;
 		padding: 0.6em;
 		font-weight: bold;
@@ -23,17 +23,16 @@ const Status = styled.div`
 `
 
 export default (props: any) => {
-const { t } = useTranslation()
+	const { t } = useTranslation()
 
 	if (props.state === 'up') {
 		return (
 			<Status>
 				<span className='status status--up'>
-							<a target='_blank' href='http://status.idena.dev/'>
-								{t('RPC node is')} {t('UP')} (
-								{t('latest block')}{' '}
-								{props.block})
-							</a>
+					<a target='_blank' href='http://status.idena.dev/'>
+						{t('RPC node is')} {t('UP')} ({t('latest block')}{' '}
+						{props.block})
+					</a>
 				</span>
 			</Status>
 		)
@@ -43,9 +42,9 @@ const { t } = useTranslation()
 		return (
 			<Status>
 				<span className='status status--down'>
-							<a target='_blank' href='http://status.idena.dev/'>
-								{t('RPC node is')} {t('DOWN')}
-							</a>
+					<a target='_blank' href='http://status.idena.dev/'>
+						{t('RPC node is')} {t('DOWN')}
+					</a>
 				</span>
 			</Status>
 		)
