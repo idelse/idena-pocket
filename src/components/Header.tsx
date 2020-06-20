@@ -21,6 +21,7 @@ const Header = styled.div`
 		width: 100%;
 		z-index: -10;
 		height: 28em;
+		top: 0;
 		left: 0;
 		background-color: ${colors.medBlack};
 		position: absolute;
