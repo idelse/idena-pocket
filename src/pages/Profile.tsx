@@ -180,6 +180,7 @@ export default (): ReactElement => {
 				<div className='line'></div>
 				<Confirmation
 					text={t('Are you sure you want to erase your wallet?')}
+					icon='warning'
 				>
 					<p className='forget' onClick={resetWallet}>
 						<i className='fa fa-undo' />
