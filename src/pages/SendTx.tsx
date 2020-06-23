@@ -3,15 +3,28 @@ import { ReactElement } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { parseAmount, validateInputAddresses, hexEncode } from '../libs/helpers'
 import styled from 'styled-components'
+import { colors } from '../libs/helpers'
 import { useForm } from 'react-hook-form'
 import Button from '../components/Button'
 import Container from '../components/Container'
 import Input from '../components/Input'
+import Status from '../components/Status'
 import { sendTx } from '../actions'
 import Confirmation from '../components/Confirmation'
 import { useTranslation } from 'react-i18next'
 
-const SendTx = styled.div``
+const SendTx = styled.div`
+	.desc {
+		margin-top: 10px;
+		font-size: 0.9em;
+		color: #999;
+	}
+	.line {
+		margin: 1.5em 0;
+		color: #bbb;
+		border: 1px solid ${colors.grey};
+	}
+`
 
 export default (): ReactElement => {
 	const { t, i18n } = useTranslation()
@@ -21,6 +34,7 @@ export default (): ReactElement => {
 	const storage = useSelector((state: any) => {
 		return {
 			idena: state.app.idena,
+			nodeStatus: state.app.nodeStatus,
 			balance: state.app.balance,
 			currentAddress: state.app.currentAddress,
 			transactions: state.app.transactions,
@@ -91,6 +105,19 @@ export default (): ReactElement => {
 						/>
 					</Confirmation>
 				</form>
+
+				<div className='line'></div>
+				<p className='desc'>
+					{storage.nodeStatus.synced && (
+						<Status
+							state='up'
+							block={storage.nodeStatus.latestBlock}
+						></Status>
+					)}
+					{!storage.nodeStatus.synced && (
+						<Status state='down'></Status>
+					)}
+				</p>
 			</Container>
 		</SendTx>
 	)

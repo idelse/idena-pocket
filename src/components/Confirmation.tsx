@@ -25,10 +25,12 @@ export default (props: any) => {
 	const canctext = t('Cancel')
 
 	const text = props.text || t('Are you sure you want to do this?')
+	const iconprop = props.icon || 'warning'
 	const disabled = !!props.disabled
 	const handleClick = async () => {
 		if (disabled) return
 		const confirmed = await swal(text, {
+			icon: iconprop,
 			buttons: [canctext, conftext]
 		})
 		if (confirmed) props.children.props.onClick()
