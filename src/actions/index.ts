@@ -1,5 +1,5 @@
 import AES from 'crypto-js/aes'
-import { formatDate } from '../libs/helpers'
+import { convertOldDerivationPathFormat, formatDate } from '../libs/helpers'
 import api from '../libs/api'
 import config from '../config'
 import { ProviderHDWallet, ProviderLedger } from 'idena-js'
@@ -68,6 +68,7 @@ export const UNLOCK = 'UNLOCK'
 export const unlock = (seed, derivationPath, derivationIndex = 0): any => ({
 	type: UNLOCK,
 	result: (async () => {
+		derivationPath = convertOldDerivationPathFormat(derivationPath)
 		idena = new ProviderHDWallet(seed.join(' '), derivationPath)
 		const currentAddress = await idena.getAddressByIndex(derivationIndex)
 		const addresses = await Promise.all(

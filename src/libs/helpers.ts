@@ -119,3 +119,11 @@ export function useOnClickOutside (ref, handler) {
 		}
 	}, [ref, handler])
 }
+
+export function convertOldDerivationPathFormat(derivationPath: string) {
+	const arrayDerivationPath = derivationPath.split("/")
+	if (arrayDerivationPath.length === 6) {
+		return arrayDerivationPath.slice(0, 5).join("/")
+	}
+	return derivationPath
+}
