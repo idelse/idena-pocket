@@ -1,10 +1,12 @@
 import AES from 'crypto-js/aes'
-import { formatDate } from '../libs/helpers'
+import { convertOldDerivationPathFormat, formatDate } from '../libs/helpers'
 import api from '../libs/api'
 import config from '../config'
-import { Idena, ProviderLocalKeyStore, ProviderLedger } from 'idena-js'
-const HDWallet = require('ethereum-hdwallet')
+import { ProviderHDWallet, ProviderLedger } from 'idena-js'
+import IdenaProvider from 'idena-js/dist/providers/IdenaProvider'
 const bip39 = require('bip39')
+
+let idena: IdenaProvider = null
 
 export const UPDATE_CREATION_WALLET_PASSWORD = 'UPDATE_CREATION_WALLET_PASSWORD'
 export const updateCreationWalletPassword = (password: string) => ({
@@ -31,9 +33,14 @@ export const updateEncryptedSeed = (seed, derivationPath, password) => ({
 		).toString()
 		localStorage.setItem('encrypted_seed', encryptedSeed)
 		localStorage.setItem('derivation_path', derivationPath)
+		localStorage.setItem('derivation_index', config.defaultIndexAddress)
+		localStorage.setItem(
+			'generated_addresses',
+			config.defaultGeneratedAddress
+		)
 		return {
 			encryptedSeed,
-			derivationPath
+			derivation: `${derivationPath}/${config.defaultIndexAddress}`
 		}
 	})()
 })
@@ -46,41 +53,46 @@ export const retrieveEncryptedSeed = () => ({
 			encryptedSeed: localStorage.getItem('encrypted_seed'),
 			derivationPath:
 				localStorage.getItem('derivation_path') ||
-				config.oldDerivationPath
+				config.oldDerivationPath,
+			currentAddressIndex:
+				localStorage.getItem('derivation_index') ||
+				config.defaultIndexAddress,
+			generatedAddresses:
+				localStorage.getItem('generated_addresses') ||
+				config.defaultGeneratedAddress
 		}
 	})()
 })
 
 export const UNLOCK = 'UNLOCK'
-export const unlock = (seed, derivationPath): any => ({
+export const unlock = (seed, derivationPath, derivationIndex = 0): any => ({
 	type: UNLOCK,
 	result: (async () => {
-		const hdwallet = HDWallet.fromMnemonic(seed.join(' '))
-		const address = `0x${hdwallet
-			.derive(derivationPath)
-			.getAddress()
-			.toString('hex')}`
-		const privateKey = hdwallet
-			.derive(derivationPath)
-			.getPrivateKey()
-			.toString('hex')
-		const provider = new ProviderLocalKeyStore(privateKey)
-		const idena = new Idena(provider)
+		derivationPath = convertOldDerivationPathFormat(derivationPath)
+		idena = new ProviderHDWallet(seed.join(' '), derivationPath)
+		const currentAddress = await idena.getAddressByIndex(derivationIndex)
+		const addresses = await Promise.all(
+			Array(20)
+				.fill(1)
+				.map((_, index) => idena.getAddressByIndex(index))
+		)
 		return {
-			address,
-			idena
+			idena,
+			currentAddress,
+			currentAddressIndex: derivationIndex,
+			addresses
 		}
 	})()
 })
 
 export const LOCK = 'LOCK'
-export const lock = (idena): any => ({
+export const lock = (): any => ({
 	type: LOCK,
 	result: idena.close()
 })
 
 export const SEND_TX = 'SEND_TX'
-export const sendTx = (idena, { amount, to, payload }): any => ({
+export const sendTx = ({ amount, to, payload }, currentAddressIndex): any => ({
 	type: SEND_TX,
 	request: {
 		to,
@@ -88,7 +100,11 @@ export const sendTx = (idena, { amount, to, payload }): any => ({
 		payload,
 		timestamp: formatDate(new Date())
 	},
-	result: api.sendTransaction(idena, { amount, to, payload })
+	result: api.sendTransaction(
+		idena,
+		{ amount, to, payload },
+		currentAddressIndex
+	)
 })
 
 export const TOAST = 'TOAST'
@@ -105,6 +121,8 @@ export const RESET = 'RESET'
 export const reset = () => {
 	localStorage.removeItem('encrypted_seed')
 	localStorage.removeItem('derivation_path')
+	localStorage.removeItem('derivation_index')
+	localStorage.removeItem('generated_addresses')
 	return {
 		type: RESET
 	}
@@ -145,9 +163,8 @@ export const CONNECT_LEDGER = 'CONNECT_LEDGER'
 export const connectLedger = (): any => ({
 	type: CONNECT_LEDGER,
 	result: (async () => {
-		const provider = new ProviderLedger()
-		const address = await provider.getAddress()
-		const idena = new Idena(provider)
+		idena = new ProviderLedger()
+		const address = await idena.getAddressByIndex(0)
 		return { idena, address }
 	})()
 })
@@ -157,5 +174,23 @@ export const getNodeStatus = (): any => ({
 	type: NODE_STATUS,
 	result: (async () => {
 		return api.getStatus()
+	})()
+})
+
+export const CHANGE_ADDRESS = 'CHANGE_ADDRESS'
+export const changeAddress = (indexAddress: number): any => ({
+	type: CHANGE_ADDRESS,
+	result: (async () => {
+		const currentAddress = await idena.getAddressByIndex(indexAddress)
+		const transactions = await api
+			.getTransactions(currentAddress)
+			.then(result => result.transactions)
+		const balance = await api.getBalance(currentAddress)
+		return {
+			currentAddressIndex: indexAddress,
+			currentAddress,
+			transactions,
+			balance
+		}
 	})()
 })

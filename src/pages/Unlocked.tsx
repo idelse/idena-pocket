@@ -98,12 +98,14 @@ export default (props): ReactElement => {
 
 	const storage = useSelector((state: any) => {
 		return {
+			provider: state.provider,
 			pathname: state.router.location.pathname,
 			unlocked: state.app.unlocked,
 			currentAddress: state.app.currentAddress,
 			transactions: state.app.transactions,
 			balance: state.app.balance,
-			price: state.app.price
+			price: state.app.price,
+			derivationPath: state.derivationPath
 		}
 	})
 

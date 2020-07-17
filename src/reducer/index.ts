@@ -12,14 +12,18 @@ import {
 	GET_BALANCE,
 	GET_PRICE,
 	CONNECT_LEDGER,
-	NODE_STATUS
+	NODE_STATUS,
+	CHANGE_ADDRESS
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
 
 export const defaultState: any = {
-	encryptedSeed: '',
-	currentAddress: '',
 	idena: null,
+	addresses: [],
+	currentAddress: '',
+	currentAddressIndex: 0,
+	numberOfShowedAddresses: 5,
+	encryptedSeed: '',
 	unlocked: false,
 	balance: 0,
 	transactions: [],
@@ -64,7 +68,8 @@ export default (defaultState: any) => {
 				return {
 					...state,
 					encryptedSeed: action.result.encryptedSeed,
-					derivationPath: action.result.derivationPath
+					derivationPath: action.result.derivationPath,
+					currentAddressIndex: action.result.currentAddressIndex
 				}
 			case UNLOCK + '_REQUESTED':
 				return {
@@ -78,7 +83,9 @@ export default (defaultState: any) => {
 			case UNLOCK:
 				return {
 					...state,
-					currentAddress: action.result.address,
+					currentAddressIndex: action.result.currentAddressIndex,
+					currentAddress: action.result.currentAddress,
+					addresses: action.result.addresses,
 					idena: action.result.idena,
 					unlocked: true,
 					toast: {}
@@ -86,8 +93,10 @@ export default (defaultState: any) => {
 			case CONNECT_LEDGER:
 				return {
 					...state,
+					currentAddressIndex: 0,
 					currentAddress: action.result.address,
 					idena: action.result.idena,
+					addresses: [action.result.address],
 					unlocked: true,
 					toast: {}
 				}
@@ -207,8 +216,7 @@ export default (defaultState: any) => {
 				}
 			case LOCK:
 				return {
-					...state,
-					unlocked: false
+					...defaultState
 				}
 			case TOAST:
 				return {
@@ -217,6 +225,25 @@ export default (defaultState: any) => {
 				}
 			case RESET:
 				return defaultState
+			case CHANGE_ADDRESS + '_REQUESTED':
+				return {
+					...state,
+					sending: false,
+					toast: {
+						type: 'info',
+						message: 'Loading new address',
+						autoclose: false
+					}
+				}
+			case CHANGE_ADDRESS:
+				return {
+					...state,
+					currentAddressIndex: action.result.currentAddressIndex,
+					currentAddress: action.result.currentAddress,
+					transactions: action.result.transactions,
+					balance: action.result.balance,
+					toast: {}
+				}
 			default:
 				return state
 		}
