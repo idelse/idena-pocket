@@ -2,9 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import Logo from '../components/Logo'
-import { formatAddress, colors } from '../libs/helpers'
-import { lock } from '../actions'
-import CopyToClipboard from 'react-copy-to-clipboard'
+import { colors } from '../libs/helpers'
 import { useTranslation } from 'react-i18next'
 import MenuProfile from './MenuProfile'
 
@@ -49,16 +47,6 @@ export default () => {
 		<Header>
 			<div className='darkbg'></div>
 			<Logo theme='light' width={50} />
-
-			{/*
-			<span
-				className='logout'
-				onClick={() => dispatch(lock(storage.idena))}
-			>
-				<i className='fa fa-power-off' />
-				{t('Logout')}
-			</span>
-			*/}
 			<MenuProfile />
 		</Header>
 	)

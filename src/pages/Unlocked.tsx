@@ -12,7 +12,6 @@ import {
 	getBalance,
 	getPrice,
 	getNodeStatus,
-	retrieveGeneratedAddresses
 } from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'
@@ -99,6 +98,7 @@ export default (props): ReactElement => {
 
 	const storage = useSelector((state: any) => {
 		return {
+			provider: state.provider,
 			pathname: state.router.location.pathname,
 			unlocked: state.app.unlocked,
 			currentAddress: state.app.currentAddress,

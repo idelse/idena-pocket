@@ -20,9 +20,9 @@ export default (): ReactElement => {
 
 	const storage = useSelector((state: any) => {
 		return {
-			idena: state.app.idena,
 			balance: state.app.balance,
 			currentAddress: state.app.currentAddress,
+			currentAddressIndex: state.app.currentAddressIndex,
 			transactions: state.app.transactions,
 			sending: state.app.sending
 		}
@@ -38,7 +38,7 @@ export default (): ReactElement => {
 		const payload =
 			data.message !== '' ? '0x' + hexEncode(data.message) : '0x'
 		let amount = parseAmount(data.amount)
-		dispatch(sendTx(storage.idena, { amount, to, payload }))
+		dispatch(sendTx({ amount, to, payload }, storage.currentAddressIndex))
 	}
 
 	return (

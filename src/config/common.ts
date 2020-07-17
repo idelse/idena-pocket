@@ -3,7 +3,7 @@ export default {
 	derivationPath: `m/44'/515'/0'/0`,
 	oldDerivationPath: `m/44'/60'/0'/0`,
 	defaultIndexAddress: 0,
-	defaultGeneratedAddress: 5,
+	defaultNumberOfGeneratedAddresses: 5,
 	rpc: 'https://rpc.idena.dev',
 	price: 'https://price.idena-price.workers.dev/',
 	menu: [
