@@ -42,7 +42,7 @@ const Container = styled.div`
 		border-radius: 0 0 0.5em 0.5em;
 	}
 	.menu li {
-		padding: 0 .5em 0 1em;
+		padding: 0 0.5em 0 1em;
 		min-height: 60px;
 		align-items: center;
 		justify-content: space-between;
@@ -79,7 +79,7 @@ function MenuProfile () {
 		idena: state.app.idena,
 		currentAddress: state.app.currentAddress,
 		currentAddressIndex: state.app.currentAddressIndex,
-		addresses: state.app.addresses,
+		addresses: state.app.addresses
 	}))
 	const ref = useRef()
 	const [menuIsOpen, toggleMenu] = useState(false)
@@ -98,22 +98,37 @@ function MenuProfile () {
 				</div>
 				{menuIsOpen && (
 					<ul className='menu'>
-						{storage.addresses.slice(0, storage.numberOfShowedAddresses).map((address, index) => <li onClick={() => {
-							dispatch(changeAddress(index))
-							toggleMenu(!menuIsOpen)
-						}} key={index}>
-							<span className={`address ${index === storage.currentAddressIndex ? 'menu-li--current' : ''}`}>Account {index+1}</span>
-							<div className='robohash--menu'>
-								<img
-									src={`https://robohash.org/${address.toLowerCase()}`}
-								/>
-							</div>
-						</li>)}
+						{storage.addresses
+							.slice(0, storage.numberOfShowedAddresses)
+							.map((address, index) => (
+								<li
+									onClick={() => {
+										dispatch(changeAddress(index))
+										toggleMenu(!menuIsOpen)
+									}}
+									key={index}
+								>
+									<span
+										className={`address ${
+											index ===
+											storage.currentAddressIndex
+												? 'menu-li--current'
+												: ''
+										}`}
+									>
+										Account {index + 1}
+									</span>
+									<div className='robohash--menu'>
+										<img
+											src={`https://robohash.org/${address.toLowerCase()}`}
+										/>
+									</div>
+								</li>
+							))}
 
 						<li onClick={() => dispatch(lock())}>
-							<span className='logout' >{t('Logout')}</span>
+							<span className='logout'>{t('Logout')}</span>
 						</li>
-
 					</ul>
 				)}
 			</div>

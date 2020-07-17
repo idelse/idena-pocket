@@ -70,12 +70,16 @@ export const unlock = (seed, derivationPath, derivationIndex = 0): any => ({
 	result: (async () => {
 		idena = new ProviderHDWallet(seed.join(' '), derivationPath)
 		const currentAddress = await idena.getAddressByIndex(derivationIndex)
-		const addresses = await Promise.all(Array(20).fill(1).map((_, index) => idena.getAddressByIndex(index)))
+		const addresses = await Promise.all(
+			Array(20)
+				.fill(1)
+				.map((_, index) => idena.getAddressByIndex(index))
+		)
 		return {
 			idena,
 			currentAddress,
 			currentAddressIndex: derivationIndex,
-			addresses,
+			addresses
 		}
 	})()
 })
@@ -95,7 +99,11 @@ export const sendTx = ({ amount, to, payload }, currentAddressIndex): any => ({
 		payload,
 		timestamp: formatDate(new Date())
 	},
-	result: api.sendTransaction(idena, { amount, to, payload }, currentAddressIndex)
+	result: api.sendTransaction(
+		idena,
+		{ amount, to, payload },
+		currentAddressIndex
+	)
 })
 
 export const TOAST = 'TOAST'
@@ -173,7 +181,9 @@ export const changeAddress = (indexAddress: number): any => ({
 	type: CHANGE_ADDRESS,
 	result: (async () => {
 		const currentAddress = await idena.getAddressByIndex(indexAddress)
-		const transactions = await api.getTransactions(currentAddress).then(result => result.transactions)
+		const transactions = await api
+			.getTransactions(currentAddress)
+			.then(result => result.transactions)
 		const balance = await api.getBalance(currentAddress)
 		return {
 			currentAddressIndex: indexAddress,

@@ -11,7 +11,7 @@ import {
 	getTransactions,
 	getBalance,
 	getPrice,
-	getNodeStatus,
+	getNodeStatus
 } from '../actions'
 import config from '../config'
 import { useTranslation } from 'react-i18next'

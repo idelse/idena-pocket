@@ -12,7 +12,8 @@ import {
 	GET_BALANCE,
 	GET_PRICE,
 	CONNECT_LEDGER,
-	NODE_STATUS, CHANGE_ADDRESS,
+	NODE_STATUS,
+	CHANGE_ADDRESS
 } from '../actions'
 import { formatNumber } from '../libs/helpers'
 
@@ -215,7 +216,7 @@ export default (defaultState: any) => {
 				}
 			case LOCK:
 				return {
-					...defaultState,
+					...defaultState
 				}
 			case TOAST:
 				return {

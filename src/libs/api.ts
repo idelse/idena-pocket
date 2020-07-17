@@ -43,8 +43,8 @@ const getTransactions = async address => {
 }
 
 const getBalance = async address =>
-	idena
-		.rpc.getBalanceByAddress(address)
+	idena.rpc
+		.getBalanceByAddress(address)
 		.then((r: any) => parseFloat(r.balance))
 		.catch(error => {
 			return 0
@@ -56,9 +56,16 @@ const getPrice = async () =>
 		.then((res: any) => res.price)
 		.catch(() => 0)
 
-const sendTransaction = async (idena, { amount, to, payload }, currentAddressIndex) => {
+const sendTransaction = async (
+	idena,
+	{ amount, to, payload },
+	currentAddressIndex
+) => {
 	try {
-		const operation = await idena.transferByIndex({ amount, to, payload }, currentAddressIndex)
+		const operation = await idena.transferByIndex(
+			{ amount, to, payload },
+			currentAddressIndex
+		)
 		await operation.confirmation()
 		return {
 			to,

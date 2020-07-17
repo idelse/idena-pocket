@@ -78,7 +78,9 @@ export default () => {
 	const onLogin = (data: any) => {
 		const bytes = AES.decrypt(storage.encryptedSeed, data.password)
 		const seed = JSON.parse(bytes.toString(enc.Utf8))
-		dispatch(unlock(seed, storage.derivationPath, storage.currentAddressIndex))
+		dispatch(
+			unlock(seed, storage.derivationPath, storage.currentAddressIndex)
+		)
 	}
 
 	return (
