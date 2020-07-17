@@ -8,6 +8,7 @@ import { reset, toast } from '../actions'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import Confirmation from '../components/Confirmation'
 import Button from '../components/Button'
+import Status from '../components/Status'
 import { useTranslation } from 'react-i18next'
 
 const Profile = styled.div`
@@ -103,22 +104,6 @@ const Profile = styled.div`
 		width: 72%;
 		margin: auto;
 	}
-	.status a {
-		text-align: center;
-		padding: 0.3em 0.5em;
-		font-weight: bold;
-		font-size: 0.8em;
-		text-decoration: none;
-		border-radius: 2px;
-	}
-	.status--up a {
-		background: #ccff90;
-		color: #79b700;
-	}
-	.status--down a {
-		background: #ffccbc;
-		color: ${colors.darkRed};
-	}
 	@media (max-width: 578px) {
 		.imgContainer {
 			width: 80% !important;
@@ -195,6 +180,7 @@ export default (): ReactElement => {
 				<div className='line'></div>
 				<Confirmation
 					text={t('Are you sure you want to erase your wallet?')}
+					icon='warning'
 				>
 					<p className='forget' onClick={resetWallet}>
 						<i className='fa fa-undo' />
@@ -208,20 +194,13 @@ export default (): ReactElement => {
 				<div className='line'></div>
 				<p className='desc'>
 					{storage.nodeStatus.synced && (
-						<span className='status status--up'>
-							<a target='_blank' href='http://status.idena.dev/'>
-								{t('RPC node is')} {t('UP')} (
-								{t('latest block')}{' '}
-								{storage.nodeStatus.latestBlock})
-							</a>
-						</span>
+						<Status
+							state='up'
+							block={storage.nodeStatus.latestBlock}
+						></Status>
 					)}
 					{!storage.nodeStatus.synced && (
-						<span className='status status--down'>
-							<a target='_blank' href='http://status.idena.dev/'>
-								{t('RPC node is')} {t('DOWN')}
-							</a>
-						</span>
+						<Status state='down'></Status>
 					)}
 				</p>
 			</Container>
