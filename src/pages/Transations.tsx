@@ -14,6 +14,7 @@ const Transactions = styled.div`
 		list-style: none;
 		border-bottom: 1px solid ${colors.grey};
 		text-align: center;
+		font-size: .9em;
 	}
 	.transactions li a {
 		display: flex;
@@ -32,7 +33,7 @@ const Transactions = styled.div`
 	}
 	.transactions__li__details {
 		padding-top: .5em;
-		font-size: .8em;
+		font-size: .7em;
 		text-align: left;
 		width: 100%;
 		display: flex;
@@ -97,7 +98,7 @@ const Transactions = styled.div`
 	text-align: center;
 	}
 	.empty fa {
-	color: ${colors.red};
+		color: ${colors.red};
 	}
 
 	.thumbnail {
@@ -119,6 +120,7 @@ const Transactions = styled.div`
 	}
 	.transactions__li__amount {
 		font-weight: 600;
+		font-size: 0.8em;
 	}
 	.transactions__li__amount .transactions__li__currency {
 		font-weight: inherit;
@@ -222,7 +224,7 @@ export default (): ReactElement => {
 										<span className='transactions__li__amount'>
 											{formatNumber(tx.amount, 4)}{' '}
 											<span className='transactions__li__currency'>
-												DNA
+												iDNA
 											</span>{' '}
 											<i
 												className={

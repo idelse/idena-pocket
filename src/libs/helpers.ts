@@ -28,8 +28,7 @@ export const formatAddress = (address, l = 6) =>
 		address.length
 	)}`
 
-export const formatNumber = (number, pow = 2) =>
-	Math.floor(number * 10 ** pow) / 10 ** pow
+export const formatNumber = (number, pow = 2) => number
 
 export const validateInputAddresses = address =>
 	/^(0x){1}[0-9a-fA-F]{40}$/i.test(address)
