@@ -136,7 +136,7 @@ export default (props): ReactElement => {
 			<Unlocked>
 				<div className='balance'>
 					<span className='balance__value'>
-						{formatNumber(storage.balance)} iDNA
+						{formatNumber(storage.balance)} IDNA
 						<i
 							onClick={() => refreshAccountState()}
 							className='balance__value__refresh fa fa-refresh'

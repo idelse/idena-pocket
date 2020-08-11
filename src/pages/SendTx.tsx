@@ -97,7 +97,7 @@ export default (): ReactElement => {
 					/>
 					<Confirmation
 						disabled={!formState.isValid || storage.sending}
-						text={`I'm sending ${watchAllFields.amount} iDNA to ${watchAllFields.destination}`}
+						text={`I'm sending ${watchAllFields.amount} IDNA to ${watchAllFields.destination}`}
 					>
 						<Button
 							disabled={!formState.isValid || storage.sending}

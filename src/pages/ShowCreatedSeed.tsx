@@ -112,7 +112,7 @@ export default (): ReactElement => {
 				<p>
 					<strong>{t('ATTENTION:')}</strong>{' '}
 					{t(
-						'Never tell anyone this backup phrase. Anyone with this phrase can steal your iDNA forever.'
+						'Never tell anyone this backup phrase. Anyone with this phrase can steal your IDNA forever.'
 					)}
 				</p>
 				<p className='extramargin'>

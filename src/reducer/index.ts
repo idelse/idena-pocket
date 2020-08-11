@@ -147,7 +147,7 @@ export default (defaultState: any) => {
 									type: 'info',
 									message: `You received ${formatNumber(
 										action.result.balance - state.balance
-									)} iDNA`,
+									)} IDNA`,
 									autoclose: true
 							  }
 							: state.toast

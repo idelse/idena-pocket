@@ -28,7 +28,7 @@
 	"Secret seed phrase": "Tajna seed fraza",
 	"Your secret backup phrase makes it easy to backup and restore your account.": "Vaša seed fraza omogućava lako čuvanje i povratak naloga",
 	"ATTENTION:": "PAŽNJA:",
-	"Never tell anyone this backup phrase. Anyone with this phrase can steal your iDNA forever.": "Nikada, nikome nemojte reći svoju frazu za povratak novčanika. Svako ko je poseduje može nepovratno da ukrade vaš iDNA.",
+	"Never tell anyone this backup phrase. Anyone with this phrase can steal your IDNA forever.": "Nikada, nikome nemojte reći svoju frazu za povratak novčanika. Svako ko je poseduje može nepovratno da ukrade vaš IDNA.",
 	"Please write your seed words below and store them in a secure place. These can be used to restore your wallet.": "Molimo upišite svoje seed reči ispod i sačuvajte ih na bezbednom mestu. One se koriste za povratak vašeg novčanika.",
 	"Click here to show seed phrase": "Kliknite ovde za prikaz seed fraze",
 	"Your Full Address": "Vaša puna adresa",

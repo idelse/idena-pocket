@@ -219,7 +219,7 @@ export default (): ReactElement => {
 										<span className='transactions__li__amount'>
 											{formatNumber(tx.amount)}{' '}
 											<span className='transactions__li__currency'>
-												iDNA
+												IDNA
 											</span>{' '}
 											<i
 												className={
