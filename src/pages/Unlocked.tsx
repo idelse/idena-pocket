@@ -30,7 +30,7 @@ const Unlocked = styled.div`
 		font-size: 1.2em;
 		color: ${colors.white};
 		font-weight: 500;
-		margin: 0 auto .5em auto;
+		margin: 0 auto 0.5em auto;
 		width: 70%;
 		word-break: break-all;
 	}
