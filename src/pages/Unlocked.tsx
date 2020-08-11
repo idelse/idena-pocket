@@ -27,10 +27,12 @@ const Unlocked = styled.div`
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	}
 	.balance__value {
-		font-size: 1.5em;
+		font-size: 1.2em;
 		color: ${colors.white};
 		font-weight: 500;
-		margin-bottom: 0.5em;
+		margin: 0 auto .5em auto;
+		width: 70%;
+		word-break: break-all;
 	}
 	.balance__value__refresh {
 		color: ${colors.lightGrey};
@@ -134,14 +136,14 @@ export default (props): ReactElement => {
 			<Unlocked>
 				<div className='balance'>
 					<span className='balance__value'>
-						{formatNumber(storage.balance, 4)} iDNA
+						{formatNumber(storage.balance)} iDNA
 						<i
 							onClick={() => refreshAccountState()}
 							className='balance__value__refresh fa fa-refresh'
 						/>
 					</span>
 					<span className='balance__dollar'>
-						${formatNumber(storage.balance * storage.price)}
+						${formatNumber(storage.balance * storage.price, 2)}
 					</span>
 				</div>
 				<ul className='menu'>

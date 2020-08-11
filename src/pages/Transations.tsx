@@ -141,11 +141,6 @@ const Transactions = styled.div`
 		padding: 1em;
 		}
 	}
-	@media (max-width: 400px) {
-		.transactions__li__currency {
-		   display: none;
-		}
-	}
 `
 
 export default (): ReactElement => {
@@ -222,7 +217,7 @@ export default (): ReactElement => {
 											</span>
 										)}
 										<span className='transactions__li__amount'>
-											{formatNumber(tx.amount, 4)}{' '}
+											{formatNumber(tx.amount)}{' '}
 											<span className='transactions__li__currency'>
 												iDNA
 											</span>{' '}
