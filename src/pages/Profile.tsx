@@ -104,6 +104,10 @@ const Profile = styled.div`
 		width: 72%;
 		margin: auto;
 	}
+	.support {
+		display: block;
+		padding: 0 0 1em 0;
+	}
 	@media (max-width: 578px) {
 		.imgContainer {
 			width: 80% !important;
@@ -193,6 +197,9 @@ export default (): ReactElement => {
 
 				<div className='line'></div>
 				<p className='desc'>
+					<span className='support'>
+						{t('Reach out us on Telegram for support')}: <a href="https://t.me/idelseresearch">@idelsesupport</a>
+					</span>
 					{storage.nodeStatus.synced && (
 						<Status
 							state='up'
