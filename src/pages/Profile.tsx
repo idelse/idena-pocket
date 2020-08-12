@@ -198,7 +198,8 @@ export default (): ReactElement => {
 				<div className='line'></div>
 				<p className='desc'>
 					<span className='support'>
-						{t('Reach out us on Telegram for support')}: <a href="https://t.me/idelseresearch">@idelsesupport</a>
+						{t('Reach out us on Telegram for support')}:{' '}
+						<a href='https://t.me/idelseresearch'>@idelsesupport</a>
 					</span>
 					{storage.nodeStatus.synced && (
 						<Status
