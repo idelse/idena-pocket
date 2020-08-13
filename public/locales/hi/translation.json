@@ -48,7 +48,7 @@
 	"Logout": "लॉग आउट",
 	"Profile": "प्रोफ़ाइल",
 	"Transactions": "लेन-देन",
-	"Old users could use m/44'/60'/0'/0/0": "पुराने उपयोगकर्ता m/44'/60'/0'/0/0 का उपयोग कर सकते थे",
+	"Old users could use m/44'/60'/0'/0": "पुराने उपयोगकर्ता m/44'/60'/0'/0 का उपयोग कर सकते थे",
 	"Import": "आयात",
 	"Seed phrase": "बीज वाक्यांश",
 	"Address copied": "पता कॉपी किया गया",
@@ -58,6 +58,6 @@
 	"UP": "यूपी",
 	"latest block": "नवीनतम ब्लॉक",
 	"DOWN": "बंद है",
-	"\"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "सुनिश्चित करें कि वर्तमान में idena-ledger ऐप खुला है और idena-pocket को अपना पता पढ़ने की अनुमति दें।",
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "सुनिश्चित करें कि वर्तमान में idena-ledger ऐप खुला है और idena-pocket को अपना पता पढ़ने की अनुमति दें।",
 	"Reach out us on Telegram for support": "समर्थन के लिए टेलीग्राम पर हमसे संपर्क करें"
 }

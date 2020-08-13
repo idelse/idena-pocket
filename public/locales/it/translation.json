@@ -48,7 +48,7 @@
 	"Logout": "Esci",
 	"Profile": "Profilo",
 	"Transactions": "Transazioni",
-	"Old users could use m/44'/60'/0'/0/0": "I vecchi utenti potrebbero usare m/44'/60'/0'/0/0",
+	"Old users could use m/44'/60'/0'/0": "I vecchi utenti potrebbero usare m/44'/60'/0'/0",
 	"Import": "Importa",
 	"Seed phrase": "Frase segreta",
 	"Address copied": "Indirizzo copiato",
@@ -57,6 +57,6 @@
 	"UP": "DISPONIBILE",
 	"latest block": "ultimo blocco",
 	"DOWN": "DOWN",
-	"\"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Assicurati che l'app idena-ledger sia attualmente aperta e permetti a idena-pocket di leggere il tuo indirizzo.",
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Assicurati che l'app idena-ledger sia attualmente aperta e permetti a idena-pocket di leggere il tuo indirizzo.",
 	"Reach out us on Telegram for support": "Contattaci su Telegram per ricevere supporto"
 }

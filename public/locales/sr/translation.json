@@ -48,7 +48,7 @@
 	"Logout": "Odjavljivanje",
 	"Profile": "Profil",
 	"Transactions": "Transakcije",
-	"Old users could use m/44'/60'/0'/0/0": "Stari korisnici mogu da koriste m/44'/60'/0'/0/0",
+	"Old users could use m/44'/60'/0'/0": "Stari korisnici mogu da koriste m/44'/60'/0'/0",
 	"Import": "Uvezi",
 	"Seed phrase": "Seed fraza",
 	"Address copied": "Adresa kopirana",
@@ -57,6 +57,6 @@
 	"UP": "UP",
 	"latest block": "najnoviji blok",
 	"DOWN": "DOWN",
-	"\"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Provjerite je li aplikacija idena-ledger trenutno otvorena i dopustite džepu idene da pročita vašu adresu.",
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Provjerite je li aplikacija idena-ledger trenutno otvorena i dopustite džepu idene da pročita vašu adresu.",
 	"Reach out us on Telegram for support": "Позовите нас на Телеграму за подршку"
 }

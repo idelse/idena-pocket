@@ -16,7 +16,7 @@ export default () => {
 		<ConnectLedgerButton>
 			<Confirmation
 				text={t(
-					'"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.'
+					'Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.'
 				)}
 			>
 				<Button

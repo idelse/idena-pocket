@@ -56,7 +56,7 @@
 	"UP": "UP",
 	"latest block": "latest block",
 	"DOWN": "DOWN",
-	"\"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "\"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.",
-	"Old users could use m/44'/60'/0'/0/0": "Old users could use m/44'/60'/0'/0/0",
+	"Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.": "Be sure the idena-ledger app is currently open and allow idena-pocket to read your address.",
+	"Old users could use m/44'/60'/0'/0": "Old users could use m/44'/60'/0'/0",
 	"Reach out us on Telegram for support": "Reach out us on Telegram for support"
 }
