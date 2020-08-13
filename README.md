@@ -42,7 +42,7 @@ Keys to be translated will have the value `__STRING_NOT_TRANSLATED__.`
 
 ### 🌐 Useful Links
 
--   [idena-js documentation](https://www.idelse.dev/idena-js/quick-start)
+-   [idena-js documentation](https://www.idelse.com/idena-js/quick-start)
 -   [idena-rpc documentation](https://github.com/idelse/idena-rpc)
 -   [idena-pocket website](https://pocket.idena.dev)
 -   [Telegram](https://t.me/idelsesupport)
