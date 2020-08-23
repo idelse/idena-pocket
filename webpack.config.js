@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { EnvironmentPlugin } = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 // @ts-ignore
 module.exports = {
@@ -50,6 +51,10 @@ module.exports = {
 	},
 
 	plugins: [
+		new WorkboxPlugin.GenerateSW({
+			clientsClaim: true,
+			skipWaiting: true
+		}),
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'idena-pocket',
@@ -57,7 +62,10 @@ module.exports = {
 			hash: true,
 			minify: true
 		}),
-		new CopyPlugin([{ from: 'public', to: '', ignore: ['index.html'] }]),
+		new CopyPlugin([
+			{ from: 'public', to: '', ignore: ['index.html'] },
+			{ from: 'public/manifest', to: 'manifest' }
+		]),
 		new EnvironmentPlugin(['NODE_ENV']),
 		...(process.env.NODE_ENV === 'stats'
 			? [new BundleAnalyzerPlugin()]
